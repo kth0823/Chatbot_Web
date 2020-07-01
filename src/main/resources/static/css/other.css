@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+
+/* other.css */
+
+/* 데스크탑 브라우저 가로 */
+@media only screen and (min-width : 1224px) {
+header{
+	font-size : 40px; 
+	color: black;
+	text-align:center;
+}
+navi{
+	font-size : 20px; 
+	color: black;
+	text-align:center;
+	
+}
+
+#root {
+			width:100%;
+			margin:30 auto;						
+			background-color:#ededed; 
+			color:#345;
+			font-size : 14px;
+		}
+	
+}
+
+#writedata {
+		  	width : 100%;	
+}
+
+/* 큰 모니터 */
+@media only screen and (min-width : 1824px) {
+	header{
+	font-size : 40px; 
+	color: black;
+	text-align:center;
+}
+navi{
+	font-size : 30px; 
+	color: black;
+	text-align:center;
+	
+}
+
+#root {
+			width:100%;
+			margin:30 auto;						
+			background-color:#ededed; 
+			color:#222;
+			font-size : 30px;
+		}
+}
+
+#writedata {
+		  	width : 100%;	
+}
+
+/* 스마트폰 가로+세로 */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px){
+	header{
+	font-size : 40px; 
+	color: black;
+	text-align:center;
+}
+navi{
+	font-size : 20px; 
+	color: black;
+	text-align:center;
+	
+}
+
+#root {
+			width:100%;
+			margin:10 auto;						
+			 background-color:#ededed; 
+			color:#597;
+			font-size : 3.0em;
+		}
+#writedata {
+		  	width : 100%;	
+}		
+		
+#root td {
+		  	font-size: 3.0em;
+		  	margin: 0 0 0.1em 0;	
+}		
+
+#root button {
+		  	font-size: 1.0em;
+		  	margin: 0 0 0.1em 0;	
+}		
+			
+}
+
