@@ -458,7 +458,7 @@
 			    </li>
 				<li class="self">
 			      <div class="avatar" name="search">
-			        <img src="/resources/images/ATECTN.png" />
+			        <img src="/resources/images/user2.png" />
 			      </div>
 			      <div class="messages">
 			        <p>조회조건</p>

@@ -95,6 +95,7 @@
 	         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
 	         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
 	         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 	         showOn: "both", 
         	 minDate: -20, 
         	 maxDate: "+3D",
@@ -113,6 +114,7 @@
 	         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
 	         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
 	         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 	         showOn: "both", 
         	 minDate: -20, 
         	 maxDate: "+3D",
@@ -166,8 +168,7 @@
 						<tr>
 							<td><label for="Co_id">*고속사</label><br><!-- <input type="text"
 								id="Co_id" name="Co_id" class="chk" title="고속사를 선택하세요." /> --> 								
-								<select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요."  style="width: 98%;" >
-										<option value=" ">고속사를 선택하세요</option>
+								<select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요."  style="width: 98%;" >										
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<option value="${co_info.co_id}">${co_info.co_nm}</option>
 								</c:forEach>
@@ -190,8 +191,7 @@
 							<label for="Csr_reqid">*접수대분류</label><br>
 							<!--  <input type="text"
 								id="Csr_reqid" name="Csr_reqid" class="chk" title="대분류를 선택하세요." />-->								
-								<select name="Csr_reqid" id="Csr_reqid" class="chk" title="접수대분류를 선택하세요." style="width: 98%;">
-									<option value=" ">접수대분류를 선택하세요</option>
+								<select name="Csr_reqid" id="Csr_reqid" class="chk" title="접수대분류를 선택하세요." style="width: 98%;">									
 								<c:forEach var="csr_req" items="${csr_req}" varStatus="i">
 									<option value="${csr_req.csr_reqid}">${csr_req.csr_req}</option>
 									</c:forEach>
@@ -251,8 +251,7 @@
 							<!--  <input type="text"
 								id="Fix_ctgid" name="Fix_ctgid" class="chk" size="12" title="처리대분류를 선택하세요." /> -->
 						 	<select name="Fix_ctgid" id="Fix_ctgid" style="width: 98%;"
-										class="chk" title="처리대분류을 선택하세요.">
-										<option value=" ">	</option>
+										class="chk" title="처리대분류을 선택하세요.">										
 									<c:forEach var="fix_ctg" items="${fix_ctg}" varStatus="i">
 										<option value="${fix_ctg.fix_ctgid}">${fix_ctg.fix_ctg}</option>
 									</c:forEach>

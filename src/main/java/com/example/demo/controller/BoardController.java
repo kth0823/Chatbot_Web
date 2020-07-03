@@ -67,8 +67,7 @@ public class BoardController {
 	public String writechat(BoardVO vo) throws Exception {
 		logger.info("writechat");
 
-		service.writechat(vo);
-		Thread.sleep(4000);
+		service.writechat(vo);		
 		return "redirect:/board/client04";
 	}
 	
@@ -346,7 +345,7 @@ public class BoardController {
 		
 		
 		model.addAttribute("co_info", service.co_info(scri));
-		model.addAttribute("device", service.device(scri));
+		model.addAttribute("csr_req", service.csr_req(scri));
 		
 		//return "board/client04";
 	}

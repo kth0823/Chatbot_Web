@@ -13,7 +13,12 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <c:url value="/images/ATECTN.png" var="logo"/>
+<c:url value="/images/co.png" var="logo"/>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> 
+ <!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	
 	<title>챗봇</title>
 	
@@ -122,7 +127,7 @@
 		
 		.self .messages {
 		  	order: 1;
-		  	background: yellow;
+		  	background: white;
 		  	border-bottom-right-radius: 0;
 		}
 		
@@ -159,6 +164,9 @@
 		  	font-size: 0.7em;
 		  	color: #ccc;
 		}
+		.messages button {
+		  	font-size: 0.5em;		  	
+		}
 		
 		
 	</style>       
@@ -166,6 +174,7 @@
 		var host;
 		var port;
 		var socket;
+		var inFormOrLink;
 		
 		// 문서 로딩 후 실행됨
 		$(function() {
@@ -319,12 +328,13 @@
 		});
 
 		$(function() {
-		    $( "#Pro_date" ).datepicker({
+		    $( "#Date" ).datepicker({
 		         changeMonth: true,	       
 		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
 		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
 		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
 		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 		         showOn: "both", 
 	        	 minDate: -20, 
 	        	 maxDate: "+3D",
@@ -333,7 +343,7 @@
 	             dateFormat: "yy-mm-dd"            	 
 		  });
 		  //초기값을 오늘 날짜로 설정
-	        $('#Pro_date').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+	        $('#Date').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 		});
 			  
 		function addToDiscussion2(writer, msg) {
@@ -364,7 +374,30 @@
 			$(".discussion").append(contents);	
 			i++;
 		}
-		
+
+		$(document).ready(function() {
+			var formObj = $("form[name='writeForm']");
+			$(".write_btn").on("click", function() {
+				if (fn_valiChk()) {
+					return false;
+				}
+				else{
+				formObj.attr("action", "/board/writechat");
+				formObj.attr("method", "post");
+	 			formObj.submit();	 			
+				}
+			});
+		})
+
+		function fn_valiChk() {
+			var regForm = $("form[name='writeForm'] .chk").length;
+			for (var i = 0; i < regForm; i++) {
+				if ($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null) {
+					alert($(".chk").eq(i).attr("title"));
+					return true;
+				}
+			}
+		}
 	</script>
 </head>
 <body>
@@ -446,8 +479,7 @@
 		    
 		    <!-- 결과 표시 -->
 		    <h4 class="ui horizontal divider header">메시지</h4>
-			<div class="ui segment" id="result">
-			
+			<div class="ui segment" id="result">			
 			  <ol class="discussion">
 			    <li class="other">
 			      <div class="avatar">
@@ -459,33 +491,32 @@
 			    </li>
 				<li class="self">
 			      <div class="avatar">
-			        <img src="/resources/images/ATECTN.png" />
+			        <img src="/resources/images/user2.png" />
 			      </div>
 			      <div class="messages">
 			        <p>CSR 항목을 입력하세요</p>
 			        <form name="writeForm" method="post" action="/board/writechat" enctype="multipart/form-data"> 
 			        <!--  <form name="writeForm" enctype="multipart/form-data"> -->
-			        <label for="Date">접수일자</label>
+			        <img src="/resources/images/calendar.png" />
 					<input type="text"
-								id="Date" name="Date" class="chk" size="12" title="접수일자를 선택하세요."/><br>
-					<label for="co_info">고속사</label>
-					<select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요.">
-										<option value=" ">고속사를 선택하세요</option>
+								id="Date" name="Date" class="chk" title="접수일자 선택하세요" style="width: 70%;"/><br>
+					<img src="/resources/images/office-building.png" />
+					<select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요" style="width: 70%;">																			 	 
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<option value="${co_info.co_id}">${co_info.co_nm}</option>
 								</c:forEach>
 								</select>
 					<br>
-					<label for="device">단말기</label>
-					<select name="deviceid" id="deviceid" class="chk" title="단말기 선택하세요.">
-										<option value=" ">단말기를 선택하세요</option>
-									<c:forEach var="device" items="${device}" varStatus="i">
-										<option value="${device.deviceid}">${device.device}</option>
+					<img src="/resources/images/bus.png" />								
+								 <input type="text" id="Car_no" name="Car_no" class="chk"  title="차량번호를 선택하세요" placeholder="차량번호 입력" style="width: 70%;" /><br>
+					<img src="/resources/images/check.png" />
+					<select name="csr_reqid" id="csr_reqid" class="chk" title="접수대분류 선택하세요" style="width: 70%;">										
+									<c:forEach var="csr_req" items="${csr_req}" varStatus="i">
+										<option value="${csr_req.csr_reqid}">${csr_req.csr_req}</option>
 									</c:forEach>
 								</select>
-								<br>
-					<label for="device">등    록</label>
-					<button type="submit" id="add">등   록</button><br>
+								<br>					
+					<button class="write_btn btn btn-success" type="submit">등   록</button><br>
 					</form>					
 			      </div>
 			    </li>

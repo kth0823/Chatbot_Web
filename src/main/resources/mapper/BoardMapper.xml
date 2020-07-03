@@ -360,13 +360,15 @@
 	</select>
 	<insert id="client04" parameterType="com.example.demo.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
 		INSERT INTO chatbot_temp.tCsr_Bo2(
+		DATE,
 		CO_ID,
 		CAR_NO,
-		DEVICEID
+		CSR_REQID
 		)VALUES(
+		#{Date},
 		#{Co_id},		
 		#{Car_no},
-		#{Deviceid})
+		#{Csr_reqid})
 	</insert>
 			    
 </mapper>
