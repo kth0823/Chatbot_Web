@@ -316,6 +316,7 @@
 		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
 		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
 		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 		         showOn: "both", 
 	        	 minDate: -20, 
 	        	 maxDate: "+3D",
@@ -327,24 +328,6 @@
 	        $('#Date').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 		});
 
-		$(function() {
-		    $( "#Date" ).datepicker({
-		         changeMonth: true,	       
-		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-		         showOn: "both", 
-	        	 minDate: -20, 
-	        	 maxDate: "+3D",
-	        	 currentText: '오늘 날짜', 
-	             closeText: '닫기', 
-	             dateFormat: "yy-mm-dd"            	 
-		  });
-		  //초기값을 오늘 날짜로 설정
-	        $('#Date').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-		});
 			  
 		function addToDiscussion2(writer, msg) {
 			println("addToDiscussion 호출됨 : " + writer + ", " + msg);
