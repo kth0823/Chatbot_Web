@@ -64,8 +64,7 @@
 			padding-left:0.4em;
 			padding-right:0.4em;
 			padding-top : 0.4em;
-  			/*추가 2020-07-06 : 아래 3줄
-            테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
+  			/*추가 2020-07-06 : 아래 3줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
   			border-radius: 15px;
   			background: #b2c7d9;
   			display: inline-block;  			
@@ -86,11 +85,12 @@
 		}
 		
 		#result {			
-			<!-- height:14em;			-->
+			<!-- height:14em; -->
 			width : 92%;
 			height:92%;		
 			overflow:auto;
-  			background-color: #b2c7d9;  			
+  			background-color: #b2c7d9;  	
+  			border-style: none;		
 		}		
 		
 		.discussion {
@@ -140,8 +140,7 @@
 		  	order: 1;
 		  	background: #ffeb33;
 		  	border-bottom-right-radius: 0;
-  			/*추가 2020-07-06 : 아래 1줄
-            테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
+  			/*추가 2020-07-06 : 아래 1줄  테두리 둥글게, 최대4군데 입력가능. 왼쪽상단부터 시계방향*/
   			border-radius: 10px 10px 0 10px;
 		}
 		
@@ -165,8 +164,7 @@
 		.messages {
 		  	background: white;
 		  	padding: 10px;
-  			/*수정 2020-07-06 : 아래 1줄
-            테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
+  			/*수정 2020-07-06 : 아래 1줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
   			border-radius: 0 10px 10px 10px;
 		  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);  	  
 		}
@@ -182,11 +180,10 @@
 		}
 		.messages button {
 		  	font-size: 0.5em;		  	
-		}
-		
-		
-		
+		}	
+				
 	</style>       
+	
 	<script>
 		var host;
 		var port;
