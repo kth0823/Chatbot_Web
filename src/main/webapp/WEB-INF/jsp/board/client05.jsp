@@ -36,6 +36,9 @@
 			padding:0;
 			margin:0;
 			box-sizing:border-box;
+  			font-family: "나눔고딕", NanumGothic, "맑은고딕", "Malgun Gothic";
+  			font-size: 16;
+  			letter-spacing: -1pt;
 		}
 		
 		html {
@@ -65,6 +68,10 @@
 			padding-left:0.4em;
 			padding-right:0.4em;
 			padding-top : 0.4em;
+    		/*추가 2020-07-06 : 아래 3줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
+  			border-radius: 15px;
+  			background: #b2c7d9;
+  			display: inline-block;  	
 		}
 
 		#iconImage {
@@ -85,6 +92,7 @@
 			width :100%;
 			height:100%;		
 			overflow:auto;
+  			background-color: #b2c7d9;  	
 		}
 		
 		
@@ -92,7 +100,7 @@
 		  	list-style: none;
 			width : 100%;
 			height:100%;
-		  	background: #ededed;
+		  	background: #b2c7d9;
 		  	margin: 0;
 		  	padding: 0 0 50px 0;
 			overflow:auto;
@@ -133,8 +141,10 @@
 		
 		.self .messages {
 		  	order: 1;
-		  	background: yellow;
+		  	background: #ffeb33;
 		  	border-bottom-right-radius: 0;
+  			/*추가 2020-07-06 : 아래 1줄  테두리 둥글게, 최대4군데 입력가능. 왼쪽상단부터 시계방향*/
+  			border-radius: 10px 10px 0 10px;  			
 		}
 		
 		.self .avatar {
@@ -148,19 +158,20 @@
 		  	left: 0;
 		  	width: 0;
 		  	height: 0;
-		  	border: 5px solid white;
+		  	border: 5px solid #ffeb33;
 		  	border-right-color: transparent;
 		  	border-top-color: transparent;
-		  	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+		  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 		}
 		
 		.messages {
 		  	background: white;
 		  	padding: 10px;
-		  	border-radius: 2px;
-		  	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-		}
-		
+		  	/*수정 2020-07-06 : 아래 1줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
+  			border-radius: 0 10px 10px 10px;
+		  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);	    			
+		}		
+
 		.messages p {
 		  	font-size: 0.8em;
 		  	margin: 0 0 0.2em 0;
