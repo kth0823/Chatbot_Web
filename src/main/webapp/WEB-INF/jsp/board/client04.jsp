@@ -503,6 +503,7 @@
 					</form>					
 			      </div>
 			    </li>
+			    <%@include file="button.jsp"%>
 			  </ol>
 			
 			</div>

@@ -537,7 +537,8 @@
 				 
 				<!--  iframe 검색링크 반환 검토내역 
 				<iframe src="/board/list?searchType=al&keyword=%EA%B8%88%ED%98%B8%EA%B3%A0%EC%86%8D" width="100%" height="100%" frameborder="0"></iframe> --> 
-			</div>				  			    
+			</div>
+			<%@include file="button.jsp"%>				  			    
 			  </ol>
 			</div>
 	
