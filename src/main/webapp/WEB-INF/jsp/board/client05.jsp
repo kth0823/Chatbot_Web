@@ -187,6 +187,9 @@
 		frameborder:0;
 		
 		}
+		.messages button {
+		  	font-size: 0.5em;		  	
+		}	
 		
 	</style>       
 	<script>
@@ -195,7 +198,11 @@
 		var socket;
 		var search = 0;			
 		var searchlinks;
-		var links;
+		var links;		
+		var now=new Date();
+		var week = new Array('일', '월', '화', '수', '목', '금', '토');
+		var dayName = week[now.getDay()];
+		var sendtime=now.getFullYear()+"년 "+(now.getMonth() + 1) + "월 " + now.getDate() + "일 "+dayName+"요일";
 		//var searchlinks="/board/list?searchType=al&keyword=%EA%B8%88%ED%98%B8%EA%B3%A0%EC%86%8D";
 		
 		//var searchlinks="/board/list?"+'${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#Car_no').val());"
@@ -455,7 +462,8 @@
 		     
 		    <br>		    
 		    <!-- 결과 표시 -->
-		    <h4 class="ui horizontal divider header">메시지</h4>
+		    <h4 class="ui horizontal divider header"><script type="text/javascript">
+        document.write(sendtime);</script></h4>
 			<div class="ui segment" id="result">
 			
 			  <ol class="discussion" id="discuss">
@@ -483,7 +491,7 @@
 					</select>-->					 
 					<label for="device">차량번호</label>
 					<input type="text"id="Car_no" name="Car_no" class="chk" placeholder="차량번호를 입력하세요."/><br>					
-					<button type="button" id="viewhidden">조회</button><br>		
+					<button class="btn btn-success" type="button" id="viewhidden">조회</button><br>		
 			      </div>
 			    </li>
 			<!--	<li class="other">

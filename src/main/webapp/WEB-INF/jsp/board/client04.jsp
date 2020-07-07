@@ -7,11 +7,9 @@
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 	<script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <c:url value="/images/ATECTN.png" var="logo"/>
 <c:url value="/images/co.png" var="logo"/>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> 
@@ -189,6 +187,10 @@
 		var port;
 		var socket;
 		var inFormOrLink;
+		var now=new Date();
+		var week = new Array('일', '월', '화', '수', '목', '금', '토');
+		var dayName = week[now.getDay()];
+		var sendtime=now.getFullYear()+"년 "+(now.getMonth() + 1) + "월 " + now.getDate() + "일 "+dayName+"요일";
 		
 		// 문서 로딩 후 실행됨
 		$(function() {
@@ -475,7 +477,8 @@
 		    <br>
 		    
 		    <!-- 결과 표시 -->
-		    <h4 class="ui horizontal divider header">메시지</h4>
+		    <h4 class="ui horizontal divider header"><script type="text/javascript">
+        document.write(sendtime);</script></h4>
 			<div class="ui segment" id="result">			
 			  <ol class="discussion">
 			    <li class="other">
