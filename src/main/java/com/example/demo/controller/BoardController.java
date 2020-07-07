@@ -43,6 +43,7 @@ public class BoardController {
 		model.addAttribute("csr_type", service.csr_type(scri));
 		model.addAttribute("co_info", service.co_info(scri));
 		model.addAttribute("csr_req", service.csr_req(scri));
+		model.addAttribute("device", service.device(scri));
 		model.addAttribute("fix_area", service.fix_area(scri));
 		model.addAttribute("zone", service.zone(scri));
 		model.addAttribute("co_info", service.co_info(scri));

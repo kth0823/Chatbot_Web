@@ -238,8 +238,7 @@
 							<td><label for="Deviceid">*단말기종류</label><br><!-- <input type="text"
 								id="Deviceid" name="Deviceid" class="chk" title="단말기종류를 선택하세요." />  -->
 						 		<select name="deviceid" id="deviceid" 
-										class="chk" title="요청지역을 선택하세요." style="width: 98%;">
-										<option value=" ">단말기종류를 선택하세요</option>
+										class="chk" title="요청지역을 선택하세요." style="width: 98%;">										
 									<c:forEach var="device" items="${device}" varStatus="i">
 										<option value="${device.deviceid}">${device.device}</option>
 									</c:forEach>
