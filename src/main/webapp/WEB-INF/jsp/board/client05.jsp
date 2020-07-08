@@ -88,7 +88,8 @@
 
 											$(searchR).insertBefore('#self_sq');
 											$(links).insertBefore("#self_sq");
-
+											//$('#cardbox').scrollTop($("#cardbox")[0].scrollHeight);
+											$('#result').scrollTop($("#result")[0].scrollHeight);	
 										});
 					});
 
@@ -104,6 +105,7 @@
 	$(document).ready(function() {
 	      $("#discuss").scrollTop($("#discuss")[0].scrollHeight);
 	});
+	
 </script>
 </head>
 <body>
