@@ -17,11 +17,6 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
-<!--  <script src="//cdnjs.cloudflare.com/ajax/libs/TableExport/5.2.0/js/tableexport.min.js" type="text/javascript"></script> -->
 
 <link href="<c:url value="/resources/css/chat.css?ver1.0" />" rel="stylesheet">
 <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="32x32">
@@ -117,9 +112,9 @@
 						<div class="messages">
 							<p>조회조건</p>
 							<label for="co_info">고속사</label> <input type="text" id="co_info"
-								name="co_info" class="chk" placeholder="고속사를 입력하세요." /><br>
+								name="co_info" class="chk" placeholder="고속사 입력"  style="width: 70%;"/><br>
 							<label for="device">차량번호</label> <input type="text" id="Car_no"
-								name="Car_no" class="chk" placeholder="차량번호를 입력하세요." /><br>
+								name="Car_no" class="chk" placeholder="차량번호 입력"  style="width: 70%;" /><br>
 							<button class="btn btn-success" id="viewhidden">조회</button>
 							<br>
 						</div>
