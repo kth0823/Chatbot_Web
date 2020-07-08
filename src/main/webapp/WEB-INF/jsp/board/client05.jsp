@@ -43,7 +43,7 @@
 	type="text/javascript"></script>
 <script src="//unpkg.com/tableexport@5.2.0/dist/js/tableexport.min.js"
 	type="text/javascript"></script>
-<c:url value="/images/ATECTN.png" var="logo" />
+<link href="<c:url value="/resources/css/chat.css?ver1.0" />" rel="stylesheet">
 <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="32x32">
 <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="192x192">
 <link rel="apple-touch-icon-precomposed" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
@@ -51,172 +51,7 @@
 	
 <title>챗봇</title>
 
-<style>
-<style>
-		* {
-			padding:0;
-			margin:0;
-			box-sizing:border-box;
-  			font-family: "나눔고딕", NanumGothic, "맑은고딕", "Malgun Gothic";
-  			font-size: 16;
-  			letter-spacing: -1pt;
-		}
-		
-		html {
-			width:100%;
-			height:100%;
-		}
-		
-		body {
-			width:100%;
-			height:100%;
-			color: #000;
-			background-color: #fff;
-		}
-				
-		.container {
-			width:100%;
-			height:100%;
-			display:flex;
-			flex-flow:column wrap;
-			align-items:center;
-			justify-content:center;
-		}
-
-		#cardbox {
-			width:94%;
-			height:94%;
-			padding-left:0.4em;
-			padding-right:0.4em;
-			padding-top : 0.4em;
-    		/*추가 2020-07-06 : 아래 3줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
-  			border-radius: 15px;
-  			background: #b2c7d9;
-  			display: inline-block;  	
-		}
-
-		#iconImage {
-			display:inline;
-		}
-		
-		#titleText {
-			font-size:1.4em;
-			font-weight:bold;
-			color:#777;
-		}
-		
-		#contentsText {
-			color:#999;
-		}
-		
-		#result {			
-			width :100%;
-			height:100%;		
-			overflow:auto;
-  			background-color: #b2c7d9;  	
-		}
-		
-		
-		.discussion {
-		  	list-style: none;
-			width : 100%;
-			height:100%;
-		  	background: #b2c7d9;
-		  	margin: 0;
-		  	padding: 0 0 50px 0;
-			overflow:auto;
-		}
-		
-		.discussion li {
-		  	padding: 0.5em;
-		  	overflow: hidden;
-		  	display: flex;
-		}
-		
-		.discussion .avatar {
-		  	width: 40px;
-		  	position: relative;
-		}
-		
-		.discussion .avatar img {
-		  	display: block;
-		  	width: 100%;
-		}
-		
-		.other .avatar:after {
-		  	content: "";
-		  	position: absolute;
-		  	top: 0;
-		  	right: 0;
-		  	width: 0;
-		  	height: 0;
-		  	border: 5px solid white;
-		  	border-left-color: transparent;
-		  	border-bottom-color: transparent;
-		}
-		
-		.self {
-		  	justify-content: flex-end;
-		  	align-items: flex-end;
-		}
-		
-		.self .messages {
-		  	order: 1;
-		  	background: #ffeb33;
-		  	border-bottom-right-radius: 0;
-  			/*추가 2020-07-06 : 아래 1줄  테두리 둥글게, 최대4군데 입력가능. 왼쪽상단부터 시계방향*/
-  			border-radius: 10px 10px 0 10px;  			
-		}
-		
-		.self .avatar {
-		  	order: 2;
-		}
-		
-		.self .avatar:after {
-		  	content: "";
-		  	position: absolute;
-		  	bottom: 0;
-		  	left: 0;
-		  	width: 0;
-		  	height: 0;
-		  	border: 5px solid #ffeb33;
-		  	border-right-color: transparent;
-		  	border-top-color: transparent;
-		  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-		}
-		
-		.messages {
-		  	background: white;
-		  	padding: 10px;
-		  	/*수정 2020-07-06 : 아래 1줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
-  			border-radius: 0 10px 10px 10px;
-		  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);	    			
-		}		
-
-		.messages p {
-		  	font-size: 0.8em;
-		  	margin: 0 0 0.2em 0;
-		}
-		
-		.messages time {
-		  	font-size: 0.7em;
-		  	color: #ccc;
-		}
-.searchlink {
-	width: 50%;
-	height: 100%;
-	frameborder: 0;
-}
-	.messages button {
-		  	font-size: 0.5em;		  	
-		}	
-		
-</style>
 <script>
-	var host;
-	var port;
-	var socket;
-	var search = 0;
 	var searchlinks;
 	var links;
 	var searchR;
@@ -303,7 +138,7 @@
 								name="co_info" class="chk" placeholder="고속사를 입력하세요." /><br>
 							<label for="device">차량번호</label> <input type="text" id="Car_no"
 								name="Car_no" class="chk" placeholder="차량번호를 입력하세요." /><br>
-							<button type="button" id="viewhidden">조회</button>
+							<button class="btn btn-success" id="viewhidden">조회</button>
 							<br>
 						</div>
 					</li>
