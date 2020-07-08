@@ -203,7 +203,7 @@
 		  	color: #ccc;
 		}
 .searchlink {
-	width: 50%;
+	width: 100%;
 	height: 100%;
 	frameborder: 0;
 }
@@ -241,7 +241,7 @@
 															'#Car_no').val());
 
 											links = "<iframe class='searchlink' src='" +searchlinks+ "'/>";
-											// 											$("#discuss").append(links);
+										
 
 											searchR = '<li class="other"id="viewhidden2" >'
 													+ '<div class="avatar">'
@@ -253,7 +253,7 @@
 
 											$(searchR).insertBefore('#self_sq');
 											$(links).insertBefore("#self_sq");
-
+											//$("#discuss").append(links);
 										});
 					});
 
