@@ -10,11 +10,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<c:url value="/images/ATECTN.png" var="logo"/>
-<c:url value="/images/co.png" var="logo"/>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> 
  <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="<c:url value="/resources/css/chat.css?ver1.0" />" rel="stylesheet">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="32x32">
@@ -25,310 +23,13 @@
 	<title>챗봇</title>
 	
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
-
-	<style>
-		
-		* {
-			padding:0;
-			margin:0;
-			box-sizing:border-box;
-  			font-family: "나눔고딕", NanumGothic, "맑은고딕", "Malgun Gothic";
-  			font-size: 16;
-  			letter-spacing: -1pt;
-		}
-		
-		html {
-  
-			width:100%;
-			height:100%;
-		}
-		
-		body {
-			width:100%;
-			height:100%;
-			color: #000;
-			background-color: #fff;  
-		}
-				
-		.container {
-			width:100%;
-			height:100%;
-			display:flex;
-			flex-flow:column wrap;
-			align-items:center;
-			justify-content:center;
-  			background-color: white;  			
-		}
-
-		#cardbox {
-			width:94%;
-			height:94%;
-			padding-left:0.4em;
-			padding-right:0.4em;
-			padding-top : 0.4em;
-  			/*추가 2020-07-06 : 아래 3줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
-  			border-radius: 15px;
-  			background: #b2c7d9;
-  			display: inline-block;  			
-		}
-
-		#iconImage {
-			display:inline;
-		}
-		
-		#titleText {
-			font-size:1.4em;
-			font-weight:bold;
-			color:#777;
-		}
-		
-		#contentsText {
-			color:#999;
-		}
-		
-		#result {			
-			<!-- height:14em; -->
-			width : 92%;
-			height:92%;		
-			overflow:auto;
-  			background-color: #b2c7d9;  	
-  			border-style: none;		
-		}		
-		
-		.discussion {
-		  	list-style: none;
-			width : 100%;
-			height:100%;
-		  	background: #b2c7d9;
-		  	margin: 0;
-		  	padding: 0 0 50px 0;    
-		}
-		
-		.discussion li {
-		  	padding: 0.5em;
-		  	overflow: hidden;
-		  	display: flex;
-  		}
-		
-		.discussion .avatar {
-		  	width: 40px;
-		  	position: relative;  			
-		}
-		
-		.discussion .avatar img {
-		  	display: block;
-		  	width: 100%;
-		}
-		
-		.other .avatar:after {
-		  	content: "";
-		  	position: absolute;
-		  	top: 0;
-		  	right: 0;
-		  	width: 0;
-		  	height: 0;
-		  	border: 5px solid white;
-		  	border-left-color: transparent;
-		  	border-bottom-color: transparent;
-		}
-		
-		.self {
-		  	justify-content: flex-end;
-		  	align-items: flex-end;  	
-  			color : black;
-		}
-		
-		.self .messages {
-		  	order: 1;
-		  	background: #ffeb33;
-		  	border-bottom-right-radius: 0;
-  			/*추가 2020-07-06 : 아래 1줄  테두리 둥글게, 최대4군데 입력가능. 왼쪽상단부터 시계방향*/
-  			border-radius: 10px 10px 0 10px;
-		}
-		
-		.self .avatar {
-		  	order: 2;
-		}
-		
-		.self .avatar:after {
-		  	content: "";
-		  	position: absolute;
-		  	bottom: 0;
-		  	left: 0;
-		  	width: 0;
-		  	height: 0;
-		  	border: 5px solid #ffeb33;
-		  	border-right-color: transparent;
-		  	border-top-color: transparent;
-		  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-		}
-		
-		.messages {
-		  	background: white;
-		  	padding: 10px;
-  			/*수정 2020-07-06 : 아래 1줄 테두리 둥글게, 최대4개 입력가능. 왼쪽상단부터 시계방향*/
-  			border-radius: 0 10px 10px 10px;
-		  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);  	  
-		}
-		
-		.messages p {
-		  	font-size: 0.8em;
-		  	margin: 0 0 0.2em 0;
-		}
-		
-		.messages time {
-		  	font-size: 0.7em;
-		  	color: #ccc;
-		}
-		.messages button {
-		  	font-size: 0.5em;		  	
-		}	
-				
-	</style>       
 	
 	<script>
-		var host;
-		var port;
-		var socket;
-		var inFormOrLink;
 		var now=new Date();
 		var week = new Array('일', '월', '화', '수', '목', '금', '토');
 		var dayName = week[now.getDay()];
-		var sendtime=now.getFullYear()+"년 "+(now.getMonth() + 1) + "월 " + now.getDate() + "일 "+dayName+"요일";
+		var sendtime=now.getFullYear()+"년 "+(now.getMonth() + 1) + "월 " + now.getDate() + "일 "+dayName+"요일";		
 		
-		// 문서 로딩 후 실행됨
-		$(function() {
-
-			// 연결하기 버튼 클릭 처리
-			$("#connectButton").bind('click', function(event) {
-				println('connectButton이 클릭되었습니다.');
-				
-                   //host = $('#hostInput').val();
-                   //port = $('#portInput').val();
-					
-                   connectToServer();
-            });
-			// 전송 버튼 클릭 시 처리
-            $("#sendButton").bind('click', function(event) {
-            	var sender = $('#senderInput').val();
-            	var recepient = $('#recepientInput').val();
-            	var data = $('#dataInput').val();
-
-          		var output = {sender:sender, recepient:recepient, command:'chat', type:'text', data:data};
-            	console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-
-           		if (socket == undefined) {
-             		alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-           			return;
-             	}
-
-           		socket.emit('message', output);
-           		
-           		addToDiscussion('self', data);
-          	});
-
-			// 전송 버튼 클릭 시 처리
-            $("#add").bind('click', function(event) {	
-           		host="http://localhost/";
-				port="8080";
-				connectToServer(); 
-				var data = "CSR이 등록되었습니다.";
-           		addToDiscussion2('other', data);
-           		self.location = "client041";
-           		
-          	});
-
-			// 로그인 버튼 클릭 시 처리
-            $("#loginButton").bind('click', function(event) {
-            	var id = $('#idInput').val();
-            	var password = $('#passwordInput').val();
-            	var alias = $('#aliasInput').val();
-            	var today = $('#todayInput').val();
-
-            	var output = {id:id, password:password, alias:alias, today:today};
-           		console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-
-           		if (socket == undefined) {
-            		alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-            		return;
-           		}
-
-            	socket.emit('login', output);
-            });
-			
-         	// 결과 지우기 버튼 클릭 시 처리
-            $("#clearButton").bind('click', function(event) {
-            	$("#result").html('');
-            });
-
-        });
-           
-		// 서버에 연결하는 함수 정의
-        function connectToServer() {
-
-        	var options = {'forceNew':true};
-        	var url = 'http://' + host + ':' + port;
-        	socket = io.connect(url, options);
-
-        	socket.on('connect', function() {
-               	println('웹소켓 서버에 연결되었습니다. : ' + url);
-
-                socket.on('message', function(message) {
-                	console.log(JSON.stringify(message));
-
-                	println('<p>수신 메시지 : ' + message.sender + ', ' + message.recepient + ', ' + message.command + ', ' + message.data + '</p>');
-	            	
-                	addToDiscussion('other', message.data);
-                });
-	
-	            socket.on('response', function(response) {
-	            	console.log(JSON.stringify(response));
-	            	println('응답 메시지를 받았습니다. : ' + response.command + ', ' + response.code + ', ' + response.message);
-	            });
-	            
-	        });
-
-	        socket.on('disconnect', function() {
-	        	println('웹소켓 연결이 종료되었습니다.');
-	        });
-
-   		}
-           
-		function println(data) {
-			console.log(data);
-			//$('#result').append('<p>' + data + '</p>');
-		}
-		/*
-		function addToDiscussion(writer, msg) {
-			println("addToDiscussion 호출됨 : " + writer + ", " + msg);
-			var now=new Date();
-			var sendtime = {};
-			var i=0;			
-			sendtime[i]=(now.getMonth() + 1) + "월 " + now.getDate() + "일 " + now.getHours() + "시 " + now.getMinutes() + "분 ";  
-			
-			var img = '/resources/images/ATEC T&.png';
-			if (writer == 'other') {
-				img = '/resources/images/ATEC T&.png';
-			}
-			
-			var contents = "<li class='" + writer + "'>"
-						 + "  <div class='avatar'>"
-						 + "    <img src='" + img + "' />"
-		      			 + "  </div>"
-		      			 + "  <div class='messages'>"
-		        		 + "    <p>" + msg + "</p>"
-		        		 //+ "    <time datetime='2016-02-10 18:30'>showClock()</time>"
-						 + "    <time>"+sendtime[i]+"</time>"
-		      			 + "  </div>"
-		    			 + "</li>";
-			
-		    println("추가할 HTML : " + contents);
-		    //$(".discussion").prepend(contents);
-			$(".discussion").append(contents);	
-			i++;
-		}
-		*/
-
 		$(function() {
 		    $( "#Date" ).datepicker({
 		         changeMonth: true,	       
@@ -494,8 +195,8 @@
 			      </div>
 			    </li>
 				<li class="self">
-			      <div class="avatar">
-			        <img src="/resources/images/user2.png" />
+			      <div class="avatar" >
+			        <img src="/resources/images/user.png" class="s_img"/>
 			      </div>
 			      <div class="messages">
 			        <p>CSR 항목을 입력하세요</p>
@@ -511,7 +212,7 @@
 								</c:forEach>
 								</select>
 					<br>
-					<img src="/resources/images/bus.png" />								
+					<img src="/resources/images/bus.png"  />								
 								 <input type="text" id="Car_no" name="Car_no" class="chk"  title="차량번호를 선택하세요" placeholder="차량번호 입력" style="width: 70%;" /><br>
 					<img src="/resources/images/check.png" />
 					<select name="csr_reqid" id="csr_reqid" class="chk" title="접수대분류 선택하세요" style="width: 70%;">										
