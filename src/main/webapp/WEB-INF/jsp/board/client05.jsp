@@ -104,12 +104,12 @@
 
 	<div class="container">
 
-		<div id="cardbox" class="ui blue fluid card">
+		<div id="cardbox" class="ui blue fluid card">			
+
 			<!-- 결과 표시 -->
 			<h4 class="ui horizontal divider header"><script type="text/javascript">
         document.write(sendtime);</script></h4>
 			<div class="ui segment" id="result">
-
 				<ol class="discussion" id="discuss">
 					<li class="other">
 						<div class="avatar">
@@ -125,6 +125,7 @@
 						</div>
 						<div class="messages">
 							<p>조회조건</p>
+
 							<img src="/resources/images/office-building.png" />
 							<input type="text" id="co_info"
 								name="co_info" class="chk" placeholder="고속사 입력"  style="width: 70%;"/><br>
