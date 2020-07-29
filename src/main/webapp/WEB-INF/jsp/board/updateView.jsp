@@ -28,9 +28,6 @@
 				$(document).on("click","#fileDel", function(){
 					$(this).parent().remove();
 				})
-				
-				fn_addFile();
-
 				$(".cancel_btn").on(
 						"click",
 						function() {
@@ -50,6 +47,7 @@
 					formObj.attr("method", "post");
 					formObj.submit();
 				})
+				fn_addFile();
 			})
 
 	/* function fn_valiChk() {
@@ -392,19 +390,20 @@
 									<div>
 										<input type="hidden" id="FILE_NO" name="FILE_NO_${var.index}" value="${file.FILE_NO }">
 										<input type="hidden" id="FILE_NAME" name="FILE_NAME" value="FILE_NO_${var.index}">
-										<a href="#" id="fileName" onclick="return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)
+										<a href="#" id="fileName" onclick="return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
 										<button id="fileDel" onclick="fn_del('${file.FILE_NO}','FILE_NO_${var.index}');" type="button" class="btn btn-danger">삭제</button><br>
 									</div>
 									</c:forEach>
 								</td>
 							</tr>
 					</tbody>
-				</table>
-				<div>
+					</table>
+				<tr>
 					<button type="button" class="update_btn btn btn-warning">수정완료</button>
 					<button type="submit" class="cancel_btn btn btn-danger">취소</button>
 					<button type="button" class="fileAdd_btn btn btn-info">파일추가</button>					
-				</div>
+				</tr>
+				
 			</form>
 		</section>
 		<hr />

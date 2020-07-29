@@ -69,9 +69,15 @@ public class BoardServiceImpl implements  BoardService {
 	}
 	
 	@Override
-	public void update(BoardVO vo) throws Exception {
+	public void update(BoardVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
 
 		dao.update(vo);
+		
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(vo, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			dao.insertFile(list.get(i)); 
+		}
 	}
 
 	@Override

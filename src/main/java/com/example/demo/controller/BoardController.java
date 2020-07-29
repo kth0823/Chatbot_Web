@@ -165,7 +165,7 @@ public class BoardController {
 			 MultipartHttpServletRequest mpRequest) throws Exception {
 		logger.info("update");
 
-		service.update(vo);
+		service.update(vo, files, fileNames ,mpRequest);
 
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
