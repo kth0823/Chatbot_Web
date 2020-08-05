@@ -207,7 +207,7 @@
 			<if test="searchType == 'd'.toString()">AND DATE LIKE '%' #{keyword}
 				'%'</if>
 			<if test="searchType == 'r'.toString()">AND CSR_REQID IN (select CSR_REQID from chatbot_temp.tCsr_Req where CSR_REQ like '%' #{keyword} '%')  </if>				
-			<if test="searchType == 't'.toString()">AND BE_IH LIKE '%' #{keyword} or AND AF_IH LIKE '%' #{keyword} 
+			<if test="searchType == 't'.toString()">AND BE_IH LIKE '%' #{keyword} '%' or AF_IH LIKE '%' #{keyword} 
 				'%'</if>
 			<if test="searchType == 'al'.toString()">AND (DATE LIKE '%' #{keyword}
 				'%') or (CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%'))or 
