@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.example.demo.dao.BoardDAO;
 import com.example.demo.util.FileUtils;
 import com.example.demo.vo.BoardVO;
+import com.example.demo.vo.ManualVO;
+import com.example.demo.util.mFileUtils;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -19,6 +21,9 @@ public class BoardServiceImpl implements  BoardService {
     
 	@Resource(name="fileUtils")
 	private FileUtils fileUtils;
+	
+	@Resource(name="mfileUtils")
+	private mFileUtils mfileUtils;
 	
 	@Inject
 	private BoardDAO dao;
@@ -194,5 +199,19 @@ public class BoardServiceImpl implements  BoardService {
 		dao.writechat(vo);	
 		
 	}
+	
+	// 게시글 작성
+	@Override
+	public void manualwrite(ManualVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
+		dao.manualwrite(vo);
+		
+		List<Map<String,Object>> list = mfileUtils.parseInsertFileInfo(vo, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			dao.insertManualFile(list.get(i)); 
+		}
+	}
+	
+
 
 }

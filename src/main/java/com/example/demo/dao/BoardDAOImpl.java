@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import com.example.demo.vo.BoardVO;
+import com.example.demo.vo.ManualVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -190,5 +191,19 @@ public class BoardDAOImpl implements BoardDAO {
 	public void writechat(BoardVO vo) throws Exception {
 		sqlSession.insert("boardMapper.client04", vo);
 
+	}
+	
+	// 메뉴얼 등록 작성
+	@Override
+	public void manualwrite(ManualVO vo) throws Exception {
+		sqlSession.insert("boardMapper.insertManual", vo);
+
+	}
+	
+	// 메뉴얼 파일 업로드
+	@Override
+	public void insertManualFile(Map<String, Object> map) throws Exception {
+	// TODO Auto-generated method stub
+	sqlSession.insert("boardMapper.insertmanualFile", map);
 	}
 }

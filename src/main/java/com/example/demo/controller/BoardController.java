@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.service.BoardService;
 import com.example.demo.vo.BoardVO;
+import com.example.demo.vo.ManualVO;
 //import com.example.demo.vo.Criteria;====
 import com.example.demo.vo.PageMaker;
 import com.example.demo.vo.SearchCriteria;
@@ -376,6 +377,24 @@ public class BoardController {
 		return "board/client05";
 		//return "board/writeView";
 	}
+	
+	// 메뉴얼 등록 작성 화면
+	@RequestMapping(value = "/board/manualwriteView", method = RequestMethod.GET)
+	public void manualwriteView(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		logger.info("manualwriteView");
+
+	}
+	
+	// 게시판 글 작성
+	@RequestMapping(value = "/board/manualwrite", method = RequestMethod.POST)
+	public String manualwrite(ManualVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
+		logger.info("manualwrite");
+
+		service.manualwrite(vo, mpRequest);
+
+		return "redirect:/board/list";
+	}
+	
 		
 //		// 게시판 수정뷰
 //		@RequestMapping(value = "/updateView", method = RequestMethod.GET)

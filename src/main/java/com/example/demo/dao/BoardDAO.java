@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.demo.vo.BoardVO;
+import com.example.demo.vo.ManualVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -78,4 +79,10 @@ public interface  BoardDAO {
 	
 	// 챗봇으로 게시글 작성
 	public void writechat(BoardVO vo) throws Exception;
+	
+	// 메뉴얼 등록 작성
+	public void manualwrite(ManualVO vo) throws Exception;
+	
+	// 메뉴얼 파일 업로드
+	public void insertManualFile(Map<String, Object> map) throws Exception;
 }

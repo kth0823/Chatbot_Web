@@ -326,7 +326,36 @@
 		#{Car_no},
 		#{Deviceid})
 	</insert>
-			    
+	
+		
+	<!-- 메뉴얼 글 작성 -->
+	<insert id="insertManual" parameterType="com.example.demo.vo.ManualVO" useGeneratedKeys="true" keyProperty="mno">
+		INSERT INTO chatbot_temp.tManual(		
+		MFW,
+		MCOMMENT,
+		MREGDATE
+		)VALUES(
+		#{Mfw},
+		#{Mcomment},
+		NOW())
+	</insert>
+	
+		<!-- 메뉴얼 파일 업로드 -->
+	 <insert id="insertmanualFile" parameterType="hashMap">
+		INSERT INTO chatbot_temp.tManual_File(
+			mFILE_NO,
+			MNO,
+			mORG_FILE_NAME,
+			mSTORED_FILE_NAME,
+			mFILE_SIZE
+		)VALUES(
+			#{mFILE_NO},
+			#{MNO},
+			#{mORG_FILE_NAME},
+			#{mSTORED_FILE_NAME},
+			#{mFILE_SIZE}
+		)
+    </insert>	    
 </mapper>
 
 

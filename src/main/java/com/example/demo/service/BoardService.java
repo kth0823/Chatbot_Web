@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.demo.vo.BoardVO;
+import com.example.demo.vo.ManualVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -77,4 +78,7 @@ public interface BoardService {
 	
 	// 게시글 작성
 	public void writechat(BoardVO vo) throws Exception;
+	
+	// 게시글 작성
+	public void manualwrite(ManualVO vo, MultipartHttpServletRequest mpRequest) throws Exception;
 }
