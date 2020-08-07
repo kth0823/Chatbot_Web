@@ -206,4 +206,21 @@ public class BoardDAOImpl implements BoardDAO {
 	// TODO Auto-generated method stub
 	sqlSession.insert("boardMapper.insertmanualFile", map);
 	}
+	
+	// 게시물 목록 조회
+	@Override
+	public List<BoardVO> manuallist(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardMapper.manuallistPage", scri);
+
+	}
+
+	// 게시물 총 개수
+	@Override
+	public int manuallistCount(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.manuallistCount", scri);
+
+	}
+	
 }

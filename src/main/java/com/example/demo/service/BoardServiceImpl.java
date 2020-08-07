@@ -212,6 +212,19 @@ public class BoardServiceImpl implements  BoardService {
 		}
 	}
 	
+	
+	// 메뉴얼 목록 조회
+	@Override
+	public List<BoardVO> manuallist(SearchCriteria scri) throws Exception {
+
+		return dao.manuallist(scri);
+	}
+	//게시물 총 개수 
+	@Override
+	public int manuallistCount(SearchCriteria scri) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.manuallistCount(scri);
+	}
 
 
 }

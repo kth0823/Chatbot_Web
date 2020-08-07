@@ -392,7 +392,25 @@ public class BoardController {
 
 		service.manualwrite(vo, mpRequest);
 
-		return "redirect:/board/list";
+		return "redirect:/board/manuallist";
+	}
+	
+	
+	// 게시판 목록 조회
+	@RequestMapping(value = "/manuallist", method = RequestMethod.GET)
+	public String manuallist(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		logger.info("manuallist");
+
+		model.addAttribute("manuallist", service.manuallist(scri));		
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.manuallistCount(scri));		
+
+		model.addAttribute("pageMaker", pageMaker);
+
+		return "board/manuallist";
+
 	}
 	
 		

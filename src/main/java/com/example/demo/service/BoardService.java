@@ -81,4 +81,10 @@ public interface BoardService {
 	
 	// 게시글 작성
 	public void manualwrite(ManualVO vo, MultipartHttpServletRequest mpRequest) throws Exception;
+	
+	// 메뉴얼 목록 조회
+	public List<BoardVO> manuallist(SearchCriteria scri) throws Exception;
+
+	// 메뉴얼 총 갯수
+	public int manuallistCount(SearchCriteria scri) throws Exception;
 }

@@ -399,7 +399,44 @@
 			#{mFILE_SIZE}
 		)
     </insert>
+    
+    <!-- 메뉴얼 리스트 페이지  -->
+    <select id="manuallistPage" resultType="com.example.demo.vo.ManualVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT MNO
+		,MREGDATE
+		,MFW
+		,MCOMMENT		 
+	 FROM 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.MNO 
+	,A.MREGDATE 
+	,A.MFW
+	,A.MCOMMENT 	 
+	 FROM 
+	 chatbot_temp.tManual A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="search"></include>
+	<![CDATA[ORDER BY MREGDATE desc
+	 ) manuallist 
+	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
 	
+	<!-- 메뉴얼 리스트 페이지  -->
+	<select id="manuallistCount" resultType="int">
+
+		SELECT COUNT(MNO)
+		FROM chatbot_temp.tManual
+		WHERE 1=1
+		<include refid="search"></include>
+		and MNO > 0
+	</select>	
 			    
 </mapper>
 
