@@ -87,7 +87,7 @@ public interface  BoardDAO {
 	public void insertManualFile(Map<String, Object> map) throws Exception;
 	
 	// 메뉴얼 목록 조회
-	public List<BoardVO> manuallist(SearchCriteria scri) throws Exception;
+	public List<ManualVO> manuallist(SearchCriteria scri) throws Exception;
 	
 	// 메뉴얼 총 개수 
 	public int manuallistCount(SearchCriteria scri) throws Exception;

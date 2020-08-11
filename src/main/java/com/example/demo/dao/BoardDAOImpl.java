@@ -209,7 +209,7 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// 게시물 목록 조회
 	@Override
-	public List<BoardVO> manuallist(SearchCriteria scri) throws Exception {
+	public List<ManualVO> manuallist(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("boardMapper.manuallistPage", scri);
 

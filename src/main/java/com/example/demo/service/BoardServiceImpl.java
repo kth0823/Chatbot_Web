@@ -215,7 +215,7 @@ public class BoardServiceImpl implements  BoardService {
 	
 	// 메뉴얼 목록 조회
 	@Override
-	public List<BoardVO> manuallist(SearchCriteria scri) throws Exception {
+	public List<ManualVO> manuallist(SearchCriteria scri) throws Exception {
 
 		return dao.manuallist(scri);
 	}
