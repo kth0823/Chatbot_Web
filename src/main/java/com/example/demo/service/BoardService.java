@@ -87,4 +87,14 @@ public interface BoardService {
 
 	// 메뉴얼 총 갯수
 	public int manuallistCount(SearchCriteria scri) throws Exception;
+	
+	// 메뉴얼 목록 조회
+	public ManualVO manualread(int mno) throws Exception;
+	
+	// 메뉴얼 파일 조회
+	public List<Map<String, Object>> manualselectFileList(int mno) throws Exception;
+		
+	// 메뉴얼 파일 다운
+	public Map<String, Object> manualselectFileInfo(Map<String, Object> map) throws Exception;
+	
 }

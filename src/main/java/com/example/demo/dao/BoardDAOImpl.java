@@ -223,4 +223,25 @@ public class BoardDAOImpl implements BoardDAO {
 
 	}
 	
+	// 게시물 조회
+	@Override
+	public ManualVO manualread(int mno) throws Exception {
+
+		return sqlSession.selectOne("boardMapper.manualread", mno);
+	}
+	
+	// 첨부파일 조회
+	@Override
+	public List<Map<String, Object>> manualselectFileList(int mno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardMapper.manualselectFileList", mno);
+	}
+		
+	// 첨부파일 다운로드
+	@Override
+	public Map<String, Object> manualselectFileInfo(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.manualselectFileInfo", map);
+	}
+	
 }

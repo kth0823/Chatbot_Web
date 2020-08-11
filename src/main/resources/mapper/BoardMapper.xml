@@ -383,7 +383,7 @@
 		NOW())
 	</insert>
 	
-		<!-- 메뉴얼 파일 등록 업로드 -->
+		<!-- 메뉴얼 파일 업로드 -->
 	 <insert id="insertmanualFile" parameterType="hashMap">
 		INSERT INTO chatbot_temp.tManual_File(
 			mFILE_NO,
@@ -400,7 +400,34 @@
 		)
     </insert>
     
-    <!-- 메뉴얼 리스트 페이지  -->
+    	<!-- 메뉴얼 파일 조회 -->
+	<select id="manualselectFileList" parameterType="int" resultType="hashMap">
+		SELECT mFILE_NO,
+			   mORG_FILE_NAME,
+			   ROUND(mFILE_SIZE/1024,1) AS mFILE_SIZE
+		  FROM chatbot_temp.tManual_File
+		 WHERE MNO = #{MNO}
+		   AND mDEL_GB = 'N'
+		 ORDER BY mFILE_NO ASC
+	</select>
+	
+	<!-- 메뉴얼 파일 다운 -->
+	<select id="manualselectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT 
+			mSTORED_FILE_NAME,
+			mORG_FILE_NAME
+		FROM chatbot_temp.tManual_File
+		WHERE mFILE_NO = #{mFILE_NO}
+	</select>
+	
+	<!-- 메뉴얼 파일 업데이트 -->
+	<update id="manualupdateFile" parameterType="hashMap">
+    	UPDATE chatbot_temp.tManual_File SET
+    	mDEL_GB = 'Y'
+    	WHERE mFILE_NO = #{mFILE_NO}
+    </update>
+    
+       <!-- 메뉴얼 리스트 페이지  -->
     <select id="manuallistPage" resultType="com.example.demo.vo.ManualVO"
 		parameterType="com.example.demo.vo.Criteria">
 	<![CDATA[
@@ -436,9 +463,21 @@
 		WHERE 1=1
 		<include refid="search"></include>
 		and MNO > 0
+	</select>
+	
+	<select id="manualread" parameterType="int"
+		resultType="com.example.demo.vo.ManualVO">
+		SELECT MNO,
+		MREGDATE,
+		MFW,
+		MCOMMENT
+		FROM
+		chatbot_temp.tManual
+		WHERE MNO = #{mno}
 	</select>	
-			    
+    	    
 </mapper>
+
 
 
  

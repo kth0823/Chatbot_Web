@@ -411,6 +411,37 @@ public class BoardController {
 
 		return "board/manuallist";
 
+	}	
+	
+	// 메뉴얼 등록내역 조회
+	@RequestMapping(value = "/manualreadView", method = RequestMethod.GET)
+	public String manualread(ManualVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+		logger.info("manualread");
+
+		model.addAttribute("manualread", service.manualread(vo.getMno()));
+		
+		List<Map<String, Object>> manualfileList = service.manualselectFileList(vo.getMno());
+		model.addAttribute("manualfile", manualfileList);
+		return "board/manualreadView";
+	}
+	
+	// 메뉴얼 다운로드
+	@RequestMapping(value="/mfileDown")
+	public void mfileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
+		Map<String, Object> resultMap = service.manualselectFileInfo(map);
+		String storedFileName = (String) resultMap.get("mSTORED_FILE_NAME");
+		String originalFileName = (String) resultMap.get("mORG_FILE_NAME");
+		
+		// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
+		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("/home/bliss/manual/"+storedFileName));
+		
+		response.setContentType("application/octet-stream");
+		response.setContentLength(fileByte.length);
+		response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
+		response.getOutputStream().write(fileByte);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+		
 	}
 	
 		

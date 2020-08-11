@@ -226,5 +226,26 @@ public class BoardServiceImpl implements  BoardService {
 		return dao.manuallistCount(scri);
 	}
 
+	// 메뉴얼  조회
+	@Override
+	public ManualVO manualread(int mno) throws Exception {
+
+		return dao.manualread(mno);
+	}
+	
+	// 메뉴얼 파일 조회
+	@Override
+	public List<Map<String, Object>> manualselectFileList(int mno) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.manualselectFileList(mno);
+	}
+	
+	// 메뉴얼 파일 다운로드
+	@Override
+	public Map<String, Object> manualselectFileInfo(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.manualselectFileInfo(map);
+	}
+	
 
 }

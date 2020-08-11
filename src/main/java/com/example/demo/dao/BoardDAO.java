@@ -91,4 +91,13 @@ public interface  BoardDAO {
 	
 	// 메뉴얼 총 개수 
 	public int manuallistCount(SearchCriteria scri) throws Exception;
+	
+	// 메뉴얼 게시물 조회
+	public ManualVO manualread(int mno) throws Exception;
+	
+	// 메뉴얼 첨부파일 조회
+	public List<Map<String, Object>> manualselectFileList(int mno) throws Exception;
+		
+	// 메뉴얼 첨부파일 다운
+	public Map<String, Object> manualselectFileInfo(Map<String, Object> map) throws Exception;
 }
