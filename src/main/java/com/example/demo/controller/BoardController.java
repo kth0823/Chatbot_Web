@@ -425,10 +425,10 @@ public class BoardController {
 		return "board/manualreadView";
 	}
 	
-	// 메뉴얼 다운로드
+	//메뉴얼 다운로드
 	@RequestMapping(value="/mfileDown")
 	public void mfileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
-		Map<String, Object> resultMap = service.manualselectFileInfo(map);
+		Map<String, Object> resultMap = service.manselectFileInfo(map);
 		String storedFileName = (String) resultMap.get("mSTORED_FILE_NAME");
 		String originalFileName = (String) resultMap.get("mORG_FILE_NAME");
 		
@@ -443,7 +443,7 @@ public class BoardController {
 		response.getOutputStream().close();
 		
 	}
-	
+
 		
 //		// 게시판 수정뷰
 //		@RequestMapping(value = "/updateView", method = RequestMethod.GET)

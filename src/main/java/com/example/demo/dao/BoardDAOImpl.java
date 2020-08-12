@@ -239,9 +239,10 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	// 첨부파일 다운로드
 	@Override
-	public Map<String, Object> manualselectFileInfo(Map<String, Object> map) throws Exception {
+	public Map<String, Object> manselectFileInfo(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("boardMapper.manualselectFileInfo", map);
+		return sqlSession.selectOne("boardMapper.manselectFileInfo", map);
 	}
+
 	
 }

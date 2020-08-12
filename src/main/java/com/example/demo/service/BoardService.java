@@ -95,6 +95,7 @@ public interface BoardService {
 	public List<Map<String, Object>> manualselectFileList(int mno) throws Exception;
 		
 	// 메뉴얼 파일 다운
-	public Map<String, Object> manualselectFileInfo(Map<String, Object> map) throws Exception;
+	public Map<String, Object> manselectFileInfo(Map<String, Object> map) throws Exception;
+	
 	
 }

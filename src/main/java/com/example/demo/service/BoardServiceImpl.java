@@ -219,7 +219,7 @@ public class BoardServiceImpl implements  BoardService {
 
 		return dao.manuallist(scri);
 	}
-	//게시물 총 개수 
+	//메뉴얼  총 개수 
 	@Override
 	public int manuallistCount(SearchCriteria scri) throws Exception{
 		// TODO Auto-generated method stub
@@ -242,10 +242,9 @@ public class BoardServiceImpl implements  BoardService {
 	
 	// 메뉴얼 파일 다운로드
 	@Override
-	public Map<String, Object> manualselectFileInfo(Map<String, Object> map) throws Exception {
+	public Map<String, Object> manselectFileInfo(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.manualselectFileInfo(map);
+		return dao.manselectFileInfo(map);
 	}
-	
 
 }
