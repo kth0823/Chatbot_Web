@@ -443,6 +443,22 @@ public class BoardController {
 		response.getOutputStream().close();
 		
 	}
+	
+	// 메뉴얼 삭제
+	@RequestMapping(value = "/mandelete", method = RequestMethod.POST)
+	public String mandelete(ManualVO vo,@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+	
+		logger.info("mandelete");
+
+		service.mandelete(vo.getMno());
+
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
+		return "redirect:/board/manuallist";
+	}
 
 		
 //		// 게시판 수정뷰

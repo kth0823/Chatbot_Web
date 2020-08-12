@@ -246,5 +246,14 @@ public class BoardServiceImpl implements  BoardService {
 		// TODO Auto-generated method stub
 		return dao.manselectFileInfo(map);
 	}
+	
+	//메뉴얼 내역 삭제 
+	@Override
+	public void mandelete(int mno) throws Exception {
+
+		dao.mandelete(mno);
+	}
+	
+	
 
 }

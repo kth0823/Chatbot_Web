@@ -100,4 +100,7 @@ public interface  BoardDAO {
 		
 	// 메뉴얼 첨부파일 다운
 	public Map<String, Object> manselectFileInfo(Map<String, Object> map) throws Exception;
+	
+	// 메뉴얼 내역 삭제
+	public void mandelete(int mno) throws Exception;
 }

@@ -474,7 +474,15 @@
 		FROM
 		chatbot_temp.tManual
 		WHERE MNO = #{mno}
-	</select>	
+	</select>
+
+	<!-- 메뉴얼 내역 삭제  -->
+	<delete id="mandelete" parameterType="int">
+		DELETE
+		FROM
+		chatbot_temp.tManual
+		WHERE MNO = #{mno}
+	</delete>	
     	    
 </mapper>
 
