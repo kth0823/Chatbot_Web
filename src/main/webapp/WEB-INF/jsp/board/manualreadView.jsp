@@ -24,7 +24,7 @@
 
 		// 수정 
 		$(".update_btn").on("click", function() {
-			formObj.attr("action", "/board/updateView");
+			formObj.attr("action", "/board/manupdateView");
 			formObj.attr("method", "get");
 			formObj.submit();
 		})
@@ -43,7 +43,7 @@
 		// 목록
 		$(".list_btn").on("click", function(){
 		
-		location.href = "/board/list?page=${scri.page}"
+		location.href = "/board/manuallist?page=${scri.page}"
 		+"&perPageNum=${scri.perPageNum}"
 		+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 		})
@@ -94,7 +94,7 @@
 				  <input type="text" id="mfw" name="mfw" value="${manualread.mfw}" />										
 			</div>
 			<div class="form-group">
-				 <label for="mcomment">고속사</label><br>
+				 <label for="mcomment">메모</label><br>
 				  <input type="text" id="mcomment" name="mcomment" value="${manualread.mcomment}" /> 
 			</div>
 			<div class="form-group">

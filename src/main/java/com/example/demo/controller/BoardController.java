@@ -444,6 +444,36 @@ public class BoardController {
 		
 	}
 	
+	// 메뉴얼 등록 수정뷰
+		@RequestMapping(value = "/manupdateView", method = RequestMethod.GET)
+		public String manupdateView(ManualVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+			logger.info("updateView");
+
+			model.addAttribute("manupdate", service.manualread(vo.getMno()));			
+			
+			List<Map<String, Object>> manualfileList = service.manualselectFileList(vo.getMno());
+			model.addAttribute("manualfile", manualfileList);
+			return "board/manupdateView";
+		}
+
+	// 게시판 수정
+	@RequestMapping(value = "/manupdate", method = RequestMethod.POST)
+	public String manupdate(ManualVO vo, @ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr, 
+			@RequestParam(value="mfileNoDel[]") String[] files,
+			@RequestParam(value="mfileNameDel[]") String[] fileNames,
+			MultipartHttpServletRequest mpRequest) throws Exception {
+			logger.info("manupdate");
+
+			service.manupdate(vo, files, fileNames ,mpRequest);
+
+			rttr.addAttribute("page", scri.getPage());
+			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+			rttr.addAttribute("searchType", scri.getSearchType());
+			rttr.addAttribute("keyword", scri.getKeyword());
+			
+			return "redirect:/board/manuallist";
+	}
+	
 	// 메뉴얼 삭제
 	@RequestMapping(value = "/mandelete", method = RequestMethod.POST)
 	public String mandelete(ManualVO vo,@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{

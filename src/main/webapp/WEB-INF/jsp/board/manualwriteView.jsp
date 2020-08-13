@@ -65,7 +65,7 @@
 
 	<div id="root">
 		<header>
-			<h1>CSR 입력</h1>
+			<h1>메뉴얼 등록화면</h1>
 		</header>
 		<hr />
 

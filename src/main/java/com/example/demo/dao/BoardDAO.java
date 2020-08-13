@@ -103,4 +103,11 @@ public interface  BoardDAO {
 	
 	// 메뉴얼 내역 삭제
 	public void mandelete(int mno) throws Exception;
+	
+	// 메뉴얼 등록 수정
+	public void manupdate(ManualVO vo) throws Exception;
+	
+	// 메뉴얼 첨부파일 수정
+	public void manupdateFile(Map<String, Object> map) throws Exception;
+	
 }

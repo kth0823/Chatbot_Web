@@ -100,5 +100,11 @@ public interface BoardService {
 	// 메뉴얼 내역 삭제
 	public void mandelete(int mno) throws Exception;
 	
+	// 메뉴얼 내역 수정
+	public void manupdate(ManualVO vo, MultipartHttpServletRequest mpRequest) throws Exception;
+	
+	// 메뉴얼 파일 수정
+	public void manupdate(ManualVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
+	
 	
 }

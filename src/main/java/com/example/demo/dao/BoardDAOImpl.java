@@ -251,4 +251,19 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete("boardMapper.mandelete", mno);
 	}
 	
+	// 메뉴얼 수정
+	@Override
+	public void manupdate(ManualVO vo) throws Exception {
+
+		sqlSession.update("boardMapper.maupdate", vo);
+	}
+	
+	//메뉴얼 첨부파일 업데이트 
+	@Override
+	public void manupdateFile(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		
+		sqlSession.update("boardMapper.manualupdateFile", map);
+	}
+	
 }

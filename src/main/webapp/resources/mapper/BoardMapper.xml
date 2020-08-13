@@ -439,7 +439,15 @@
 		FROM
 		chatbot_temp.tManual
 		WHERE MNO = #{mno}
-	</delete>	
+	</delete>
+	
+	<!-- 메뉴얼 업데이트 -->
+	<update id="maupdate" parameterType="com.example.demo.vo.ManualVO">
+		UPDATE chatbot_temp.tManual
+		SET MFW=#{Mfw},
+		MCOMMENT=#{Mcomment}
+		WHERE MNO = #{mno}
+	</update>	
     	    
 </mapper>
 

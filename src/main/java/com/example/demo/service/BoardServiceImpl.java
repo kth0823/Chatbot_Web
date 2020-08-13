@@ -200,7 +200,7 @@ public class BoardServiceImpl implements  BoardService {
 		
 	}
 	
-	// 게시글 작성
+	// 메뉴얼 작성
 	@Override
 	public void manualwrite(ManualVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
 		dao.manualwrite(vo);
@@ -253,6 +253,38 @@ public class BoardServiceImpl implements  BoardService {
 
 		dao.mandelete(mno);
 	}
+	
+	//메뉴얼 내역 업데이트 
+	@Override
+	public void manupdate(ManualVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
+
+		dao.manupdate(vo);
+		
+		List<Map<String,Object>> list = mfileUtils.parseInsertFileInfo(vo, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			dao.insertManualFile(list.get(i)); 
+		}
+	}
+	//메뉴얼 파일 업데이트 
+	@Override
+	public void manupdate(ManualVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
+		
+	dao.manupdate(vo);
+		
+	List<Map<String, Object>> list = mfileUtils.parseUpdateFileInfo(vo, files, fileNames, mpRequest);
+	Map<String, Object> tempMap = null;
+	int size = list.size();
+	for(int i = 0; i<size; i++) {
+		tempMap = list.get(i);
+		if(tempMap.get("IS_NEW").equals("Y")) {
+				dao.insertManualFile(tempMap);
+			}else {
+				dao.manupdateFile(tempMap);
+			}
+		}
+	}
+	
 	
 	
 
