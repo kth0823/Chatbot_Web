@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.service.BoardService;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
+import com.example.demo.vo.FWVO;
 //import com.example.demo.vo.Criteria;====
 import com.example.demo.vo.PageMaker;
 import com.example.demo.vo.SearchCriteria;
@@ -422,6 +423,7 @@ public class BoardController {
 		
 		List<Map<String, Object>> manualfileList = service.manualselectFileList(vo.getMno());
 		model.addAttribute("manualfile", manualfileList);
+		System.out.println("man List :" +manualfileList+"\n"  );
 		return "board/manualreadView";
 	}
 	
@@ -489,7 +491,144 @@ public class BoardController {
 		
 		return "redirect:/board/manuallist";
 	}
+	
+	// tts
+	@RequestMapping(value = "/tts", method = {RequestMethod.GET, RequestMethod.POST})
+	public void tts() throws Exception{
+	
+		logger.info("tts");
 
+		
+	}
+	
+	// tts 합성관련
+	@RequestMapping(value = "/synthesizeWorker", method = {RequestMethod.GET, RequestMethod.POST})
+	public String tts_synthesizeWorker() throws Exception{
+	
+		logger.info("tts");
+		return "redirect:/board/tts";
+		
+	}
+	
+	// 다음지도
+	@RequestMapping(value = "/map", method = {RequestMethod.GET, RequestMethod.POST})
+	public void map() throws Exception{
+	
+		logger.info("map");		
+		
+	}
+
+	
+	// F/W 등록 작성 화면
+	@RequestMapping(value = "/board/FWwriteView", method = RequestMethod.GET)
+	public void FWwriteView(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		logger.info("FWwriteView");
+
+	}
+		
+	// F/W 글 작성
+	@RequestMapping(value = "/board/FWwrite", method = RequestMethod.POST)
+	public String FWwrite(FWVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
+		logger.info("FWwrite");
+
+		service.FWwrite(vo, mpRequest);
+
+		return "redirect:/board/FWlist";
+	}
+		
+		
+	// F/W 목록 조회
+	@RequestMapping(value = "/FWlist", method = RequestMethod.GET)
+	public String FWlist(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		logger.info("FWlist");
+		model.addAttribute("FWlist", service.FWlist(scri));		
+			
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.FWlistCount(scri));		
+			model.addAttribute("pageMaker", pageMaker);
+			return "board/FWlist";
+	}	
+		
+	// F/W 등록내역 조회
+	@RequestMapping(value = "/FWreadView", method = RequestMethod.GET)
+	public String FWread(FWVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+		logger.info("FWread");
+
+			model.addAttribute("FWread", service.FWread(vo.getFno()));
+			
+			List<Map<String, Object>> FWfileList = service.FWselectFileList(vo.getFno());
+			
+			model.addAttribute("FWfile", FWfileList);
+			//System.out.println("FW List :" +FWfileList+"\n"  );
+			
+			return "board/FWreadView";
+	}
+		
+	//F/W 다운로드
+	@RequestMapping(value="/ffileDown")
+	public void ffileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
+		Map<String, Object> resultMap = service.FWselectFileInfo(map);
+		String storedFileName = (String) resultMap.get("fSTORED_FILE_NAME");
+		String originalFileName = (String) resultMap.get("fORG_FILE_NAME");
+			
+		// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
+		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("/home/bliss/FW/"+storedFileName));
+			
+			response.setContentType("application/octet-stream");
+			response.setContentLength(fileByte.length);
+			response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
+			response.getOutputStream().write(fileByte);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+			
+	}
+		
+	// F/W 등록 수정뷰
+	@RequestMapping(value = "/FWupdateView", method = RequestMethod.GET)
+	public String FWupdateView(FWVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+				logger.info("FWupdateView");
+
+				model.addAttribute("FWupdate", service.FWread(vo.getFno()));			
+				
+				List<Map<String, Object>> FWfileList = service.FWselectFileList(vo.getFno());
+				model.addAttribute("FWfile", FWfileList);
+				return "board/FWupdateView";
+	}
+
+	// F/W 게시판 수정
+	@RequestMapping(value = "/FWupdate", method = RequestMethod.POST)
+	public String FWupdate(FWVO vo, @ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr, 
+			@RequestParam(value="ffileNoDel[]") String[] files,
+			@RequestParam(value="ffileNameDel[]") String[] fileNames,
+			MultipartHttpServletRequest mpRequest) throws Exception {
+			logger.info("FWupdate");
+
+			service.FWupdate(vo, files, fileNames ,mpRequest);
+
+				rttr.addAttribute("page", scri.getPage());
+				rttr.addAttribute("perPageNum", scri.getPerPageNum());
+				rttr.addAttribute("searchType", scri.getSearchType());
+				rttr.addAttribute("keyword", scri.getKeyword());
+				
+				return "redirect:/board/FWlist";
+	}
+		
+	// F/W 삭제
+	@RequestMapping(value = "/FWdelete", method = RequestMethod.POST)
+	public String FWdelete(FWVO vo,@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+		
+			logger.info("FWdelete");
+
+			service.FWdelete(vo.getFno());
+
+			rttr.addAttribute("page", scri.getPage());
+			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+			rttr.addAttribute("searchType", scri.getSearchType());
+			rttr.addAttribute("keyword", scri.getKeyword());
+			
+			return "redirect:/board/FWlist";
+	}
 		
 //		// 게시판 수정뷰
 //		@RequestMapping(value = "/updateView", method = RequestMethod.GET)

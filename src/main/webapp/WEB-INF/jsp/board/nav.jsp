@@ -19,7 +19,8 @@ li {
 		<ul>
 			<li><a href="/board/list">목록</a></li>
 			<li><a href="/board/writeView">글 작성</a></li>
-			<li><a href="/board/manuallist">메뉴얼 다운로드</a></li>			
+			<li><a href="/board/manuallist">메뉴얼 다운로드</a></li>
+			<li><a href="/board/FWlist">F/W 다운로드</a></li>			
 		</ul>
 	</div>
 </body>

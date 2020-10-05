@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
+import com.example.demo.vo.FWVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -105,6 +106,33 @@ public interface BoardService {
 	
 	// 메뉴얼 파일 수정
 	public void manupdate(ManualVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
+	
+	// F/W 작성
+	public void FWwrite(FWVO vo, MultipartHttpServletRequest mpRequest) throws Exception;
+		
+	// F/W 목록 조회
+	public List<FWVO> FWlist(SearchCriteria scri) throws Exception;
+
+	// F/W 총 갯수
+	public int FWlistCount(SearchCriteria scri) throws Exception;
+		
+	// F/W 목록 조회
+	public FWVO FWread(int fno) throws Exception;
+		
+	// F/W 파일 조회
+	public List<Map<String, Object>> FWselectFileList(int fno) throws Exception;
+			
+	// F/W 파일 다운
+	public Map<String, Object> FWselectFileInfo(Map<String, Object> map) throws Exception;
+		
+	// F/W 내역 삭제
+	public void FWdelete(int fno) throws Exception;
+		
+	// F/W 내역 수정
+	public void FWupdate(FWVO vo, MultipartHttpServletRequest mpRequest) throws Exception;
+		
+	// F/W 파일 수정
+	public void FWupdate(FWVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 	
 	
 }

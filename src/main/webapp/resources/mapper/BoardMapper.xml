@@ -447,7 +447,128 @@
 		SET MFW=#{Mfw},
 		MCOMMENT=#{Mcomment}
 		WHERE MNO = #{mno}
+	</update>
+	
+		<!-- F/W -->
+	<!-- F/W 글 작성 -->
+	<insert id="insertFW" parameterType="com.example.demo.vo.FWVO" useGeneratedKeys="true" keyProperty="fno">
+		INSERT INTO chatbot_temp.tFw(		
+		FW,
+		FCOMMENT,
+		FREGDATE
+		)VALUES(
+		#{Fw},
+		#{Fcomment},
+		NOW())
+	</insert>
+	
+	<!-- F/W 파일 업로드 -->
+	 <insert id="insertFWFile" parameterType="hashMap">
+		INSERT INTO chatbot_temp.tFw_File(
+			fFILE_NO,
+			FNO,
+			fORG_FILE_NAME,
+			fSTORED_FILE_NAME,
+			fFILE_SIZE
+		)VALUES(
+			#{fFILE_NO},
+			#{FNO},
+			#{fORG_FILE_NAME},
+			#{fSTORED_FILE_NAME},
+			#{fFILE_SIZE}
+		)
+    </insert>    
+    
+	<select id="FWsellist" parameterType="int" resultType="hashMap">
+		SELECT fFILE_NO,
+			   fORG_FILE_NAME,
+			   ROUND(fFILE_SIZE/1024,1) AS fFILE_SIZE
+		  FROM chatbot_temp.tFw_File
+		 WHERE FNO = #{FNO}
+		   AND fDEL_GB = 'N'
+		 ORDER BY fFILE_NO ASC 
+	</select>
+	
+	<select id="FWselectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT 
+			fSTORED_FILE_NAME,
+			fORG_FILE_NAME
+		FROM chatbot_temp.tFw_File
+		WHERE fFILE_NO = #{fFILE_NO}
+	</select>
+	
+	<!-- F/W 파일 업데이트 -->
+	<update id="FWupdateFile" parameterType="hashMap">
+    	UPDATE chatbot_temp.tFw_File SET
+    	fDEL_GB = 'Y'
+    	WHERE fFILE_NO = #{fFILE_NO}
+    </update>
+    
+    <!-- F/W 리스트 페이지  -->
+    <select id="FWlistPage" resultType="com.example.demo.vo.FWVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT FNO
+		,FREGDATE
+		,FW
+		,FCOMMENT		 
+	 FROM 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.FNO 
+	,A.FREGDATE 
+	,A.FW
+	,A.FCOMMENT 	 
+	 FROM 
+	 chatbot_temp.tFw A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="search"></include>
+	<![CDATA[ORDER BY FREGDATE desc
+	 ) fwlist 
+	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
+	
+	<!-- F/W 리스트 페이지  -->
+	<select id="FWlistCount" resultType="int">
+
+		SELECT COUNT(FNO)
+		FROM chatbot_temp.tFw
+		WHERE 1=1
+		<include refid="search"></include>
+		and FNO > 0
+	</select>
+	
+	<select id="FWread" parameterType="int"
+		resultType="com.example.demo.vo.FWVO">
+		SELECT FNO,
+		FREGDATE,
+		FW,
+		FCOMMENT
+		FROM
+		chatbot_temp.tFw
+		WHERE FNO = #{fno}
+	</select>
+	
+	<!-- F/W 업데이트 -->
+	<update id="FWupdate" parameterType="com.example.demo.vo.FWVO">
+		UPDATE chatbot_temp.tFw
+		SET FREGDATE=NOW(), 
+		FW=#{Fw},
+		FCOMMENT=#{Fcomment}
+		WHERE FNO = #{fno}
 	</update>	
+
+	<!-- F/W 내역 삭제  -->
+	<delete id="FWdelete" parameterType="int">
+		DELETE
+		FROM
+		chatbot_temp.tFw
+		WHERE FNO = #{fno}
+	</delete>	
     	    
 </mapper>
 

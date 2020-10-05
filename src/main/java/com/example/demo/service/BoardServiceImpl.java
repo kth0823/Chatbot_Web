@@ -12,7 +12,9 @@ import com.example.demo.dao.BoardDAO;
 import com.example.demo.util.FileUtils;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
+import com.example.demo.vo.FWVO;
 import com.example.demo.util.mFileUtils;
+import com.example.demo.util.fFileUtils;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -24,6 +26,9 @@ public class BoardServiceImpl implements  BoardService {
 	
 	@Resource(name="mfileUtils")
 	private mFileUtils mfileUtils;
+	
+	@Resource(name="ffileUtils")
+	private fFileUtils ffileUtils;
 	
 	@Inject
 	private BoardDAO dao;
@@ -284,8 +289,93 @@ public class BoardServiceImpl implements  BoardService {
 			}
 		}
 	}
-	
-	
-	
 
+	
+	// F/W 작성
+	@Override
+	public void FWwrite(FWVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
+			dao.FWwrite(vo);
+			
+			List<Map<String,Object>> list = ffileUtils.parseInsertFileInfo(vo, mpRequest); 
+			int size = list.size();
+			for(int i=0; i<size; i++){ 
+				dao.insertFWFile(list.get(i)); 
+		}
+	}
+		
+		
+	// F/W 목록 조회
+	@Override
+	public List<FWVO> FWlist(SearchCriteria scri) throws Exception {
+
+		return dao.FWlist(scri);
+	}
+	
+	//F/W  총 개수 
+	@Override
+	public int FWlistCount(SearchCriteria scri) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.FWlistCount(scri);
+	}
+
+	// F/W  조회
+	@Override
+	public FWVO FWread(int fno) throws Exception {
+
+		return dao.FWread(fno);
+	}
+		
+	// F/W 파일 조회
+	@Override
+	public List<Map<String, Object>> FWselectFileList(int fno) throws Exception {
+		// TODO Auto-generated method stub		
+		return dao.FWselectFileList(fno);
+		
+	}
+		
+	// F/W 파일 다운로드
+	@Override
+	public Map<String, Object> FWselectFileInfo(Map<String, Object> map) throws Exception {
+			// TODO Auto-generated method stub
+		return dao.FWselectFileInfo(map);
+	}
+		
+	//F/W 내역 삭제 
+	@Override
+	public void FWdelete(int fno) throws Exception {
+
+		dao.FWdelete(fno);
+	}
+		
+	//F/W 내역 업데이트 
+	@Override
+	public void FWupdate(FWVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
+
+		dao.FWupdate(vo);
+			
+		List<Map<String,Object>> list = ffileUtils.parseInsertFileInfo(vo, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+				dao.insertFWFile(list.get(i)); 
+		}
+	}
+	
+	//F/W 파일 업데이트 
+	@Override
+	public void FWupdate(FWVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
+			
+		dao.FWupdate(vo);
+			
+		List<Map<String, Object>> list = ffileUtils.parseUpdateFileInfo(vo, files, fileNames, mpRequest);
+		Map<String, Object> tempMap = null;
+		int size = list.size();
+		for(int i = 0; i<size; i++) {
+			tempMap = list.get(i);
+			if(tempMap.get("IS_NEW").equals("Y")) {
+				dao.insertFWFile(tempMap);
+			}else {
+				dao.FWupdateFile(tempMap);
+			}
+		}
+	}
 }

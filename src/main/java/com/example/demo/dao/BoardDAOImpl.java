@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
+import com.example.demo.vo.FWVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -234,6 +235,8 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public List<Map<String, Object>> manualselectFileList(int mno) throws Exception {
 		// TODO Auto-generated method stub
+		List<Map<String, Object>> manlist=sqlSession.selectList("boardMapper.manualselectFileList", mno);
+		System.out.println("Board manlist :" +manlist+"\n"  );
 		return sqlSession.selectList("boardMapper.manualselectFileList", mno);
 	}
 		
@@ -264,6 +267,80 @@ public class BoardDAOImpl implements BoardDAO {
 		// TODO Auto-generated method stub
 		
 		sqlSession.update("boardMapper.manualupdateFile", map);
+	}
+	
+	
+	// F/W 등록 작성
+	@Override
+	public void FWwrite(FWVO vo) throws Exception {
+			sqlSession.insert("boardMapper.insertFW", vo);
+
+	}
+		
+	// F/W 파일 업로드
+	@Override
+	public void insertFWFile(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+	sqlSession.insert("boardMapper.insertFWFile", map);
+	}
+		
+	// F/W 목록 조회
+	@Override
+	public List<FWVO> FWlist(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardMapper.FWlistPage", scri);
+	}
+
+	// F/W 총 개수
+	@Override
+	public int FWlistCount(SearchCriteria scri) throws Exception {
+			// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.FWlistCount", scri);		
+	}
+		
+	// F/W 조회
+	@Override
+	public FWVO FWread(int fno) throws Exception {
+		return sqlSession.selectOne("boardMapper.FWread", fno);
+	}
+		
+	// F/W 첨부파일 조회
+	@Override
+	public List<Map<String, Object>> FWselectFileList(int fno) throws Exception {
+			// TODO Auto-generated method stub
+		List<Map<String, Object>> FWfileList = sqlSession.selectList("boardMapper.FWsellist", fno);
+		System.out.println("Board F/W List :" +FWfileList+"\n"  );
+		System.out.println("fno :" +fno+"\n"  );
+		return sqlSession.selectList("boardMapper.FWsellist", fno);
+	}
+			
+	// F/W 첨부파일 다운로드
+	@Override
+	public Map<String, Object> FWselectFileInfo(Map<String, Object> map) throws Exception {
+			// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.FWselectFileInfo", map);
+	}
+		
+	// F/W 내역  삭제
+	@Override
+	public void FWdelete(int fno) throws Exception {
+
+		sqlSession.delete("boardMapper.FWdelete", fno);
+	}
+		
+	// F/W 수정
+	@Override
+	public void FWupdate(FWVO vo) throws Exception {
+
+		sqlSession.update("boardMapper.FWupdate", vo);
+	}
+		
+	//F/W 첨부파일 업데이트 
+	@Override
+	public void FWupdateFile(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+			
+		sqlSession.update("boardMapper.FWupdateFile", map);
 	}
 	
 }

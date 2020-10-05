@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
+import com.example.demo.vo.FWVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -109,5 +110,36 @@ public interface  BoardDAO {
 	
 	// 메뉴얼 첨부파일 수정
 	public void manupdateFile(Map<String, Object> map) throws Exception;
+	
+	
+	// F/W 등록 작성
+	public void FWwrite(FWVO vo) throws Exception;
+		
+	// F/W 파일 업로드
+	public void insertFWFile(Map<String, Object> map) throws Exception;
+		
+	// F/W 목록 조회
+	public List<FWVO> FWlist(SearchCriteria scri) throws Exception;
+		
+	// F/W 총 개수 
+	public int FWlistCount(SearchCriteria scri) throws Exception;
+		
+	// F/W 게시물 조회
+	public FWVO FWread(int fno) throws Exception;
+		
+	// F/W 첨부파일 조회
+	public List<Map<String, Object>> FWselectFileList(int fno) throws Exception;
+			
+	// F/W 첨부파일 다운
+	public Map<String, Object> FWselectFileInfo(Map<String, Object> map) throws Exception;
+		
+	// F/W 내역 삭제
+	public void FWdelete(int fno) throws Exception;
+		
+	// F/W 등록 수정
+	public void FWupdate(FWVO vo) throws Exception;
+		
+	// F/W 첨부파일 수정
+	public void FWupdateFile(Map<String, Object> map) throws Exception;
 	
 }
