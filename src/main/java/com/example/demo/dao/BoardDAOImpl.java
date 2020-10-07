@@ -301,6 +301,8 @@ public class BoardDAOImpl implements BoardDAO {
 	// F/W 조회
 	@Override
 	public FWVO FWread(int fno) throws Exception {
+		FWVO read = sqlSession.selectOne("boardMapper.FWread", fno);
+		System.out.println("내역 :" +read.getFregdate()+"\n"  );
 		return sqlSession.selectOne("boardMapper.FWread", fno);
 	}
 		

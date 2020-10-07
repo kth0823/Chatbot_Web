@@ -1,12 +1,12 @@
 package com.example.demo.vo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ManualVO {
 	private int Mno;
 	private String Mfw;
 	private String Mcomment;
-	private Date Mregdate;
+	private LocalDateTime Mregdate;
 	public int getMno() {
 		return Mno;
 	}
@@ -25,10 +25,10 @@ public class ManualVO {
 	public void setMcomment(String mcomment) {
 		Mcomment = mcomment;
 	}
-	public Date getMregdate() {
+	public LocalDateTime getMregdate() {
 		return Mregdate;
 	}
-	public void setMregdate(Date mregdate) {
+	public void setMregdate(LocalDateTime mregdate) {
 		Mregdate = mregdate;
 	}
 	
