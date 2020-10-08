@@ -50,13 +50,44 @@
 	<div id="root">
 		<header>
 			<h1>CSR 전체내역</h1>
-		</header>
+		</header>		
 		<div>
 			<%@include file="nav.jsp"%>
 		</div>
-		<section id="container">
+	<!--  	<br>
+		<br>
+		<p>1달내 중복요청건</p>
+		<table id="comp" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
+					<div class="row">										
+					<thead>
+						<tr>							
+							<th>차량번호</th>
+							<th>고속사 </th>
+							<th>처리 대분류</th>												
+						</tr>
+					</thead>
+					</div>	
+					<c:forEach items="${comp}" var="comp">
+					<tbody>
+							<tr>
+								<td><c:out value="${comp.car_no}" /></td>								
+								<td>									
+									<c:forEach var="co_info" items="${co_info}" varStatus="i">
+										<c:if test="${comp.co_id eq co_info.co_id}">${co_info.co_nm}</c:if> 
+									</c:forEach>
+								</td>
+								<td>																					
+									<c:forEach var="csr_req" items="${csr_req}" varStatus="i">
+										<c:if test="${comp.csr_reqid eq csr_req.csr_reqid}">${csr_req.csr_req}</c:if> 
+									</c:forEach>												
+								</td>
+							</tr>
+					</tbody>
+					</c:forEach>
+			-->			
+		<section id="container">		
 			<form role="form" method="get" >
-					<table id="TableToExcel" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
+					<table id="TableToExcel" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >					
 					<div class="row">
 					<thead>
 						<tr>

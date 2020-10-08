@@ -57,26 +57,30 @@
 		<br>
 		<br>		
 		<c:forEach items="${tot}" var="tot">
-				<label for="tatal">한달 발생건 :</label> 
+				<label for="tatal">한달간 발생건 :</label> 
 				<c:out value="${tot.NUM}" />
 		</c:forEach>		
 		<br><br>		
-		
+		<section id="table1">
 		<table id="comp" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>1달내 중복요청건</label>
+					<label>한달내 중복요청건</label>
 					<div class="row">				
 					<thead>
 						<tr>
 							<!--  <th>작성자</th>-->
+							<th>No.</th>
 							<th>차량번호</th>
 							<th>고속사 </th>
 							<th>처리 대분류</th>												
 						</tr>
 					</thead>
 					</div>	
-					<c:forEach items="${comp}" var="comp">
+					<c:forEach items="${comp}" var="comp" varStatus="i">
 					<tbody>
 							<tr>
+								<td>								
+									<c:out value="${i.count}" />
+								</td>
 								<td><c:out value="${comp.car_no}" /></td>								
 								<td>									
 									<c:forEach var="co_info" items="${co_info}" varStatus="i">
@@ -91,11 +95,13 @@
 							</tr>
 					</tbody>
 					</c:forEach>
+					</table>
+					</section>
 						
 		<section id="container">		
 			<form role="form" method="get" >
 					<table id="TableToExcel" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>1달간 장애발생 현황</label>
+					<label>한달간 장애발생 현황</label>
 					<div class="row">
 					<thead>
 						<tr>
@@ -106,12 +112,13 @@
 						</tr>
 					</thead>
 					</div>	
-					<c:forEach items="${anal1}" var="anal1">
+					<c:forEach items="${anal1}" var="anal1" varStatus="i">
 					<tbody>
-							<tr>
-	
-		
-								<td><c:out value="I" /></td>								
+						<tr>
+								<td>								
+									<c:out value="${i.count}" />
+								</td>
+																			
 								<td>								
 									<c:forEach var="csr_req" items="${csr_req}" varStatus="i">
 										<c:if test="${anal1.CSR_REQID eq csr_req.csr_reqid}">${csr_req.csr_req}</c:if></a>
@@ -121,15 +128,15 @@
 									<c:out value="${anal1.NUM}" />	 							
 								</td>
 							</tr>
-					</tbody>
-					</c:forEach>
+							</c:forEach>
+					</tbody>					
 					<iframe id="txtArea1" style="display:none"></iframe>
 				</table>
 				</section>
 				<br>
-		
+		<section id="table3">
 		<table id="coinfo" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>1달간 고속사 요청건</label>
+					<label>한달간 고속사 요청건</label>
 					<div class="row">								
 					<thead>
 						<tr>
@@ -140,12 +147,10 @@
 						</tr>
 					</thead>
 					</div>	
-					<c:forEach items="${anal2}" var="anal2">
+					<c:forEach items="${anal2}" var="anal2" varStatus="i">
 					<tbody>
-							<tr>
-	
-		
-								<td><c:out value="I" /></td>								
+							<tr>		
+								<td><c:out value="${i.count}"/></td>								
 								<td>								
 									<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<c:if test="${anal2.CO_ID eq co_info.co_id}">${co_info.co_nm}</c:if></a>
@@ -157,7 +162,8 @@
 							</tr>
 					</tbody>
 					</c:forEach>
-				
+				</table>
+				</section>
 		<hr />
 	</div>
 </body>
