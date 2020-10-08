@@ -51,6 +51,40 @@ public class BoardServiceImpl implements  BoardService {
 
 		return dao.list(scri);
 	}
+	
+	// 게시물 중복장애 조회
+	@Override
+	public List<BoardVO> comp(SearchCriteria scri) throws Exception {
+		List<BoardVO> comp=dao.comp(scri);
+		System.out.println("comp service list :" +comp+"\n"  );
+		return dao.comp(scri);
+	}
+	
+	// 게시물 장애현황 조회
+	@Override
+	public List<Map<String, Object>> anal1(SearchCriteria scri) throws Exception {
+		List<Map<String, Object>> anal=dao.anal1(scri);
+		System.out.println("anal1 service list :" +anal+"\n"  );
+		return dao.anal1(scri);
+	}
+	
+	// 고속사별 발생건수 현황 조회
+	@Override
+	public List<Map<String, Object>> anal2(SearchCriteria scri) throws Exception {
+		List<Map<String, Object>> anal2=dao.anal2(scri);
+		System.out.println("anal2 service list :" +anal2+"\n"  );
+		return dao.anal2(scri);
+	}
+	
+	// 한달 발생건수 현황 조회
+	@Override
+	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception {
+		List<Map<String, Object>> tot=dao.tot(scri);
+		System.out.println("tot service :" +tot+"\n"  );
+		return dao.tot(scri);
+	}
+	
+	
 	//게시물 총 개수 
 	@Override
 	public int listCount(SearchCriteria scri) throws Exception{

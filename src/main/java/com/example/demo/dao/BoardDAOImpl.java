@@ -33,6 +33,46 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("boardMapper.listPage", scri);
 
 	}
+	
+	// 게시물 중복장애 표시
+	@Override
+	public List<BoardVO> comp(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		List<BoardVO> comp=sqlSession.selectList("boardMapper.comp", scri);
+		System.out.println("comp dao list :" +comp+"\n"  );
+		return sqlSession.selectList("boardMapper.comp", scri);
+
+	}
+	
+	// 게시물 장애현황  표시
+	@Override
+	public List<Map<String, Object>> anal1(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> anal=sqlSession.selectList("boardMapper.anal1", scri);
+		System.out.println("anal1 dao list :" +anal+"\n"  );
+		return sqlSession.selectList("boardMapper.anal1", scri);
+
+	}
+	
+	// 고속사별 장애건수  표시
+	@Override
+	public List<Map<String, Object>> anal2(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> anal2=sqlSession.selectList("boardMapper.anal2", scri);
+		System.out.println("anal2 dao list :" +anal2+"\n"  );
+		return sqlSession.selectList("boardMapper.anal2", scri);
+
+	}
+	
+	// 고속사별 장애건수  표시
+	@Override
+	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> tot=sqlSession.selectList("boardMapper.tot", scri);
+		System.out.println("tot dao :" +tot+"\n"  );
+		return sqlSession.selectList("boardMapper.tot", scri);
+
+		}
 
 	// 게시물 총 개수
 	@Override

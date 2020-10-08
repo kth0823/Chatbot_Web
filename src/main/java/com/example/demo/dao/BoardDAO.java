@@ -17,6 +17,18 @@ public interface  BoardDAO {
 	// 게시물 목록 조회
 	public List<BoardVO> list(SearchCriteria scri) throws Exception;
 	
+	// 게시물 중복장애 표시 
+	public List<BoardVO> comp(SearchCriteria scri) throws Exception;
+	
+	// 게시물 장애현황  표시 
+	public List<Map<String, Object>> anal1(SearchCriteria scri) throws Exception;
+	
+	// 고속사별 발생 건수현황  표시 
+	public List<Map<String, Object>> anal2(SearchCriteria scri) throws Exception;
+	
+	// 한달 발생한 건수  
+	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception;
+	
 	// 게시물 총 개수 
 	public int listCount(SearchCriteria scri) throws Exception;
 	

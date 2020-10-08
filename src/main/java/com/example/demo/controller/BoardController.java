@@ -78,8 +78,10 @@ public class BoardController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		logger.info("list");
-
+		
+		model.addAttribute("comp", service.comp(scri));
 		model.addAttribute("list", service.list(scri));
+		model.addAttribute("co_info", service.co_info(scri));
 		model.addAttribute("csr_req", service.csr_req(scri));
 		model.addAttribute("user", service.user(scri));
 		model.addAttribute("status", service.status(scri));
@@ -93,6 +95,44 @@ public class BoardController {
 		return "board/list";
 
 	}
+	
+	// 게시판 목록 조회
+		@RequestMapping(value = "/anal", method = RequestMethod.GET)
+		public String anal(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			logger.info("anal");
+			
+			model.addAttribute("comp", service.comp(scri));
+			List<BoardVO> comp=service.comp(scri);
+			System.out.println("comp control list :" +comp+"\n"  );
+			List<Map<String, Object>> anal1=service.anal1(scri);
+			model.addAttribute("anal1", service.anal1(scri));			
+			System.out.println("anal1 control list :" +anal1+"\n"  );
+			
+			List<Map<String, Object>> anal2=service.anal2(scri);
+			model.addAttribute("anal2", service.anal2(scri));			
+			System.out.println("anal2 control list :" +anal2+"\n"  );
+			
+			List<Map<String, Object>> tot=service.tot(scri);
+			model.addAttribute("tot", service.tot(scri));			
+			System.out.println("tot control :" +tot+"\n"  );
+			
+			
+			//System.out.println("anal :" +anal1+"\n"  );
+			model.addAttribute("list", service.list(scri));
+			model.addAttribute("co_info", service.co_info(scri));
+			model.addAttribute("csr_req", service.csr_req(scri));
+			model.addAttribute("user", service.user(scri));
+			model.addAttribute("status", service.status(scri));
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(scri);
+			pageMaker.setTotalCount(service.listCount(scri));		
+
+			model.addAttribute("pageMaker", pageMaker);
+
+			return "board/anal";
+
+		}
 	
 	// 챗봇 등록 목록 조회
 	@RequestMapping(value = "/list2", method = RequestMethod.GET)
@@ -133,6 +173,7 @@ public class BoardController {
 		model.addAttribute("fix_ctg", service.fix_ctg(scri));
 		model.addAttribute("simple", service.simple(scri));
 		List<Map<String, Object>> fileList = service.selectFileList(vo.getBno());
+		System.out.println("fileList :" +fileList+"\n"  );
 		model.addAttribute("file", fileList);
 		return "board/readView";
 	}

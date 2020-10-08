@@ -224,7 +224,8 @@
 				(STATUSID IN (select STATUSID from chatbot_temp.tStatus where STATUS like '%' #{keyword} '%'))
 			</if>
 		</if>
-	</sql>	
+	</sql>
+		
 	
 	<!-- 첨부파일 업로드 -->
 	 <insert id="insertFile" parameterType="hashMap">
