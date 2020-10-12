@@ -39,7 +39,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> comp(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
 		List<BoardVO> comp=sqlSession.selectList("boardMapper.comp", scri);
-		System.out.println("comp dao list :" +comp+"\n"  );
+		//System.out.println("comp dao list :" +comp+"\n"  );
 		return sqlSession.selectList("boardMapper.comp", scri);
 
 	}
@@ -49,7 +49,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<Map<String, Object>> anal1(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> anal=sqlSession.selectList("boardMapper.anal1", scri);
-		System.out.println("anal1 dao list :" +anal+"\n"  );
+		//System.out.println("anal1 dao list :" +anal+"\n"  );
 		return sqlSession.selectList("boardMapper.anal1", scri);
 
 	}
@@ -59,7 +59,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<Map<String, Object>> anal2(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> anal2=sqlSession.selectList("boardMapper.anal2", scri);
-		System.out.println("anal2 dao list :" +anal2+"\n"  );
+		//System.out.println("anal2 dao list :" +anal2+"\n"  );
 		return sqlSession.selectList("boardMapper.anal2", scri);
 
 	}
@@ -69,10 +69,20 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> tot=sqlSession.selectList("boardMapper.tot", scri);
-		System.out.println("tot dao :" +tot+"\n"  );
+		//System.out.println("tot dao :" +tot+"\n"  );
 		return sqlSession.selectList("boardMapper.tot", scri);
 
-		}
+	}
+	
+	// 월별 발생 건수  표시
+	@Override
+	public List<Map<String, Object>> month(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> month=sqlSession.selectList("boardMapper.month", scri);
+		//System.out.println("tot dao :" +tot+"\n"  );
+		return sqlSession.selectList("boardMapper.month", scri);
+
+	}
 
 	// 게시물 총 개수
 	@Override
@@ -276,7 +286,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<Map<String, Object>> manualselectFileList(int mno) throws Exception {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> manlist=sqlSession.selectList("boardMapper.manualselectFileList", mno);
-		System.out.println("Board manlist :" +manlist+"\n"  );
+		//System.out.println("Board manlist :" +manlist+"\n"  );
 		return sqlSession.selectList("boardMapper.manualselectFileList", mno);
 	}
 		
@@ -342,7 +352,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public FWVO FWread(int fno) throws Exception {
 		FWVO read = sqlSession.selectOne("boardMapper.FWread", fno);
-		System.out.println("내역 :" +read.getFregdate()+"\n"  );
+		//System.out.println("내역 :" +read.getFregdate()+"\n"  );
 		return sqlSession.selectOne("boardMapper.FWread", fno);
 	}
 		
@@ -351,8 +361,8 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<Map<String, Object>> FWselectFileList(int fno) throws Exception {
 			// TODO Auto-generated method stub
 		List<Map<String, Object>> FWfileList = sqlSession.selectList("boardMapper.FWsellist", fno);
-		System.out.println("Board F/W List :" +FWfileList+"\n"  );
-		System.out.println("fno :" +fno+"\n"  );
+		//System.out.println("Board F/W List :" +FWfileList+"\n"  );
+		//System.out.println("fno :" +fno+"\n"  );
 		return sqlSession.selectList("boardMapper.FWsellist", fno);
 	}
 			

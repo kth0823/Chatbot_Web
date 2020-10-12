@@ -35,6 +35,10 @@ public interface BoardService {
 	// 한달 발생건수 조회
 	//	public List<BoardVO> list() throws Exception;
 	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception;
+	
+	// 월별 발생건수 조회
+	//	public List<BoardVO> list() throws Exception;
+	public List<Map<String, Object>> month(SearchCriteria scri) throws Exception;
 		
 	// 게시물 총 갯수
 	public int listCount(SearchCriteria scri) throws Exception;

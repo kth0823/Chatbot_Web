@@ -27,6 +27,7 @@
 <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="192x192">
 <link rel="apple-touch-icon-precomposed" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
 <meta name="msapplication-TileImage" content="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 	
 <title>에이텍티앤</title>
@@ -34,7 +35,7 @@
 			li {list-style: none; float: left; padding: 6px;}
 		</style>
 		<script type="text/javascript"> 
-		function ReportToExcelConverter() { 
+		/*function ReportToExcelConverter() { 
 			$("#TableToExcel").tableExport({
 				filename: "report_"+moment().format('lll')
 				,headers : true
@@ -43,7 +44,30 @@
 				,bootstrap : true
 				,sheetname : "report" 
 			}); 	
-		};
+		};*/
+
+		google.charts.load('current', {'packages':['bar']});
+	      google.charts.setOnLoadCallback(drawChart);
+
+	      function drawChart() {
+		    var tot = document.getElementById("total").value;  
+	        var data = google.visualization.arrayToDataTable([ 
+				['건수', '건' ],
+	        	['최근30일간 총 발생양', tot]     
+	        ]);
+	          
+
+	        var options = {
+	          chart: {
+	            title: '총량',
+	            subtitle: '발생건수',
+	          }
+	        };
+
+	        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+	        chart.draw(data, google.charts.Bar.convertOptions(options));
+	      }		
 </script>
 </head>
 <body>
@@ -55,15 +79,19 @@
 			<%@include file="nav.jsp"%>
 		</div>
 		<br>
+		<br>
+		<div id="columnchart_material" align=center style="width: auto; height: 500px;"></div>
 		<br>		
 		<c:forEach items="${tot}" var="tot">
-				<label for="tatal">한달간 발생건 :</label> 
-				<c:out value="${tot.NUM}" />
+				<label for="tatal">한달내 발생건(금일 기준 30일 이내) :</label> 
+				<!--  <p id="total"> <c:out value="${tot.NUM}" /> </p> -->
+				<input type="text" id="total"
+					name="total"  value="${tot.NUM}" style="width: 98%;"/>
 		</c:forEach>		
 		<br><br>		
 		<section id="table1">
 		<table id="comp" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>한달내 중복요청건</label>
+					<label>한달내 중복요청건(금일 기준 30일 이내)</label>
 					<div class="row">				
 					<thead>
 						<tr>
@@ -76,7 +104,7 @@
 					</thead>
 					</div>	
 					<c:forEach items="${comp}" var="comp" varStatus="i">
-					<tbody>
+					<tbody id= "elementId">
 							<tr>
 								<td>								
 									<c:out value="${i.count}" />
@@ -101,7 +129,7 @@
 		<section id="container">		
 			<form role="form" method="get" >
 					<table id="TableToExcel" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>한달간 장애발생 현황</label>
+					<label>한달내 장애발생 현황(금일 기준 30일 이내)</label>
 					<div class="row">
 					<thead>
 						<tr>
@@ -136,7 +164,7 @@
 				<br>
 		<section id="table3">
 		<table id="coinfo" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>한달간 고속사 요청건</label>
+					<label>한달내 고속사 요청건(금일 기준 30일 이내)</label>
 					<div class="row">								
 					<thead>
 						<tr>
@@ -164,6 +192,36 @@
 					</c:forEach>
 				</table>
 				</section>
+		<section id="table4">
+		<table id="mon" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
+					<label>월별 데이터(금일 기준)</label>
+					<div class="row">								
+					<thead>
+						<tr>
+							<!--  <th>작성자</th>-->
+							<th>NO.</th>
+							<th>년-월 </th>							
+							<th>발생건수</th>												
+						</tr>
+					</thead>
+					</div>	
+					<c:forEach items="${month}" var="month" varStatus="i">
+					<tbody>
+							<tr>		
+								<td><c:out value="${i.count}"/></td>								
+								<td>								
+									<c:out value="${month.YM}" />												
+								</td>								
+								<td>								
+									<c:out value="${month.NUM}" />	 							
+								</td>
+							</tr>
+					</tbody>
+					</c:forEach>
+				</table>
+				</section>		
+				
+			
 		<hr />
 	</div>
 </body>

@@ -56,7 +56,7 @@ public class BoardServiceImpl implements  BoardService {
 	@Override
 	public List<BoardVO> comp(SearchCriteria scri) throws Exception {
 		List<BoardVO> comp=dao.comp(scri);
-		System.out.println("comp service list :" +comp+"\n"  );
+		//System.out.println("comp service list :" +comp+"\n"  );
 		return dao.comp(scri);
 	}
 	
@@ -64,7 +64,7 @@ public class BoardServiceImpl implements  BoardService {
 	@Override
 	public List<Map<String, Object>> anal1(SearchCriteria scri) throws Exception {
 		List<Map<String, Object>> anal=dao.anal1(scri);
-		System.out.println("anal1 service list :" +anal+"\n"  );
+		//System.out.println("anal1 service list :" +anal+"\n"  );
 		return dao.anal1(scri);
 	}
 	
@@ -72,7 +72,7 @@ public class BoardServiceImpl implements  BoardService {
 	@Override
 	public List<Map<String, Object>> anal2(SearchCriteria scri) throws Exception {
 		List<Map<String, Object>> anal2=dao.anal2(scri);
-		System.out.println("anal2 service list :" +anal2+"\n"  );
+		//System.out.println("anal2 service list :" +anal2+"\n"  );
 		return dao.anal2(scri);
 	}
 	
@@ -80,8 +80,16 @@ public class BoardServiceImpl implements  BoardService {
 	@Override
 	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception {
 		List<Map<String, Object>> tot=dao.tot(scri);
-		System.out.println("tot service :" +tot+"\n"  );
+		//System.out.println("tot service :" +tot+"\n"  );
 		return dao.tot(scri);
+	}
+	
+	// 월별 발생건수 현황 조회
+	@Override
+	public List<Map<String, Object>> month(SearchCriteria scri) throws Exception {
+		List<Map<String, Object>> tot=dao.month(scri);
+		//System.out.println("tot service :" +tot+"\n"  );
+		return dao.month(scri);
 	}
 	
 	

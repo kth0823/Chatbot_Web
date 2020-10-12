@@ -103,21 +103,25 @@ public class BoardController {
 			
 			model.addAttribute("comp", service.comp(scri));
 			List<BoardVO> comp=service.comp(scri);
-			System.out.println("comp control list :" +comp+"\n"  );
+			//System.out.println("comp control list :" +comp+"\n"  );
 			List<Map<String, Object>> anal1=service.anal1(scri);
 			model.addAttribute("anal1", service.anal1(scri));			
-			System.out.println("anal1 control list :" +anal1+"\n"  );
+			//System.out.println("anal1 control list :" +anal1+"\n"  );
 			
 			List<Map<String, Object>> anal2=service.anal2(scri);
 			model.addAttribute("anal2", service.anal2(scri));			
-			System.out.println("anal2 control list :" +anal2+"\n"  );
+			//System.out.println("anal2 control list :" +anal2+"\n"  );
 			
 			List<Map<String, Object>> tot=service.tot(scri);
 			model.addAttribute("tot", service.tot(scri));			
-			System.out.println("tot control :" +tot+"\n"  );
+			//System.out.println("tot control :" +tot+"\n"  );
 			
 			
 			//System.out.println("anal :" +anal1+"\n"  );
+			
+			List<Map<String, Object>> month=service.month(scri);
+			model.addAttribute("month", service.month(scri));
+			
 			model.addAttribute("list", service.list(scri));
 			model.addAttribute("co_info", service.co_info(scri));
 			model.addAttribute("csr_req", service.csr_req(scri));
@@ -173,7 +177,7 @@ public class BoardController {
 		model.addAttribute("fix_ctg", service.fix_ctg(scri));
 		model.addAttribute("simple", service.simple(scri));
 		List<Map<String, Object>> fileList = service.selectFileList(vo.getBno());
-		System.out.println("fileList :" +fileList+"\n"  );
+		//System.out.println("fileList :" +fileList+"\n"  );
 		model.addAttribute("file", fileList);
 		return "board/readView";
 	}
@@ -464,7 +468,7 @@ public class BoardController {
 		
 		List<Map<String, Object>> manualfileList = service.manualselectFileList(vo.getMno());
 		model.addAttribute("manualfile", manualfileList);
-		System.out.println("man List :" +manualfileList+"\n"  );
+		//System.out.println("man List :" +manualfileList+"\n"  );
 		return "board/manualreadView";
 	}
 	

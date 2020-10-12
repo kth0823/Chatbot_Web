@@ -29,6 +29,9 @@ public interface  BoardDAO {
 	// 한달 발생한 건수  
 	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception;
 	
+	// 월별 발생한 건수  
+	public List<Map<String, Object>> month(SearchCriteria scri) throws Exception;
+	
 	// 게시물 총 개수 
 	public int listCount(SearchCriteria scri) throws Exception;
 	

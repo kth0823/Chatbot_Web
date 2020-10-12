@@ -208,6 +208,10 @@
 		parameterType="com.example.demo.vo.Criteria">
 		SELECT CO_ID, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() GROUP BY CO_ID ORDER BY NUM DESC
 	</select>
+	<select id="month" resultType="hashMap"
+		parameterType="com.example.demo.vo.Criteria">
+		SELECT CONCAT(YEAR(DATE), '-', MONTH(DATE)) YM, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 GROUP BY YM ORDER BY YEAR(DATE) DESC, MONTH(DATE) DESC LIMIT 12
+	</select>
 
 	<select id="listCount" resultType="int">
 
