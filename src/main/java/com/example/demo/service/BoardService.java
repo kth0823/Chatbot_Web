@@ -19,6 +19,10 @@ public interface BoardService {
 	// 게시물 목록 조회
 //	public List<BoardVO> list() throws Exception;
 	public List<BoardVO> list(SearchCriteria scri) throws Exception;
+	
+	// 게시물 전체내역  반환
+//	public List<BoardVO> list() throws Exception;
+	public List<BoardVO> listtotal(SearchCriteria scri) throws Exception;
 
 	// 게시물 중복장애 조회
 	//	public List<BoardVO> list() throws Exception;

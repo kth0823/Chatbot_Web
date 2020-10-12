@@ -34,6 +34,14 @@ public class BoardDAOImpl implements BoardDAO {
 
 	}
 	
+	// 전체 게시물 반환
+	@Override
+	public List<BoardVO> listtotal(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardMapper.listTot", scri);
+
+	}
+	
 	// 게시물 중복장애 표시
 	@Override
 	public List<BoardVO> comp(SearchCriteria scri) throws Exception {

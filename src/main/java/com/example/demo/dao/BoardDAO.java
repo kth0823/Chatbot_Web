@@ -17,6 +17,9 @@ public interface  BoardDAO {
 	// 게시물 목록 조회
 	public List<BoardVO> list(SearchCriteria scri) throws Exception;
 	
+	// 게시물 전체내역 반환
+	public List<BoardVO> listtotal(SearchCriteria scri) throws Exception;
+	
 	// 게시물 중복장애 표시 
 	public List<BoardVO> comp(SearchCriteria scri) throws Exception;
 	

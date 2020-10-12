@@ -52,6 +52,13 @@ public class BoardServiceImpl implements  BoardService {
 		return dao.list(scri);
 	}
 	
+	// 게시물 전체내역 반환 조회
+	@Override
+	public List<BoardVO> listtotal(SearchCriteria scri) throws Exception {
+
+		return dao.listtotal(scri);
+	}
+	
 	// 게시물 중복장애 조회
 	@Override
 	public List<BoardVO> comp(SearchCriteria scri) throws Exception {

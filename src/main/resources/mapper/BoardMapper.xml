@@ -189,6 +189,50 @@
 	 ]]>
 	</select>
 	
+	<select id="listTot" resultType="com.example.demo.vo.BoardVO"
+		parameterType="com.example.demo.vo.Criteria">
+	 SELECT 	  
+	 A.BNO
+	,A.DATE 
+	,A.CSR_TYPEID 
+	,B.CO_NM 
+	,A.CAR_NO
+	,A.PRO_DATE
+	,A.CSR_REQID
+	,A.CSR_CONT 
+	,A.FIX_AREAID
+	,A.ZONEID
+	,A.DEVICEID
+	,A.FIX_CTGID
+	,A.FIX_CONT
+	,A.BE_IH
+	,A.AF_IH
+	,A.ETC	 
+	,A.USERID 	
+	,A.STATUSID
+	,A.GPS_ANT
+	,A.AUDIO_CAB
+	,A.VIDEO_CAB
+	,A.LED_CAB
+	,A.Y_CAB
+	,A.AFC_CAB
+	,A.BMS_CAB
+	,A.AUDIO_GENDER
+	,A.CUSHION
+	,A.LTE_ANT
+	,A.WIFI_ANT
+	,A.PRINT_BAR
+	,A.HEXBOLT
+	,A.BASEPLATE
+	,A.SIMPLEID
+	 FROM 
+	 chatbot_temp.tCsr_Bo2 A,	  
+	 chatbot_temp.tCo_Info B	 
+	 WHERE A.CO_ID=B.CO_ID
+	 ORDER BY BNO desc
+	LIMIT 10	 
+	</select>
+	
 	<select id="comp" resultType="com.example.demo.vo.BoardVO"
 		parameterType="com.example.demo.vo.Criteria">
 		SELECT CAR_NO, CSR_REQID, CO_ID, count(*) as num FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() GROUP BY CAR_NO, CSR_REQID, CO_ID  HAVING num>1
