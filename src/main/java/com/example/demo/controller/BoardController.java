@@ -686,6 +686,7 @@ public class BoardController {
 			return "redirect:/board/FWlist";
 	}
 	
+	@SuppressWarnings("null")
 	@RequestMapping(value = "/excelDown")
 
 	public void excelDown(Model model, HttpServletResponse response, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
@@ -698,10 +699,10 @@ public class BoardController {
 
 	    // 워크북 생성
 	    Workbook wb = new HSSFWorkbook();
-	    Sheet sheet = wb.createSheet("레포트 내역");
+	    Sheet sheet = wb.createSheet("장애총괄현황");
 	    Row row = null;
 	    Cell cell = null;
-	    int rowNo = 0;
+	    int rowNo = 0; 
 
 
 
@@ -910,7 +911,14 @@ public class BoardController {
 	        cell.setCellValue(vo.getBaseplate());
 	        
 	    }
+	    
+	    for (int i=0;i<30;i++) //autuSizeColumn after setColumnWidth setting!!
+	    {
+	    sheet.autoSizeColumn(i);
+	    sheet.setColumnWidth(i, (sheet.getColumnWidth(i))+512 ); //이건 자동으로 조절 하면 너무 딱딱해 보여서 자동조정한 사이즈에 (short)512를 추가해 주니 한결 보기 나아졌다.
+	    }
 
+	    row.setHeight((short)512);
 
 	    // 컨텐츠 타입과 파일명 지정
 	    response.setContentType("ms-vnd/excel");

@@ -191,23 +191,23 @@
 	
 	<select id="listTot" resultType="com.example.demo.vo.BoardVO"
 		parameterType="com.example.demo.vo.Criteria">
-	SELECT 	  
+		SELECT 	  
 	 A.BNO
 	,A.DATE 
-	,B.CSR_TYPE 
-	,C.CO_NM 
-	,A.CAR_NO	
-	,E.CSR_REQ
+	,(SELECT DISTINCT B.CSR_TYPE FROM tCsr_Type B WHERE A.CSR_TYPEID=B.CSR_TYPEID) CSR_TYPE  
+	,(SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE A.CO_ID=B.CO_ID) CO_NM
+	,A.CAR_NO 	
+	,(SELECT DISTINCT B.CSR_REQ FROM tCsr_Req B WHERE A.CSR_REQID=B.CSR_REQID) CSR_REQ
 	,A.CSR_CONT 
-	,F.FIX_AREA
-	,G.ZONE
-	,D.DEVICE
-	,H.FIX_CTG
+	,(SELECT DISTINCT B.FIX_AREA FROM tFix_Area B WHERE A.FIX_AREAID=B.FIX_AREAID) FIX_AREA
+	,(SELECT DISTINCT B.ZONE FROM tZone B WHERE A.ZONEID=B.ZONEID) ZONE
+	,(SELECT DISTINCT B.DEVICE FROM tDevice B WHERE A.DEVICEID=B.DEVICEID) DEVICE
+	,(SELECT DISTINCT B.FIX_CTG FROM tFix_Ctg B WHERE A.FIX_CTGID=B.FIX_CTGID) FIX_CTG
 	,A.FIX_CONT
 	,A.BE_IH
 	,A.AF_IH
 	,A.ETC	 
-	,I.USER 	
+	,(SELECT DISTINCT B.USER FROM tUser B WHERE A.USERID=B.USERID) USER
 	,A.GPS_ANT
 	,A.AUDIO_CAB
 	,A.VIDEO_CAB
@@ -222,18 +222,9 @@
 	,A.HEXBOLT
 	,A.BASEPLATE	
 	 FROM 
-	 chatbot_temp.tCsr_Bo2 A,	  
-	 chatbot_temp.tCsr_Type B, 
-	 chatbot_temp.tCo_Info C,
-	 chatbot_temp.tDevice D,
-	 chatbot_temp.tCsr_Req E,
-	 chatbot_temp.tFix_Area F,
-	 chatbot_temp.tZone G,
-	 chatbot_temp.tFix_Ctg H,
-	 chatbot_temp.tUser I  	 	 
-	 WHERE A.CSR_TYPEID=B.CSR_TYPEID AND A.CO_ID=C.CO_ID AND A.DEVICEID=D.DEVICEID AND A.CSR_REQID=E.CSR_REQID AND A.FIX_AREAID=F.FIX_AREAID AND A.ZONEID=G.ZONEID AND A.FIX_CTGID=H.FIX_CTGID AND A.USERID=I.USERID
-	 AND DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() 
-	 ORDER BY BNO DESC		 
+	 chatbot_temp.tCsr_Bo2 A   	 	 
+	 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() 
+	 ORDER BY BNO ASC		 
 	</select>
 	
 	<select id="comp" resultType="com.example.demo.vo.BoardVO"
