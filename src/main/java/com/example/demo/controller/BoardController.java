@@ -686,11 +686,11 @@ public class BoardController {
 			return "redirect:/board/FWlist";
 	}
 	
-	@RequestMapping(value = "/excelDown.do")
+	@RequestMapping(value = "/excelDown")
 
 	public void excelDown(Model model, HttpServletResponse response, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 
-
+		logger.info("REPORT-EXCEL");
 	    // 게시판 목록조회
 	    List<BoardVO> list = service.listtotal(scri);
 
@@ -740,15 +740,86 @@ public class BoardController {
 	    cell.setCellValue("날짜");
 	    cell = row.createCell(1);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue("고속사");
+	    cell.setCellValue("접수구분");
 	    cell = row.createCell(2);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue("차량번호");
+	    cell.setCellValue("처리지역");
 	    cell = row.createCell(3);
 	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("처리거점");
+	    cell = row.createCell(4);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("고속사");
+	    cell = row.createCell(5);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("차량번호");
+	    cell = row.createCell(6);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("단말기 ");
+	    cell = row.createCell(7);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("장애대분류 ");
+	    cell = row.createCell(8);
+	    cell.setCellStyle(headStyle);
 	    cell.setCellValue("처리대분류 ");
-
-
+	    cell = row.createCell(9);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("장애접수내용 ");
+	    cell = row.createCell(10);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("세부조치내용 ");
+	    cell = row.createCell(11);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("비고 ");
+	    cell = row.createCell(12);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("처리담당자 ");
+	    cell = row.createCell(13);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("교체전");
+	    cell = row.createCell(14);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("교체후");
+	    cell = row.createCell(15);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("GPS 안테나 ");
+	    cell = row.createCell(16);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("AUDIO 케이블 ");
+	    cell = row.createCell(17);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("VIDEO 케이블 ");
+	    cell = row.createCell(18);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("행선 케이블 ");
+	    cell = row.createCell(19);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("Y케이블");
+	    cell = row.createCell(19);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("AFC 케이블 ");
+	    cell = row.createCell(20);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("BMS 케이블");
+	    cell = row.createCell(21);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("젠더(AUDIO)");
+	    cell = row.createCell(22);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("쿠션");
+	    cell = row.createCell(23);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("LTE,Wifi 안테나");
+	    cell = row.createCell(24);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("심지봉");
+	    cell = row.createCell(25);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("육각볼트(와셔포함)");
+	    cell = row.createCell(26);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("베이스 플레이트 ");
+	    
 	    // 데이터 부분 생성
 
 	    for(BoardVO vo : list) {
@@ -758,13 +829,86 @@ public class BoardController {
 	        cell.setCellValue(vo.getDate());
 	        cell = row.createCell(1);
 	        cell.setCellStyle(bodyStyle);
-	        cell.setCellValue(vo.getCo_nm());
+	        cell.setCellValue(vo.getCsr_type());
 	        cell = row.createCell(2);
 	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getFix_area());
+	        cell = row.createCell(3);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getZone());
+	        cell = row.createCell(4);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getCo_nm());
+	        cell = row.createCell(5);
+	        cell.setCellStyle(bodyStyle);
 	        cell.setCellValue(vo.getCar_no());
-		cell = row.createCell(3);
+	        cell = row.createCell(6);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getDevice());
+	        cell = row.createCell(7);
 	        cell.setCellStyle(bodyStyle);
 	        cell.setCellValue(vo.getCsr_req());
+	        cell = row.createCell(8);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getFix_ctg());
+	        cell = row.createCell(9);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getCsr_cont());
+	        cell = row.createCell(10);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getFix_cont());
+	        cell = row.createCell(11);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getEtc());
+	        cell = row.createCell(12);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getUser());
+	        cell = row.createCell(13);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getBe_ih());
+	        cell = row.createCell(14);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getAf_ih());
+	        cell = row.createCell(15);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getGps_ant());
+	        cell = row.createCell(16);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getAudio_cab());
+	        cell = row.createCell(17);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getVideo_cab());
+	        cell = row.createCell(18);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getLed_cab());
+	        cell = row.createCell(19);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getY_cab());
+	        cell = row.createCell(19);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getAfc_cab());
+	        cell = row.createCell(20);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getBms_cab());
+	        cell = row.createCell(21);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getAudio_gender());
+	        cell = row.createCell(22);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getCushion());
+	        cell = row.createCell(23);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getLte_ant());
+	        cell = row.createCell(24);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getPrint_bar());
+	        cell = row.createCell(25);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getHexbolt());
+	        cell = row.createCell(26);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(vo.getBaseplate());
+	        
 	    }
 
 
@@ -776,6 +920,7 @@ public class BoardController {
 	    // 엑셀 출력
 	    wb.write(response.getOutputStream());
 	    wb.close();
+	    logger.info("시마이");
 	}
 		
 //		// 게시판 수정뷰
