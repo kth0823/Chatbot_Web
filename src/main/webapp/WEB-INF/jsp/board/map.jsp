@@ -8,10 +8,10 @@
  <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="32x32">   
 </head>
 	<h1 class="tit_logo">
-            <img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/>
-	</h1>
+            <img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/>                        
+	</h1>	
 <body>
-<div id="map" style="width:100%;height:700px;"></div>
+<div id="map" style="width:100%;height:750px;"></div>
 
 <em>클릭한 위치에 마커가 표시됩니다!</em>
     
@@ -54,21 +54,36 @@ function addMarker(position) {
 
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
-        position: position,
-        content: '<div>마커표시</div>'       
+        position: position       
     });
-	i++;
+	
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
     // 생성된 마커를 배열에 추가합니다
-    markers.push(marker);
+    markers.push(marker);    
 
 }
 
 function addMark(){	
 	var inputspox = document.getElementById('spox').value; 
-	var inputspoy = document.getElementById('spoy').value;
+	var inputspoy = document.getElementById('spoy').value;	
 	addMarker(new kakao.maps.LatLng(inputspox, inputspoy));	
+	var iwContent = '<div style="padding:5px;">'+i+"번째위치"+'</div>'+"위도:"+inputspox+"<br>"+"경도:"+ inputspoy, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	iwPosition = new kakao.maps.LatLng(inputspox, inputspoy), //인포윈도우 표시 위치입니다
+	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+	addinfo(iwPosition, iwContent, iwRemoveable);	
+	//인포윈도우를 생성하고 지도에 표시합니다	
+}
+
+function addinfo(iwPosition, iwContent, iwRemoveable){
+
+		var infowindow = new kakao.maps.InfoWindow({
+		map: map, // 인포윈1도우가 표시될 지도	
+		position : iwPosition, 
+		content : iwContent,
+		removable : iwRemoveable		
+	});
+		i++;
 }
 
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
@@ -78,6 +93,21 @@ function setMarkers(map) {
     }            
 }
 
+/*
+var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+iwPosition = new kakao.maps.LatLng(37.5055194, 127.0068185), //인포윈도우 표시 위치입니다
+iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+
+//인포윈도우를 생성하고 지도에 표시합니다
+var infowindow = new kakao.maps.InfoWindow({
+	map: map, // 인포윈도우가 표시될 지도	
+	position : iwPosition, 
+	content : iwContent,
+	removable : iwRemoveable
+});
+*/
+
 // "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
 function showMarkers() {
     setMarkers(map)    
@@ -86,20 +116,7 @@ function showMarkers() {
 // "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
 function hideMarkers() {
     setMarkers(null);    
-}
-
-
-var iwContent = '<div style="padding:5px;">Hello World! <br><a href="http://localhost:8080/board/map,37.5055194,127.0068185" style="color:blue" target="_blank">큰지도보기</a> <a href="http://localhost:8080/board/map,37.5055194,127.0068185" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-iwPosition = new kakao.maps.LatLng(37.5055194, 127.0068185); //인포윈도우 표시 위치입니다
-
-//인포윈도우를 생성합니다
-var infowindow = new kakao.maps.InfoWindow({
-position : iwPosition, 
-content : iwContent 
-});
-
-//마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-infowindow.open(map, marker); 
+} 
 
 </script>
 <p>
@@ -109,7 +126,8 @@ infowindow.open(map, marker);
     <br>
     <label>위도 :</label><input type="text" name="spox" id="spox" placeholder="위도를 입력하세요."/>
     <label>경도 :</label><input type="text" name="spoy" id="spoy" placeholder="경도를 입력하세요."/>
-    <button id="searchBtn" type="button" onclick='addMark();'>마커찍기</button>
+    <button id="searchBtn" type="button" onclick='addMark();'>마커찍기</button>     
 </p> 
+<img src="/resources/images/KAKAO.png" style="width:30%;height:40%;" />            
 </body>
 </html>
