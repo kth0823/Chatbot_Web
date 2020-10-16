@@ -124,8 +124,8 @@ function hideMarkers() {
     <button onclick="showMarkers()">마커 보이기</button>
     <button onclick="location.href='https://map.kakao.com/link/map/'">길찾기</button>
     <br>
-    <label>위도 :</label><input type="text" name="spox" id="spox" placeholder="위도를 입력하세요."/>
-    <label>경도 :</label><input type="text" name="spoy" id="spoy" placeholder="경도를 입력하세요."/>
+    <label>위도 :</label><input type="text" name="spox" id="spox" placeholder="위도를 입력하세요." value="37.5055194"/>
+    <label>경도 :</label><input type="text" name="spoy" id="spoy" placeholder="경도를 입력하세요." value="127.0068185"/>
     <button id="searchBtn" type="button" onclick='addMark();'>마커찍기</button>     
 </p> 
 <img src="/resources/images/KAKAO.png" style="width:30%;height:40%;" />            
