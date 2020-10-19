@@ -193,7 +193,8 @@
 		parameterType="com.example.demo.vo.Criteria">
 		SELECT 	  
 	 A.BNO
-	,A.DATE 
+	,A.DATE
+	,A.REGDATE	 
 	,(SELECT DISTINCT B.CSR_TYPE FROM tCsr_Type B WHERE A.CSR_TYPEID=B.CSR_TYPEID) CSR_TYPE  
 	,(SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE A.CO_ID=B.CO_ID) CO_NM
 	,A.CAR_NO 	
