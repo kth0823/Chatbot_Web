@@ -16,8 +16,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
-<!--  <script src="//cdnjs.cloudflare.com/ajax/libs/TableExport/5.2.0/js/tableexport.min.js" type="text/javascript"></script> --> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script> 
 <script src="//cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.1/xlsx.core.min.js" type="text/javascript"></script>
 <script src="//cdn.tutorialjinni.com/FileSaver.js/1.3.8/FileSaver.js" type="text/javascript"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" type="text/javascript"></script>
@@ -28,6 +27,9 @@
 <link rel="apple-touch-icon-precomposed" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
 <meta name="msapplication-TileImage" content="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	
 <title>에이텍티앤</title>
@@ -35,16 +37,41 @@
 			li {list-style: none; float: left; padding: 6px;}
 		</style>
 		<script type="text/javascript"> 
-		/*function ReportToExcelConverter() { 
-			$("#TableToExcel").tableExport({
-				filename: "report_"+moment().format('lll')
-				,headers : true
-				,formats : ["xlsx"]
-			,trimWhitespace: true
-				,bootstrap : true
-				,sheetname : "report" 
-			}); 	
-		};*/
+
+		$(function() {
+		    $( "#Start" ).datepicker({
+		         changeMonth: true,	       
+		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+		         showOn: "both",	        	 
+	        	 currentText: '오늘 날짜', 
+	             closeText: '닫기', 
+	             dateFormat: "yy-mm-dd"            	 
+		  });
+		  	//초기값을 오늘 날짜로 설정
+	        $('#Start').datepicker('setDate', 'today-1M'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+		});
+
+		$(function() {
+		    $( "#End" ).datepicker({
+		         changeMonth: true,	       
+		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+		         showOn: "both",
+	        	 currentText: '오늘 날짜', 
+	             closeText: '닫기', 
+	             dateFormat: "yy-mm-dd"            	 
+		  });
+		  	//초기값을 오늘 날짜로 설정
+	        $('#End').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+		});
+
 
 		google.charts.load('current', {'packages':['bar']});
 	      google.charts.setOnLoadCallback(drawChart);
@@ -80,15 +107,24 @@
 		</div>
 		<br>
 		<br>
+		<label for="Start">*분석기간</label><br>
+							<input type="text"
+								id="Start" name="Start" class="chk" size="12" title="접수일자를 선택하세요." style="width: 40%;" />
+							<label for="End">~</label>	
+							<input type="text"
+								id="End" name="End" class="chk" size="12" title="접수일자를 선택하세요." style="width: 40%;" />
+								<button class="write_btn btn btn-success" type="submit"> 조회 </button>
+								<br>
 		<div id="columnchart_material" align=center style="width: auto; height: 500px;"></div>
-		<br>		
-		<c:forEach items="${tot}" var="tot">
-				<label for="tatal">한달내 발생건(금일 기준 30일 이내) :</label> 
-				<!--  <p id="total"> <c:out value="${tot.NUM}" /> </p> -->
-				<input type="text" id="total"
+		<br>
+		<form role="form" method="get" >				
+			<c:forEach items="${tot}" var="tot">
+					<label for="tatal">한달내 발생건(금일 기준 30일 이내) :</label> 
+					<!--  <p id="total"> <c:out value="${tot.NUM}" /> </p> -->
+					<input type="text" id="total"
 					name="total"  value="${tot.NUM}" style="width: 98%;"/>
-		</c:forEach>		
-		<br><br>		
+			</c:forEach>		
+				<br><br>		
 		<section id="table1">
 		<table id="comp" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
 					<label>한달내 중복요청건(금일 기준 30일 이내)</label>
@@ -219,10 +255,9 @@
 					</tbody>
 					</c:forEach>
 				</table>
-				</section>		
-				
-			
+				</section>				
 		<hr />
+		</form>
 	</div>
 </body>
 </html>

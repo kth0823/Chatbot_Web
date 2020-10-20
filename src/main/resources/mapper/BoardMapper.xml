@@ -191,7 +191,7 @@
 	
 	<select id="listTot" resultType="com.example.demo.vo.BoardVO"
 		parameterType="com.example.demo.vo.Criteria">
-		SELECT 	  
+SELECT 	  
 	 A.BNO
 	,A.DATE
 	,A.REGDATE	 
@@ -224,9 +224,9 @@
 	,A.BASEPLATE	
 	 FROM 
 	 chatbot_temp.tCsr_Bo2 A   	 	 
-	 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() 
-	 ORDER BY BNO ASC		 
-	</select>
+	 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2}
+	 ORDER BY BNO ASC
+	 </select>
 	
 	<select id="comp" resultType="com.example.demo.vo.BoardVO"
 		parameterType="com.example.demo.vo.Criteria">

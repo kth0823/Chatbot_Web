@@ -438,6 +438,19 @@ public class BoardController {
 		//return "board/writeView";
 	}
 	
+	// 챗봇 조회화면
+	@RequestMapping(value = "/selRe", method = RequestMethod.GET)
+	public String selRe(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		 
+		logger.info("selRe");
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.listCount(scri));
+	
+		return "board/selRe";
+		//return "board/writeView";
+	}
+	
 	// 메뉴얼 등록 작성 화면
 	@RequestMapping(value = "/board/manualwriteView", method = RequestMethod.GET)
 	public void manualwriteView(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
@@ -741,7 +754,7 @@ public class BoardController {
 	    row = sheet.createRow(rowNo++);
 	    cell = row.createCell(0);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue("날짜");
+	    cell.setCellValue("일자");
 	    cell = row.createCell(1);
 	    cell.setCellStyle(headStyle);
 	    cell.setCellValue("월");
