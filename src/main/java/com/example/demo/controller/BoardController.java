@@ -116,24 +116,24 @@ public class BoardController {
 			logger.info("anal");
 			
 			model.addAttribute("comp", service.comp(scri));
-			List<BoardVO> comp=service.comp(scri);
+			//List<BoardVO> comp=service.comp(scri);
 			//System.out.println("comp control list :" +comp+"\n"  );
-			List<Map<String, Object>> anal1=service.anal1(scri);
+			//List<Map<String, Object>> anal1=service.anal1(scri);
 			model.addAttribute("anal1", service.anal1(scri));			
 			//System.out.println("anal1 control list :" +anal1+"\n"  );
 			
-			List<Map<String, Object>> anal2=service.anal2(scri);
+			//List<Map<String, Object>> anal2=service.anal2(scri);
 			model.addAttribute("anal2", service.anal2(scri));			
 			//System.out.println("anal2 control list :" +anal2+"\n"  );
 			
-			List<Map<String, Object>> tot=service.tot(scri);
+			//List<Map<String, Object>> tot=service.tot(scri);
 			model.addAttribute("tot", service.tot(scri));			
 			//System.out.println("tot control :" +tot+"\n"  );
 			
 			
-			System.out.println("anal :" +anal1+"\n"  );
+			//System.out.println("anal :" +anal1+"\n"  );
 			
-			List<Map<String, Object>> month=service.month(scri);
+			//List<Map<String, Object>> month=service.month(scri);
 			model.addAttribute("month", service.month(scri));
 			
 			model.addAttribute("list", service.list(scri));
