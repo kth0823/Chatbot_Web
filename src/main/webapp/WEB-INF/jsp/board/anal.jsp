@@ -45,7 +45,7 @@
 		    var tot = document.getElementById("total").value;  
 	        var data = google.visualization.arrayToDataTable([ 
 				['건수', '건' ],
-	        	['최근30일간 총 발생양', tot]     
+	        	['기간내 총 발생양', tot]     
 	        ]);
 	          
 
@@ -87,7 +87,7 @@
 				<br><br>		
 		<section id="table1">
 		<table id="comp" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>한달내 중복요청건(금일 기준 30일 이내)</label>
+					<label>기간내 중복요청건</label>
 					<div class="row">				
 					<thead>
 						<tr>
@@ -125,7 +125,7 @@
 		<section id="container">		
 			<form role="form" method="get" >
 					<table id="TableToExcel" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>한달내 장애발생 현황(금일 기준 30일 이내)</label>
+					<label>기간내 장애발생 현황</label>
 					<div class="row">
 					<thead>
 						<tr>
@@ -160,7 +160,7 @@
 				<br>
 		<section id="table3">
 		<table id="coinfo" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
-					<label>한달내 고속사 요청건(금일 기준 30일 이내)</label>
+					<label>기간내 고속사 요청건</label>
 					<div class="row">								
 					<thead>
 						<tr>
