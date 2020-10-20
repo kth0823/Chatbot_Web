@@ -230,22 +230,22 @@ SELECT
 	
 	<select id="comp" resultType="com.example.demo.vo.BoardVO"
 		parameterType="com.example.demo.vo.Criteria">
-		SELECT CAR_NO, CSR_REQID, CO_ID, count(*) as num FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() GROUP BY CAR_NO, CSR_REQID, CO_ID  HAVING num>1
+		SELECT CAR_NO, CSR_REQID, CO_ID, count(*) as num FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2} GROUP BY CAR_NO, CSR_REQID, CO_ID  HAVING num>1
 	</select>
 	
 	<select id="tot" resultType="hashMap"
 		parameterType="com.example.demo.vo.Criteria">
-		  SELECT COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 MONTH) AND curdate()  
+		  SELECT COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2}  
 	</select>
 	
 	<select id="anal1" resultType="hashMap"
 		parameterType="com.example.demo.vo.Criteria">
-		SELECT CSR_REQID, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() GROUP BY CSR_REQID ORDER BY NUM DESC
+		SELECT CSR_REQID, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2} GROUP BY CSR_REQID ORDER BY NUM DESC
 	</select>
 	
 	<select id="anal2" resultType="hashMap"
 		parameterType="com.example.demo.vo.Criteria">
-		SELECT CO_ID, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN date_sub(curdate(), interval 1 month) AND curdate() GROUP BY CO_ID ORDER BY NUM DESC
+		SELECT CO_ID, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2} GROUP BY CO_ID ORDER BY NUM DESC
 	</select>
 	<select id="month" resultType="hashMap"
 		parameterType="com.example.demo.vo.Criteria">

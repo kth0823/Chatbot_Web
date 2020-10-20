@@ -36,42 +36,7 @@
 	 	<style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
 		</style>
-		<script type="text/javascript"> 
-
-		$(function() {
-		    $( "#Start" ).datepicker({
-		         changeMonth: true,	       
-		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-		         showOn: "both",	        	 
-	        	 currentText: '오늘 날짜', 
-	             closeText: '닫기', 
-	             dateFormat: "yy-mm-dd"            	 
-		  });
-		  	//초기값을 오늘 날짜로 설정
-	        $('#Start').datepicker('setDate', 'today-1M'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-		});
-
-		$(function() {
-		    $( "#End" ).datepicker({
-		         changeMonth: true,	       
-		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-		         showOn: "both",
-	        	 currentText: '오늘 날짜', 
-	             closeText: '닫기', 
-	             dateFormat: "yy-mm-dd"            	 
-		  });
-		  	//초기값을 오늘 날짜로 설정
-	        $('#End').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-		});
-
+		<script type="text/javascript"> 		
 
 		google.charts.load('current', {'packages':['bar']});
 	      google.charts.setOnLoadCallback(drawChart);
@@ -100,27 +65,22 @@
 <body>
 	<div id="root">
 		<header>
-			<h1>장애분석</h1>
+			<h1>장애분석결과</h1>
 		</header>		
 		<div>
 			<%@include file="nav.jsp"%>
 		</div>
 		<br>
-		<br>
-		<label for="Start">*분석기간</label><br>
-							<input type="text"
-								id="Start" name="Start" class="chk" size="12" title="접수일자를 선택하세요." style="width: 40%;" />
-							<label for="End">~</label>	
-							<input type="text"
-								id="End" name="End" class="chk" size="12" title="접수일자를 선택하세요." style="width: 40%;" />
-								<button class="write_btn btn btn-success" type="submit"> 조회 </button>
-								<br>
+		<br>	
+		<div>
+			<p>조회한 기간 : <%= request.getParameter("keyword1") %> ~ <%= request.getParameter("keyword2") %></p> 				 		 
+		</div>
+		
 		<div id="columnchart_material" align=center style="width: auto; height: 500px;"></div>
-		<br>
+		<br>		
 		<form role="form" method="get" >				
 			<c:forEach items="${tot}" var="tot">
-					<label for="tatal">한달내 발생건(금일 기준 30일 이내) :</label> 
-					<!--  <p id="total"> <c:out value="${tot.NUM}" /> </p> -->
+					<label for="tatal">발생건 :</label>					
 					<input type="text" id="total"
 					name="total"  value="${tot.NUM}" style="width: 98%;"/>
 			</c:forEach>		
@@ -258,6 +218,7 @@
 				</section>				
 		<hr />
 		</form>
+		</div>
 	</div>
 </body>
 </html>

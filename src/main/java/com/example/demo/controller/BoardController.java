@@ -111,7 +111,7 @@ public class BoardController {
 	}
 	
 	// 게시판 목록 조회
-		@RequestMapping(value = "/anal", method = RequestMethod.GET)
+		@RequestMapping(value = "/anal", method ={RequestMethod.GET, RequestMethod.POST})
 		public String anal(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 			logger.info("anal");
 			
@@ -131,7 +131,7 @@ public class BoardController {
 			//System.out.println("tot control :" +tot+"\n"  );
 			
 			
-			//System.out.println("anal :" +anal1+"\n"  );
+			System.out.println("anal :" +anal1+"\n"  );
 			
 			List<Map<String, Object>> month=service.month(scri);
 			model.addAttribute("month", service.month(scri));
@@ -438,7 +438,7 @@ public class BoardController {
 		//return "board/writeView";
 	}
 	
-	// 챗봇 조회화면
+	// 등록내역 엑셀출력
 	@RequestMapping(value = "/selRe", method = RequestMethod.GET)
 	public String selRe(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		 
@@ -449,6 +449,19 @@ public class BoardController {
 	
 		return "board/selRe";
 		//return "board/writeView";
+	}
+	
+	// 등록내역 엑셀출력
+	@RequestMapping(value = "/selanal", method = {RequestMethod.GET, RequestMethod.POST})
+	public String selanal(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			 
+		logger.info("selanal");
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.listCount(scri));
+		
+		return "board/selanal";
+			//return "board/writeView";
 	}
 	
 	// 메뉴얼 등록 작성 화면
