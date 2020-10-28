@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import com.example.config.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +18,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -42,13 +46,18 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
+
 
 @Controller
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@RestController
 @RequestMapping("/board/*")
 public class BoardController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-
+	private static PythonInterpreter intPre;
 	@Inject
 	BoardService service;
 
@@ -602,6 +611,22 @@ public class BoardController {
 		logger.info("map");		
 		
 	}
+	
+	// ocr
+		@RequestMapping(value = "/ocr", method = {RequestMethod.GET, RequestMethod.POST})
+		public void ocr() throws Exception{
+		/*	String pythonScriptPath = "C:\\WebWorkspace\\chatbot\\src\\main\\resources\\static\\js\\restapi.py";
+			String[] cmd = new String[2];
+			cmd[0] = "python";
+			cmd[1] = pythonScriptPath;						
+			
+			Runtime rt = Runtime.getRuntime();
+			Process process = rt.exec(cmd);
+			logger.info("ocr");		
+			*/
+			
+			
+		}
 
 	
 	// F/W 등록 작성 화면
