@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/github.min.css">
 <script src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/highlight.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/resources/css/ocr.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.1">
 
 </head>
 <body>
@@ -450,7 +450,7 @@
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.0""></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
 <script>
 var FIX_HEIGHT = 450;
 
