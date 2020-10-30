@@ -612,6 +612,14 @@ public class BoardController {
 		
 	}
 	
+	// 메시지
+		@RequestMapping(value = "/board/message", method = {RequestMethod.GET, RequestMethod.POST})
+		public void message() throws Exception{
+		
+			logger.info("message");		
+			
+	}
+	
 	// ocr
 		@RequestMapping(value = "/ocr", method = {RequestMethod.GET, RequestMethod.POST})
 		public void ocr() throws Exception{

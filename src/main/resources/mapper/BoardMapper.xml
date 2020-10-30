@@ -281,8 +281,8 @@ SELECT
 				(ZONEID IN (select ZONEID from chatbot_temp.tZone where ZONE like '%' #{keyword} '%'))or 
 				(DEVICEID IN (select DEVICEID from chatbot_temp.tDevice where DEVICE like '%' #{keyword} '%'))or 
 				(FIX_CONT LIKE '%' #{keyword} '%')or
-				(BE_IH LIKE '%' #{keyword} '%')or
-				(AF_IH LIKE '%' #{keyword} '%')or
+				<!--  (BE_IH LIKE '%' #{keyword} '%')or
+				(AF_IH LIKE '%' #{keyword} '%')or-->
 				(USERID IN (select USERID from chatbot_temp.tUser where USER like '%' #{keyword} '%'))or
 				(STATUSID IN (select STATUSID from chatbot_temp.tStatus where STATUS like '%' #{keyword} '%'))
 			</if>
