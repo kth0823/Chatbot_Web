@@ -274,15 +274,16 @@ SELECT
 				'%'</if>
 			<if test="searchType == 'al'.toString()">AND (DATE LIKE '%' #{keyword}
 				'%') or (CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%'))or 
-				(CAR_NO LIKE '%' #{keyword} '%')or
+				
+				<if test="keyword.length == 4"> (CAR_NO LIKE '%' #{keyword} '%')or </if>
 				(CSR_REQID IN (select CSR_REQID from chatbot_temp.tCsr_Req where CSR_REQ like '%' #{keyword} '%'))or 
 				(CSR_CONT LIKE '%' #{keyword} '%')or
 				(FIX_AREAID IN (select FIX_AREAID from chatbot_temp.tFix_Area where FIX_AREA like '%' #{keyword} '%'))or
 				(ZONEID IN (select ZONEID from chatbot_temp.tZone where ZONE like '%' #{keyword} '%'))or 
 				(DEVICEID IN (select DEVICEID from chatbot_temp.tDevice where DEVICE like '%' #{keyword} '%'))or 
 				(FIX_CONT LIKE '%' #{keyword} '%')or
-				<!--  (BE_IH LIKE '%' #{keyword} '%')or
-				(AF_IH LIKE '%' #{keyword} '%')or-->
+				<if test="keyword.length != 4"> (BE_IH LIKE '%' #{keyword} '%')or
+				(AF_IH LIKE '%' #{keyword} '%')or </if>
 				(USERID IN (select USERID from chatbot_temp.tUser where USER like '%' #{keyword} '%'))or
 				(STATUSID IN (select STATUSID from chatbot_temp.tStatus where STATUS like '%' #{keyword} '%'))
 			</if>
