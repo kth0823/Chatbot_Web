@@ -1002,6 +1002,25 @@ public class BoardController {
 	    wb.close();
 	    logger.info("시마이");
 	}
+	
+	// 가베 결제 선택화면
+	//@RequestMapping(value = "/client04", method = RequestMethod.GET)
+	@RequestMapping(value = "/pay", method = {RequestMethod.GET, RequestMethod.POST})
+	public void pay(BoardVO vo, Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		 
+		logger.info("pay");	
+		
+		//return "board/client04";
+	}
+	
+	// 결제 진행화면
+	@RequestMapping(value = "/prepare", method = {RequestMethod.GET, RequestMethod.POST})
+	public void prepare(BoardVO vo, Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			 
+		logger.info("prepare");	
+			
+			//return "board/client04";
+	}
 		
 //		// 게시판 수정뷰
 //		@RequestMapping(value = "/updateView", method = RequestMethod.GET)
