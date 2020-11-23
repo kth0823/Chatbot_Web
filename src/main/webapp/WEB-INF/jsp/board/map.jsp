@@ -1,8 +1,15 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+Calendar c = Calendar.getInstance(); 
+int hour = c.get(Calendar.HOUR_OF_DAY);
+int minute = c.get(Calendar.MINUTE);
+int second = c.get(Calendar.SECOND);
+%>
     <meta charset="utf-8">
     <title>카카오 지도 API</title>
  <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="32x32">   
@@ -64,11 +71,14 @@ function addMarker(position) {
 
 }
 
-function addMark(){	
+function addMark(){
+	var now=new Date();
+	var sendtime = {};				
+	sendtime[i]=(now.getMonth() + 1) + "월" + now.getDate() + "일 " + now.getHours() + "시 " + now.getMinutes() + "분";
 	var inputspox = document.getElementById('spox').value; 
 	var inputspoy = document.getElementById('spoy').value;	
 	addMarker(new kakao.maps.LatLng(inputspox, inputspoy));	
-	var iwContent = '<div style="padding:5px;">'+i+"번째위치"+'</div>'+"위도:"+inputspox+"<br>"+"경도:"+ inputspoy, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	var iwContent = '<div style="padding:5px;">'+i+"번째위치"+'</div>'+"위도:"+inputspox+"<br>"+"경도:"+ inputspoy+"<br>"+sendtime[i], // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	iwPosition = new kakao.maps.LatLng(inputspox, inputspoy), //인포윈도우 표시 위치입니다
 	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 	addinfo(iwPosition, iwContent, iwRemoveable);	
