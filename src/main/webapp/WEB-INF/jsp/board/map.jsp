@@ -27,7 +27,6 @@ int second = c.get(Calendar.SECOND);
 
 var posx = "37.5055194";
 var posy = "127.0068185";
-var searchlink = ""
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
@@ -74,7 +73,7 @@ function addMarker(position) {
 function addMark(){
 	var now=new Date();
 	var sendtime = {};				
-	sendtime[i]=(now.getMonth() + 1) + "월" + now.getDate() + "일 " + now.getHours() + "시 " + now.getMinutes() + "분";
+	sendtime[i]=(now.getMonth() + 1) + "/" + now.getDate()+ " "+ now.getHours() + ":" + now.getMinutes() + ":" +  now.getSeconds();
 	var inputspox = document.getElementById('spox').value; 
 	var inputspoy = document.getElementById('spoy').value;	
 	addMarker(new kakao.maps.LatLng(inputspox, inputspoy));	
