@@ -69,6 +69,7 @@ function addMarker(position) {
     markers.push(marker);    
 
 }
+var linePath =[];
 
 function addMark(){
 	var now=new Date();
@@ -76,13 +77,37 @@ function addMark(){
 	sendtime[i]=(now.getMonth() + 1) + "/" + now.getDate()+ " "+ now.getHours() + ":" + now.getMinutes() + ":" +  now.getSeconds();
 	var inputspox = document.getElementById('spox').value; 
 	var inputspoy = document.getElementById('spoy').value;	
-	addMarker(new kakao.maps.LatLng(inputspox, inputspoy));	
+	addMarker(new kakao.maps.LatLng(inputspox, inputspoy));
+	
+	
+	linePath[i]=new kakao.maps.LatLng(inputspox, inputspoy);
+	
+	/*var linePath = [
+		 new kakao.maps.LatLng(inputspox, inputspoy),
+		 ];*/	
 	var iwContent = '<div style="padding:5px;">'+i+"번째위치"+'</div>'+"위도:"+inputspox+"<br>"+"경도:"+ inputspoy+"<br>"+sendtime[i], // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	iwPosition = new kakao.maps.LatLng(inputspox, inputspoy), //인포윈도우 표시 위치입니다
 	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 	addinfo(iwPosition, iwContent, iwRemoveable);	
 	//인포윈도우를 생성하고 지도에 표시합니다	
+
+	//지도에 표시할 선을 생성합니다
+	var polyline = new kakao.maps.Polyline({
+	    path: linePath, // 선을 구성하는 좌표배열 입니다
+	    strokeWeight: 5, // 선의 두께 입니다
+	    strokeColor: '#FFAE00', // 선의 색깔입니다
+	    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	    strokeStyle: 'solid' // 선의 스타일입니다
+	});
+
+	// 지도에 선을 표시합니다 
+	polyline.setMap(map);	 
+		
 }
+
+
+
+
 
 function addinfo(iwPosition, iwContent, iwRemoveable){
 
@@ -101,6 +126,8 @@ function setMarkers(map) {
         markers[i].setMap(map);
     }            
 }
+
+
 
 /*
 var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
