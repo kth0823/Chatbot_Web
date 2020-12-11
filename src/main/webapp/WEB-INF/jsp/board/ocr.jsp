@@ -1,8 +1,10 @@
+<!DOCTYPE html> 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html lang="utf-8">
+
+<html lang="ko">
 <head>
-<meta charset="utf-8">
 <title>카카오 비전 테스트</title>
 <meta charset="UTF-8">
 <!-- meta -->
@@ -12,17 +14,22 @@
 <meta content='ko_KR'           property='og:locale'/>
 <meta content='en_US'           property='og:locale:alternate'/>
 <meta content="Kakao API"            property='og:title'/>
-<meta content='Kakao Vision API' property='og:description'/>
+<meta content='Kakao Vision API' property='og:description'/>    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- //meta -->
 
 <link rel="shortcut icon" href="https://developers.kakao.com/vassets/img/favicon.ico" type="image/x-icon" />
-<link type="text/css" rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/styles.css" media="screen,projection">
+<!--  <link type="text/css" rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/styles.css" media="screen,projection"> -->
 <script type="text/javascript" src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/jquery-3.2.1.min.js"></script>
 
 <link rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/github.min.css">
 <script src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/highlight.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.1">
+
+<link type="text/css" rel="stylesheet" href="https://vision-api.kakao.com/static/css/common_20191226.css">
+<!--  <link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.2"> -->
+<link type="text/css" rel="stylesheet" href="/resources/css/styles.css?ver1.2" media="screen,projection">
 
 </head>
 <body>
@@ -408,7 +415,7 @@
 						<!-- 데모 API 영역 -->
 						<div class="demo_api">
 							<div id="ocr_sample_image_box" class="image_box">
-					            <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/ocr.jpg);"></div>
+					            <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/ocr.jpg)"></div>
 								<canvas id="ocr_mask_canvas" width="544" height="277" class="mask_canvas"></canvas>
 					        </div>
 <div class="code_api">
@@ -450,7 +457,7 @@
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.2"></script>
 <script>
 var FIX_HEIGHT = 450;
 
@@ -480,6 +487,13 @@ function goto_partner() {
 }
 
 
+$( document ).ready( function() {
+    $( 'code:contains("recognition_words")' ).css( 'color', 'pink' );
+  } );
+
+/*var name_by_class = $('.hljs-string').val();
+document.write(name_by_class);
+*/
 </script>
 <!-- 텝 고정 확인을 위한 임시스크립트 입니다. -->
 
