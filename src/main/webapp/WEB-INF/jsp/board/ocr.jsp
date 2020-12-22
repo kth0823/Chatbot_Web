@@ -5,7 +5,7 @@
 
 <html lang="ko">
 <head>
-<title>카카오 비전 테스트</title>
+<title>버노판 모바일 테스트</title>
 <meta charset="UTF-8">
 <!-- meta -->
 <meta content="website"       property="og:type"  />
@@ -27,35 +27,40 @@
 <script src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/highlight.min.js"></script>
 
 
-<link type="text/css" rel="stylesheet" href="https://vision-api.kakao.com/static/css/common_20191226.css">
-<!--  <link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.2"> -->
+<!--<link type="text/css" rel="stylesheet" href="https://vision-api.kakao.com/static/css/common_20191226.css"> -->
+<link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.1"> 
 <link type="text/css" rel="stylesheet" href="/resources/css/styles.css?ver1.2" media="screen,projection">
+		<h1>
+			<img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/>			
+		</h1>
 
 </head>
 <body>
+<!--  
 <div id="kakaoIndex">
      <a href="#kakaoBody">본문 바로가기</a>
      <a href="#kakaoGnb">메뉴 바로가기</a>
-</div>
+</div>-->
 <div id="kakaoWrap">
 	<div id="kakaoHead" class="k_head">
-		<h1>
+	<!--	  <h1>
+	 	<img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/> 
 			<a href="javascript:;" id="kakaoLogo">Kakao Vision API</a>
-		</h1>
+		</h1> -->
 	</div>
 	<hr class="hide">
 	<div id="kakaoContent" class="cont_api">
 		<div id="mArticle">
 		<h2 id="kakaoBody" class="screen_out">본문</h2>
-			<div class="intro_api">
+		<!--  	<div class="intro_api">
 				<div class="detail_api">
 					<strong class="tit_intro">Vision API</strong>
 					<p class="desc_intro">이미지 내부의 콘텐츠를 분석해서 얼굴, 상품, 태그, 성인 <br>여부등을 판별하고 콘텐츠 중심의 썸네일을 생성할 수 있습니다.</p>
 					<button type="button" class="btn_intro"><span class="txt_btn">API 가이드</span></button>
 					<button type="button" class="btn_partner"><span class="txt_btn">제휴제안 신청</span></button>
 				</div>
-			</div>
-			<div id="kakaoGnb" class="tab_api">
+			</div> -->
+		<!--  	<div id="kakaoGnb" class="tab_api">
 				<ul class="list_api">
 					<li class="on">
 						<a href="#face" class="link_tab">얼굴 검출</a>
@@ -76,11 +81,11 @@
 						<a href="#ocr" class="link_tab">OCR</a>
 					</li>
 				</ul>
-			</div>
-
-  			<div class="guide_api">
+			</div> 
+			
+  			<div class="guide_api"> -->
 				<!-- 얼굴인식 -->
-				<a name="face" id="section_face" class="section_link"></a>
+			<!--	<a name="face" id="section_face" class="section_link"></a>
 				<div class="fst box_g">
 					<div class="inner_api">
 						<h3 class="tit_g">얼굴 검출<span class="txt_sub">Face Detection</span></h3>
@@ -88,7 +93,7 @@
 						<a href="https://developers.kakao.com/docs/latest/ko/vision/dev-guide#recog-face" class="link_guide">API 가이드</a>
 						<strong class="tit_sub">기능 데모</strong>
 						<!-- 데모 API 영역 -->
-						<div class="demo_api">
+				<!--		<div class="demo_api">
 							<div class="view_comm">
 								<div class="photo_detail">
 									<div id="face_sample_image_box" class="image_box" style="height:390px">
@@ -105,7 +110,7 @@
 							</div>
 						</div>
 						<!-- 데모 API 영역 -->
-						<form class="option_api" id="face_form">
+					<!--	<form class="option_api" id="face_form">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
@@ -142,7 +147,7 @@
 									</a>
 								</li>
 								<li> <!-- 선택된 항목 : on 클래스 추가 -->
-									<a href="javascript:;" class="link_thumb">
+<!--									<a href="javascript:;" class="link_thumb">
 										<span class="thumb_g">
 											<img src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/03.jpg" class="thumb_img" data-sample-index="2">
 										</span>
@@ -162,7 +167,7 @@
 										</span>
 									</a>
 								</li>
-							</ul>
+							</ul> 
 							<!--
 							<div class="add_photo">
 								<label for="photoUpload" class="lab_upload">
@@ -171,13 +176,13 @@
 								</label>
 								<input type="file" id="photoUpload" class="inp_thumb">
 							</div>
-							-->
+							
 						</div>
 					</div>
-				</div>
+				</div>-->
 
 				<!-- 제품인식 -->
-				<a name="product" id="section_product" class="section_link"></a>
+<!--				<a name="product" id="section_product" class="section_link"></a>
 				<div class="box_g box_gray">
 					<div class="inner_api">
 						<h3 class="tit_g"> 상품 검출<span class="txt_sub">Product Detection</span></h3>
@@ -185,13 +190,13 @@
 						<a href="https://developers.kakao.com/docs/latest/ko/vision/dev-guide#recog-product" class="link_guide">API 가이드</a>
 						<strong class="tit_sub">기능 데모</strong>
 						<!-- 데모 API 영역 -->
-						<div class="demo_api">
+<!--						<div class="demo_api">
 							<div id="product_sample_image_box" class="image_box">
 					            <div id="product_sample_image" class="sample_image" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/06.jpg);"></div>
 								<canvas id="product_mask_canvas" width="544" height="277" class="mask_canvas"></canvas>
 				        		<div class="product_box_wrapper result_box_wrapper"></div>
 				        	</div>
-<!-- 데모 코드 임시 입력 -->
+<!-- 데모 코드 임시 입력 --><!--
 <div class="code_api">
 <pre class="detail_code">
 <code id="product_result" class="json hljs">{
@@ -199,9 +204,9 @@
 </pre>
 </div>
 <!--// 데모 코드 임시 입력 -->
-						</div>
+			<!--			</div>
 						<!-- 데모 API 영역 -->
-						<form class="option_api">
+				<!--		<form class="option_api">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
@@ -222,7 +227,7 @@
 				</div>
 
 				<!-- 썸네일 생성 -->
-				<a  name="thumbnail" id="section_thumbnail" class="section_link"></a>
+<!--				<a  name="thumbnail" id="section_thumbnail" class="section_link"></a>
 				<a  name="thumbnail_crop" class="section_link"></a>
 				<div class="box_g">
 					<div class="inner_api">
@@ -231,7 +236,7 @@
 						<a href="https://developers.kakao.com/docs/latest/ko/vision/dev-guide#create-thumbnail" class="link_guide">API 가이드</a>
 						<strong class="tit_sub">기능 데모</strong>
 						<!-- 데모 API 영역 -->
-						<div class="demo_api">
+<!--						<div class="demo_api">
 							<div id="thumbnail_crop_sample_image_box" class="image_box">
 					            <div id="thumbnail_crop_sample_image" class="sample_image" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/07.jpg);"></div>
 					            <canvas id="thumbnail_crop_mask_canvas" width="544" height="277" class="mask_canvas"></canvas>
@@ -253,7 +258,7 @@
 </div>
 						</div>
 						<!-- 데모 API 영역 -->
-						<form class="option_api">
+<!--						<form class="option_api">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
@@ -281,7 +286,7 @@
 						<a href="https://developers.kakao.com/docs/latest/ko/vision/dev-guide#extract-thumbnail" class="link_guide">API 가이드</a>
 						<strong class="tit_sub">기능 데모</strong>
 						<!-- 데모 API 영역 -->
-						<div class="demo_api">
+<!--						<div class="demo_api">
 							<div id="thumbnail_sample_image_box" class="image_box">
 					            <div id="thumbnail_sample_image" class="sample_image" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/07.jpg);"></div>
 					            <canvas id="thumbnail_mask_canvas" width="544" height="277" class="mask_canvas"></canvas>
@@ -294,7 +299,7 @@
 </div>
 						</div>
 						<!-- 데모 API 영역 -->
-						<form class="option_api">
+<!--						<form class="option_api">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
@@ -315,7 +320,7 @@
 				</div>
 
 				<!-- 멀티태그 생성 -->
-				<a name="multitag" id="section_multitag" class="section_link"></a>
+<!--				<a name="multitag" id="section_multitag" class="section_link"></a>
 				<div class="box_g box_gray">
 					<div class="inner_api">
 						<h3 class="tit_g">멀티태그 생성<span class="txt_sub">Multitag</span></h3>
@@ -323,7 +328,7 @@
 						<a href="https://developers.kakao.com/docs/latest/ko/vision/dev-guide#create-multi-tag" class="link_guide">API 가이드</a>
 						<strong class="tit_sub">기능 데모</strong>
 						<!-- 데모 API 영역 -->
-						<div class="demo_api">
+<!--						<div class="demo_api">
 							<div id="multitag_sample_image_box" class="image_box">
 					            <div id="multitag_sample_image" class="sample_image" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/08.jpg);"></div>
 					            <canvas id="multitag_mask_canvas"></canvas>
@@ -340,7 +345,7 @@
 </div>
 						</div>
 						<!-- 데모 API 영역 -->
-						<form class="option_api">
+<!--						<form class="option_api">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
@@ -361,7 +366,7 @@
 				</div>
 
 				<!-- 성인이미지 판별 -->
-				<a name="adult" id="section_adult" class="section_link"></a>
+<!--				<a name="adult" id="section_adult" class="section_link"></a>
 				<div class="box_g">
 					<div class="inner_api">
 						<h3 class="tit_g">성인이미지 판별<span class="txt_sub">Adult detection</span></h3>
@@ -369,7 +374,7 @@
 						<a href="https://developers.kakao.com/docs/latest/ko/vision/dev-guide#recog-adult-content" class="link_guide">API 가이드</a>
 						<strong class="tit_sub">기능 데모</strong>
 						<!-- 데모 API 영역 -->
-						<div class="demo_api">
+<!--						<div class="demo_api">
 							<div id="adult_sample_image_box" class="image_box">
 					            <div id="adult_sample_image" class="sample_image" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/10.jpg);"></div>
 					        </div>
@@ -381,7 +386,7 @@
 </div>
 						</div>
 						<!-- 데모 API 영역 -->
-						<form class="option_api">
+<!--						<form class="option_api">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
@@ -406,8 +411,8 @@
 				<a name="ocr" id="section_ocr" class="section_link"></a>
 				<div class="box_g">
 					<div class="inner_api">
-						<h3 class="tit_g">OCR<span class="txt_sub">Optical Character Reader</span></h3>
-                        <p class="desc_g">이미지로부터 문자영역과 해당 문자영역의 문자를 추출해낼 수 있습니다.</p>
+						<h3 class="tit_g">번호판<span class="txt_sub">이미지 파일 업로드</span></h3>
+<!--                        <p class="desc_g">이미지로부터 문자영역과 해당 문자영역의 문자를 추출해낼 수 있습니다.</p>
 
 						<a href="https://developers.kakao.com/docs/latest/ko/vision/dev-guide#ocr" class="link_guide">API 가이드</a>
 
@@ -418,28 +423,91 @@
 					            <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/ocr.jpg)"></div>
 								<canvas id="ocr_mask_canvas" width="544" height="277" class="mask_canvas"></canvas>
 					        </div>
-<div class="code_api">
+<!--  <div class="code_api">
 <pre>
 <code id="ocr_result" class="json hljs">
 </code>
 </pre>
-</div>
+</div>  -->
 						</div>
 						<!-- 데모 API 영역 -->
 						<form class="option_api">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
-									<input type="text" disabled id="ocr_url_input" class="inp_addr inp_empty" data-section="ocr" data-alt="OCR 기능은 이미지 URL 기능을 지원하지 않습니다. 우측 첨부버튼으로 이미지 파일을 첨부해서 결과를 확인해보세요.">
+									<input type="text" disabled id="ocr_url_input" class="inp_addr inp_empty" data-section="ocr" data-alt="파일 첨부하기">
 									<div class="addr_option_ocr">
 										<div class="btn_clip">
 											<label for="photoUpload" class="lab_upload">
 												<span class="ico_comm ico_clip"></span>
 											</label>
 											<input type="file" id="photoUpload" class="image_file_input inp_thumb" data-section="ocr">
+											
 										</div>
 									</div>
 								</div>
+								<br>
+								<label for="recog">인식된 문자 : </label>
+								<input type="text" name="recog_word" id="recog_word" class="recog_word">
+								<br><br>
+								<label for="reinstall_info">*차량 설치정보 </label><br>
+								<label for="region">지역 : </label>
+								<select name="region" id="region" class="region" style="width: 5%;">
+									<option value="0">서울</option>
+									<option value="1">부산</option>
+									<option value="2">대구</option>
+									<option value="3">인천</option>
+									<option value="4">광주</option>
+									<option value="5">대전</option>
+									<option value="6">울산</option>
+									<option value="7">경기</option>
+									<option value="8">강원</option>
+									<option value="9">충북</option>
+									<option value="A">충남</option>
+									<option value="B">전북</option>
+									<option value="C">전남</option>
+									<option value="D">경북</option>
+									<option value="E">경남</option>
+									<option value="F">제주</option>
+									<option value="G">세종</option>
+									<option value="H" selected>기타</option>									
+								</select>
+								<label for="bus_type">차종 : </label>
+								<select name="bus_type" id="bus_type" class="bus_type"  style="width: 5%;">
+									<option value="0">바</option>
+									<option value="1">사</option>
+									<option value="2">아</option>
+									<option value="3">자</option>
+									<option value="4" selected>기타</option>
+								</select>
+								<label for="region_no">지역번호 : </label>
+								<input type="text" name="region_no" id="region_no" class="region_no" style="width: 5%;">
+								<br>
+								<label for="car_no">차량번호 : </label>
+								<input type="text" name="car_no" id="car_no" class="car_no"  style="width: 5%;">								
+								<label for="co_no">고속사번호 : </label>
+								<select name="co_no" id="co_no" class="co_no"  style="width: 5%;">
+									<option value="01" selected>금호고속</option>
+									<option value="02">동부고속</option>
+									<option value="03">동양고속</option>
+									<option value="04">삼화고속</option>
+									<option value="05">금호속리산고속</option>
+									<option value="06">중앙고속</option>
+									<option value="07">천일고속</option>									
+									<option value="09">한일고속</option>
+									<option value="11">경기고속</option>
+									<option value="15">대원고속</option>
+									<option value="19">전북고속</option>
+									<option value="24">천여고속</option>
+									<option value="29">코리아와이드경북</option>
+									<option value="31">경남여객</option>
+									<option value="33">새서울고속</option>
+									<option value="45">광신고속</option>
+									<option value="46">경남고속</option>
+									<option value="52">충남고속</option>
+									<option value="53">한양고속</option>
+									<option value="56">삼흥고속</option>									
+								</select>
 							</fieldset>
 						</form>
 					</div>
@@ -452,12 +520,12 @@
 	</div>
 	<hr class="hide">
 	<div id="kakaoFoot" class="k_foot">
-		<small class="corp_info">Copyright <a href="http://www.kakaocorp.com" class="link_kakaocorp">&copy; Kakao Enterprise Corp. </a>All rights reserved.</small>
+		<small class="corp_info">Copyright <a href="http://www.kakaocorp.com" class="link_kakaocorp">&copy; ATEC T& Corp. </a>All rights reserved.</small>
 	</div>
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.1"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.2"></script>
 <script>
 var FIX_HEIGHT = 450;
 
