@@ -13,6 +13,7 @@ import com.example.demo.util.FileUtils;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
 import com.example.demo.vo.FWVO;
+import com.example.demo.vo.BusVO;
 import com.example.demo.util.mFileUtils;
 import com.example.demo.util.fFileUtils;
 //import com.example.demo.vo.Criteria;
@@ -245,6 +246,20 @@ public class BoardServiceImpl implements  BoardService {
 	public List<BoardVO> simple(SearchCriteria scri) throws Exception {
 
 			return dao.simple(scri);
+	}
+	
+	// 차량번호 지역 조회
+	@Override
+	public List<BusVO> car_region(SearchCriteria scri) throws Exception {
+
+		return dao.car_region(scri);
+	}
+	
+	// 차량번호 차종 조회
+	@Override
+	public List<BusVO> bus_type(SearchCriteria scri) throws Exception {
+
+		return dao.bus_type(scri);
 	}
 	
 	// 챗봇으로 게시글 작성

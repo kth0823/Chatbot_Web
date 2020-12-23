@@ -422,6 +422,19 @@ SELECT
 		FROM chatbot_temp.tSimple
 		ORDER BY SIMPLEID ASC
 	</select>
+	
+	<select id="car_region" parameterType="int" resultType="com.example.demo.vo.BusVO">
+		SELECT *
+		FROM chatbot_temp.tCar_region
+		ORDER BY car_regionid ASC
+	</select>
+	
+	<select id="bus_type" parameterType="int" resultType="com.example.demo.vo.BusVO">
+		SELECT *
+		FROM chatbot_temp.tBus_type
+		ORDER BY bus_typeid ASC
+	</select>
+	
 	<insert id="client04" parameterType="com.example.demo.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
 		INSERT INTO chatbot_temp.tCsr_Bo2(
 		DATE,
@@ -672,6 +685,12 @@ SELECT
 		chatbot_temp.tFw
 		WHERE FNO = #{fno}
 	</delete>
+	
+	<!-- OCR 차량번호 검색 리스트 페이지  -->
+	<select id="OCR" resultType="int">
+		SELECT DISTINCT CO_ID, CAR_NO from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 2
+	</select>
+	
 	    	    
 </mapper>
 

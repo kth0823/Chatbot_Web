@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
 import com.example.demo.vo.FWVO;
+import com.example.demo.vo.BusVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -100,6 +101,12 @@ public interface BoardService {
 	
 	// 단순장애 여부
 	public List<BoardVO> simple(SearchCriteria scri) throws Exception;
+	
+	// 차량번호 지역 조회
+	public List<BusVO> car_region(SearchCriteria scri) throws Exception;
+	
+	// 차량번호 차량타입 조회
+	public List<BusVO> bus_type(SearchCriteria scri) throws Exception;
 	
 	// 게시글 작성
 	public void writechat(BoardVO vo) throws Exception;

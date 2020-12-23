@@ -31,6 +31,7 @@ import com.example.demo.service.BoardService;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
 import com.example.demo.vo.FWVO;
+import com.example.demo.vo.BusVO;
 //import com.example.demo.vo.Criteria;====
 import com.example.demo.vo.PageMaker;
 import com.example.demo.vo.SearchCriteria;
@@ -402,6 +403,18 @@ public class BoardController {
 		return "board/simple";
 		//return "board/writeView";
 	}
+	
+	// 처리대분류 조회
+	@RequestMapping(value = "/car_region", method = RequestMethod.GET)
+	public String car_region(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		logger.info("car_region");
+
+
+			model.addAttribute("car_region", service.car_region(scri));
+
+			return "board/simple";
+			//return "board/writeView";
+	}
 	// 챗봇 등록화면
 	//@RequestMapping(value = "/client04", method = RequestMethod.GET)
 	@RequestMapping(value = "/client04", method = {RequestMethod.GET, RequestMethod.POST})
@@ -622,7 +635,11 @@ public class BoardController {
 	
 	// ocr
 		@RequestMapping(value = "/ocr", method = {RequestMethod.GET, RequestMethod.POST})
-		public void ocr() throws Exception{
+		public void ocr(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+			logger.info("OCR 화면");
+			model.addAttribute("co_info", service.co_info(scri));
+			model.addAttribute("car_region", service.car_region(scri));
+			model.addAttribute("bus_type", service.bus_type(scri));
 		/*	String pythonScriptPath = "C:\\WebWorkspace\\chatbot\\src\\main\\resources\\static\\js\\restapi.py";
 			String[] cmd = new String[2];
 			cmd[0] = "python";

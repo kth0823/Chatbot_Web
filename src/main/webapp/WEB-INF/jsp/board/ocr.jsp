@@ -2,6 +2,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html lang="ko">
 <head>
@@ -42,17 +44,17 @@
      <a href="#kakaoGnb">메뉴 바로가기</a>
 </div>-->
 <div id="kakaoWrap">
-	<div id="kakaoHead" class="k_head">
-	<!--	  <h1>
+<!--	<div id="kakaoHead" class="k_head">
+		  <h1>
 	 	<img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/> 
 			<a href="javascript:;" id="kakaoLogo">Kakao Vision API</a>
-		</h1> -->
+		</h1> 
 	</div>
-	<hr class="hide">
+	<hr class="hide"> -->
 	<div id="kakaoContent" class="cont_api">
 		<div id="mArticle">
-		<h2 id="kakaoBody" class="screen_out">본문</h2>
-		<!--  	<div class="intro_api">
+<!--		<h2 id="kakaoBody" class="screen_out">본문</h2>
+		  	<div class="intro_api">
 				<div class="detail_api">
 					<strong class="tit_intro">Vision API</strong>
 					<p class="desc_intro">이미지 내부의 콘텐츠를 분석해서 얼굴, 상품, 태그, 성인 <br>여부등을 판별하고 콘텐츠 중심의 썸네일을 생성할 수 있습니다.</p>
@@ -452,62 +454,31 @@
 								<br><br>
 								<label for="reinstall_info">*차량 설치정보 </label><br>
 								<label for="region">지역 : </label>
-								<select name="region" id="region" class="region" style="width: 5%;">
-									<option value="0">서울</option>
-									<option value="1">부산</option>
-									<option value="2">대구</option>
-									<option value="3">인천</option>
-									<option value="4">광주</option>
-									<option value="5">대전</option>
-									<option value="6">울산</option>
-									<option value="7">경기</option>
-									<option value="8">강원</option>
-									<option value="9">충북</option>
-									<option value="A">충남</option>
-									<option value="B">전북</option>
-									<option value="C">전남</option>
-									<option value="D">경북</option>
-									<option value="E">경남</option>
-									<option value="F">제주</option>
-									<option value="G">세종</option>
-									<option value="H" selected>기타</option>									
+								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<c:forEach var="car_region" items="${car_region}" varStatus="i">
+										<!--  <option value="${car_region.car_regionid}">${car_region.car_region}</option> -->																				
+										<option value="${car_region.car_regionid}"<c:if test="${car_region.car_region eq car_region}">selected</c:if>>${car_region.car_region}</option>
+								</c:forEach>
+								</select>							
+								
+								<label for="bus_typeid">차종 : </label>
+								<select name="bus_typeid" id="bus_typeid" class="chk" title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<c:forEach var="bus_type" items="${bus_type}" varStatus="i">
+										<option value="${bus_type.bus_typeid}">${bus_type.bus_type}</option>
+								</c:forEach>
 								</select>
-								<label for="bus_type">차종 : </label>
-								<select name="bus_type" id="bus_type" class="bus_type"  style="width: 5%;">
-									<option value="0">바</option>
-									<option value="1">사</option>
-									<option value="2">아</option>
-									<option value="3">자</option>
-									<option value="4" selected>기타</option>
-								</select>
+								
 								<label for="region_no">지역번호 : </label>
 								<input type="text" name="region_no" id="region_no" class="region_no" style="width: 5%;">
 								<br>
 								<label for="car_no">차량번호 : </label>
 								<input type="text" name="car_no" id="car_no" class="car_no"  style="width: 5%;">								
-								<label for="co_no">고속사번호 : </label>
-								<select name="co_no" id="co_no" class="co_no"  style="width: 5%;">
-									<option value="01" selected>금호고속</option>
-									<option value="02">동부고속</option>
-									<option value="03">동양고속</option>
-									<option value="04">삼화고속</option>
-									<option value="05">금호속리산고속</option>
-									<option value="06">중앙고속</option>
-									<option value="07">천일고속</option>									
-									<option value="09">한일고속</option>
-									<option value="11">경기고속</option>
-									<option value="15">대원고속</option>
-									<option value="19">전북고속</option>
-									<option value="24">천여고속</option>
-									<option value="29">코리아와이드경북</option>
-									<option value="31">경남여객</option>
-									<option value="33">새서울고속</option>
-									<option value="45">광신고속</option>
-									<option value="46">경남고속</option>
-									<option value="52">충남고속</option>
-									<option value="53">한양고속</option>
-									<option value="56">삼흥고속</option>									
-								</select>
+								<label for="Co_id">고속사번호 : </label>
+								<select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<c:forEach var="co_info" items="${co_info}" varStatus="i">
+										<option value="${co_info.co_id}">${co_info.co_nm}</option>
+								</c:forEach>
+								</select>						
 							</fieldset>
 						</form>
 					</div>
@@ -525,9 +496,10 @@
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.2"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.1"></script>
 <script>
 var FIX_HEIGHT = 450;
+var car_region="";
 
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();

@@ -5,6 +5,7 @@ import java.util.Map;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ManualVO;
 import com.example.demo.vo.FWVO;
+import com.example.demo.vo.BusVO;
 //import com.example.demo.vo.Criteria;
 import com.example.demo.vo.SearchCriteria;
 
@@ -95,6 +96,12 @@ public interface  BoardDAO {
 	
 	// 단순민원 여부
 	public List<BoardVO> simple(SearchCriteria scri) throws Exception;
+	
+	// 차량번호 지역번호 
+	public List<BusVO> car_region(SearchCriteria scri) throws Exception;
+	
+	// 차량번호 차종 
+	public List<BusVO> bus_type(SearchCriteria scri) throws Exception;
 	
 	// 챗봇으로 게시글 작성
 	public void writechat(BoardVO vo) throws Exception;
