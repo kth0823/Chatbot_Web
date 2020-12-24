@@ -92,6 +92,17 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("boardMapper.month", scri);
 
 	}
+	
+	// OCR 고속사 코드
+	@Override
+	public List<Map<String, Object>> OCR(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> OCR=sqlSession.selectList("boardMapper.OCR", scri);
+		//System.out.println("anal1 dao list :" +anal+"\n"  );
+		return sqlSession.selectList("boardMapper.OCR", scri);
+
+	}
+	
 
 	// 게시물 총 개수
 	@Override

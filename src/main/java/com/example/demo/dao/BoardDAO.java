@@ -36,6 +36,9 @@ public interface  BoardDAO {
 	// 월별 발생한 건수  
 	public List<Map<String, Object>> month(SearchCriteria scri) throws Exception;
 	
+	// OCR 고속사 번호 
+	public List<Map<String, Object>> OCR(SearchCriteria scri) throws Exception;
+	
 	// 게시물 총 개수 
 	public int listCount(SearchCriteria scri) throws Exception;
 	

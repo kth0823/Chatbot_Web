@@ -41,6 +41,10 @@ public interface BoardService {
 	//	public List<BoardVO> list() throws Exception;
 	public List<Map<String, Object>> tot(SearchCriteria scri) throws Exception;
 	
+	// OCR 고속사 번호 조회
+	//	public List<BoardVO> list() throws Exception;
+	public List<Map<String, Object>> OCR(SearchCriteria scri) throws Exception;
+	
 	// 월별 발생건수 조회
 	//	public List<BoardVO> list() throws Exception;
 	public List<Map<String, Object>> month(SearchCriteria scri) throws Exception;

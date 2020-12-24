@@ -640,6 +640,8 @@ public class BoardController {
 			model.addAttribute("co_info", service.co_info(scri));
 			model.addAttribute("car_region", service.car_region(scri));
 			model.addAttribute("bus_type", service.bus_type(scri));
+			//model.addAttribute("OCR", service.OCR(scri));		
+			
 		/*	String pythonScriptPath = "C:\\WebWorkspace\\chatbot\\src\\main\\resources\\static\\js\\restapi.py";
 			String[] cmd = new String[2];
 			cmd[0] = "python";
@@ -654,7 +656,16 @@ public class BoardController {
 			
 		}
 
-	
+		// ocr 서버의 차량정보 
+		@RequestMapping(value = "/car_no", method = RequestMethod.GET)
+		public String car_no(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			logger.info("car_no");
+			model.addAttribute("OCR", service.OCR(scri));
+			
+
+			return "board/car_no";
+
+		}
 	// F/W 등록 작성 화면
 	@RequestMapping(value = "/board/FWwriteView", method = RequestMethod.GET)
 	public void FWwriteView(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {

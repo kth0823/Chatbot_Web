@@ -530,14 +530,13 @@ $( document ).ready( function() {
 */
 $(function(){
     $('#searchBtn').click(function() {
-      //self.location = "ocr?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
-//        var content = "<c:forEach items='${OCR}' var='OCR' varStatus='i'>"+ "<c:out value='${OCR.CO_ID}' />"+" </c:forEach>";
-	/*var content = "<c:out value='${OCR.CO_ID}' />";
-        $(".Co_id").append(content);
- */    
-    	<c:forEach items="${OCR}" var="OCR" varStatus="i"> 
-    		<c:out value="${OCR.CO_ID}" /> 
-    	</c:forEach>
+      //self.location = "/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
+        var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
+        //$(".Co_id").append(content); 
+ 		
+    	
+ 		var links = "<iframe class='searchlink' src='" +content+ "'/>";
+ 		$(links).insertBefore("#Co_id");
    	 });
   });
 

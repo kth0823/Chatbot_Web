@@ -100,6 +100,13 @@ public class BoardServiceImpl implements  BoardService {
 		return dao.month(scri);
 	}
 	
+	// 게시물 장애현황 조회
+	@Override
+	public List<Map<String, Object>> OCR(SearchCriteria scri) throws Exception {
+		List<Map<String, Object>> anal=dao.OCR(scri);
+		//System.out.println("anal1 service list :" +anal+"\n"  );
+		return dao.OCR(scri);
+	}
 	
 	//게시물 총 개수 
 	@Override
