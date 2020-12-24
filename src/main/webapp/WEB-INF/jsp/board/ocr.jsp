@@ -458,18 +458,17 @@ var car_region="제주";
 								<label for="reinstall_info">*차량 설치정보 </label><br>
 								<label for="region">지역 : </label>
 								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;">
-								<c:set var="car_region1" value=""/>																			 	 
+								<!-- <c:set var="car_region1" value=""/>	-->	
 								<c:forEach var="car_region" items="${car_region}" varStatus="i">
-										<!--  <option value="${car_region.car_regionid}">${car_region.car_region}</option> -->
-																														
-										<option value="${car_region.car_regionid}"<c:if test="${car_region.car_region eq '제주'}">selected</c:if>>${car_region.car_region}</option>
-								</c:forEach>
+										<option value="${car_region.car_regionid}" id="${car_region.car_region}">${car_region.car_region}</option>						
+										
+								</c:forEach>								
 								</select>							
 								
 								<label for="bus_typeid">차종 : </label>
 								<select name="bus_typeid" id="bus_typeid" class="chk" title="고속사를 선택하세요" style="width: 5%;">																			 	 
 								<c:forEach var="bus_type" items="${bus_type}" varStatus="i">
-										<option value="${bus_type.bus_typeid}">${bus_type.bus_type}</option>
+										<option value="${bus_type.bus_typeid}" id="${bus_type.bus_type}">${bus_type.bus_type}</option>
 								</c:forEach>
 								</select>
 								
@@ -501,10 +500,9 @@ var car_region="제주";
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.2"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.0"></script>
 <script>
 var FIX_HEIGHT = 450;
-var car_region="제주";
 
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
@@ -521,6 +519,13 @@ $(document).ready(function(){
     $(".btn_intro").on("click", function() { goto_guide() });
     $(".btn_partner").on("click", function() { goto_partner() });    
 });
+
+$( document ).ready( function() {
+	$( 'select#car_regionid' ).change( function() {
+		var region = $( 'select#car_regionid' ).val();		
+	} );
+} );
+
 
 
 function goto_guide() {
