@@ -635,7 +635,7 @@ public class BoardController {
 	
 	// ocr
 		@RequestMapping(value = "/ocr", method = {RequestMethod.GET, RequestMethod.POST})
-		public void ocr(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+		public String ocr(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
 			logger.info("OCR 화면");
 			model.addAttribute("co_info", service.co_info(scri));
 			model.addAttribute("car_region", service.car_region(scri));
@@ -649,6 +649,7 @@ public class BoardController {
 			Process process = rt.exec(cmd);
 			logger.info("ocr");		
 			*/
+			return "/board/ocr";
 			
 			
 		}

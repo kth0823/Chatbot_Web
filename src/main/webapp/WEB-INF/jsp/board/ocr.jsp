@@ -476,14 +476,15 @@ var car_region="제주";
 								<input type="text" name="region_no" id="region_no" class="region_no" style="width: 5%;">
 								<br>
 								<label for="car_no">차량번호 : </label>
-								<input type="text" name="car_no" id="car_no" class="car_no"  style="width: 5%;">								
+								<input type="text" name="car_no" id="car_no" class="car_no"  value="${scri.keyword}" style="width: 5%;">								
 								<label for="Co_id">고속사번호 : </label>
-								<select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<select name="Co_id" id="Co_id" class="Co_id" title="고속사를 선택하세요" style="width: 5%;">																			 	 
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<option value="${co_info.co_id}">${co_info.co_nm}</option>
 								</c:forEach>
-								</select>						
-							</fieldset>
+								</select>
+								<button id="searchBtn" type="button">검색</button>						
+							</fieldset>								
 						</form>
 					</div>
 				</div>
@@ -517,16 +518,28 @@ $(window).scroll(function() {
 $(document).ready(function(){
     App.init();
     $(".btn_intro").on("click", function() { goto_guide() });
-    $(".btn_partner").on("click", function() { goto_partner() });    
+    $(".btn_partner").on("click", function() { goto_partner() });        
 });
-
+/*
 $( document ).ready( function() {
 	$( 'select#car_regionid' ).change( function() {
-		var region = $( 'select#car_regionid' ).val();		
+		var jb = $( 'select#car_regionid' ).val();
+		alert( jb );
 	} );
 } );
-
-
+*/
+$(function(){
+    $('#searchBtn').click(function() {
+      //self.location = "ocr?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
+//        var content = "<c:forEach items='${OCR}' var='OCR' varStatus='i'>"+ "<c:out value='${OCR.CO_ID}' />"+" </c:forEach>";
+	/*var content = "<c:out value='${OCR.CO_ID}' />";
+        $(".Co_id").append(content);
+ */    
+    	<c:forEach items="${OCR}" var="OCR" varStatus="i"> 
+    		<c:out value="${OCR.CO_ID}" /> 
+    	</c:forEach>
+   	 });
+  });
 
 function goto_guide() {
     window.location = "https://developers.kakao.com/docs/latest/ko/vision"
