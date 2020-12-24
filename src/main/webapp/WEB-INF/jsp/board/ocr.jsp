@@ -37,6 +37,9 @@
 		</h1>
 
 </head>
+<script>
+var car_region="제주";
+</script>
 <body>
 <!--  
 <div id="kakaoIndex">
@@ -454,10 +457,12 @@
 								<br><br>
 								<label for="reinstall_info">*차량 설치정보 </label><br>
 								<label for="region">지역 : </label>
-								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;">
+								<c:set var="car_region1" value=""/>																			 	 
 								<c:forEach var="car_region" items="${car_region}" varStatus="i">
-										<!--  <option value="${car_region.car_regionid}">${car_region.car_region}</option> -->																				
-										<option value="${car_region.car_regionid}"<c:if test="${car_region.car_region eq car_region}">selected</c:if>>${car_region.car_region}</option>
+										<!--  <option value="${car_region.car_regionid}">${car_region.car_region}</option> -->
+																														
+										<option value="${car_region.car_regionid}"<c:if test="${car_region.car_region eq '제주'}">selected</c:if>>${car_region.car_region}</option>
 								</c:forEach>
 								</select>							
 								
@@ -496,10 +501,10 @@
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.1"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.2"></script>
 <script>
 var FIX_HEIGHT = 450;
-var car_region="";
+var car_region="제주";
 
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
