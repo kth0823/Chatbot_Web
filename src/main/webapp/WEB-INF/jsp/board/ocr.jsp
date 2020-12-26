@@ -24,7 +24,7 @@
 <link rel="shortcut icon" href="https://developers.kakao.com/vassets/img/favicon.ico" type="image/x-icon" />
 <!--  <link type="text/css" rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/styles.css" media="screen,projection"> -->
 <script type="text/javascript" src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/jquery-3.2.1.min.js"></script>
-
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/github.min.css">
 <script src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/highlight.min.js"></script>
 
@@ -480,10 +480,10 @@ var car_region="제주";
 								<label for="Co_id">고속사번호 : </label>
 								<select name="Co_id" id="Co_id" class="Co_id" title="고속사를 선택하세요" style="width: 5%;">																			 	 
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
-										<option value="${co_info.co_id}">${co_info.co_nm}</option>
+										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
 								</select>
-								<button id="searchBtn" type="button">검색</button>						
+								<button id="searchBtn" type="button">서버검색</button>						
 							</fieldset>								
 						</form>
 					</div>
@@ -501,7 +501,7 @@ var car_region="제주";
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.0"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
 <script>
 var FIX_HEIGHT = 450;
 
@@ -535,8 +535,19 @@ $(function(){
         //$(".Co_id").append(content); 
  		
     	
- 		var links = "<iframe class='searchlink' src='" +content+ "'/>";
- 		$(links).insertBefore("#Co_id");
+ 		//var links = "<iframe class='searchlink' src='" +content+ "'/>";
+ 		//$(links).insertBefore("#Co_id");
+ 	/*	var temp=location.href.split("?");
+		var data = temp[1].split("/");
+		var co_info=data[0];
+ 		var co_info=$('#OCR_COID').val();*/
+ 		//var co_info=$('#OCR_ID').attr(content);
+ 		//$('#Co_id').val(co_info);
+ 	//	$('#'+Co_id).prop("selected", true);
+ 	 	window.name = "parentForm";
+            // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+            openWin = window.open(content,
+                    "childForm", "width=570, height=350, resizable = no, scrollbars = no"); 
    	 });
   });
 
