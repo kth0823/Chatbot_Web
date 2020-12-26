@@ -36,7 +36,7 @@ li {
 					<label for="OCR">서버에서 찾은 고속사 코드 :</label>					
 					<input type="text" id="OCR_COID"
 					name="OCR_COID" class="OCR_COID" value="${OCR.CO_ID}" style="width:30%;"/><br>
-					<label for="OCR">서버에서 찾은 고속사 코드 :</label>
+					<label for="OCR">서버에서 찾은 고속사 :</label>
 					<input type="text" id="OCR_CONM"
 					name="OCR_CONM" class="OCR_CONM" value="${OCR.CO_NM}" style="width:30%;"/>
 			</c:forEach>
