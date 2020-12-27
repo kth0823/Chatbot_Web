@@ -38,7 +38,10 @@ li {
 					name="OCR_COID" class="OCR_COID" value="${OCR.CO_ID}" style="width:30%;"/><br>
 					<label for="OCR">서버에서 찾은 고속사 :</label>
 					<input type="text" id="OCR_CONM"
-					name="OCR_CONM" class="OCR_CONM" value="${OCR.CO_NM}" style="width:30%;"/>
+					name="OCR_CONM" class="OCR_CONM" value="${OCR.CO_NM}" style="width:30%;"/><br>
+					<label for="OCR">서버에서 찾은 차량번호 :</label>
+					<input type="text" id="OCR_CAR_NO"
+					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="width:30%;"/>
 			</c:forEach>
 	</form>
 </body>
