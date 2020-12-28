@@ -501,7 +501,7 @@ var car_region="제주";
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.4"></script>
 <script>
 var FIX_HEIGHT = 450;
 
