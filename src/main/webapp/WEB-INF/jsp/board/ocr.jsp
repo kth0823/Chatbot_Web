@@ -455,6 +455,9 @@ var car_region="제주";
 								<label for="recog">인식된 문자 : </label>
 								<input type="text" name="recog_word" id="recog_word" class="recog_word">
 								<br><br>
+								<label for="qr_be">코드값 : </label>
+								<input type="text" name="qr_be" id="qr_be" class="qr_be">
+								<br><br>								
 								<label for="reinstall_info">*차량 설치정보 </label><br>
 								<label for="region">지역 : </label>
 								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;">
@@ -478,7 +481,7 @@ var car_region="제주";
 								<label for="car_no">차량번호 : </label>
 								<input type="text" name="car_no" id="car_no" class="car_no"  value="${scri.keyword}" style="width: 5%;">								
 								<label for="Co_id">고속사번호 : </label>
-								<select name="Co_id" id="Co_id" class="Co_id" title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<select name="Co_id" id="Co_id" class="Co_id" title="고속사를 선택하세요" onchange="javascript:change(this)" style="width: 5%;">																			 	 
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
@@ -501,9 +504,10 @@ var car_region="제주";
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.4"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.6"></script>
 <script>
 var FIX_HEIGHT = 450;
+var before;
 
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
@@ -514,6 +518,7 @@ $(window).scroll(function() {
         $("#kakaoWrap").removeClass("tab_fixed");
     }
 });
+
 
 $(document).ready(function(){
     App.init();
@@ -528,10 +533,12 @@ $( document ).ready( function() {
 	} );
 } );
 */
+
 $(function(){
     $('#searchBtn').click(function() {
       //self.location = "/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
         var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
+       
         //$(".Co_id").append(content); 
  		
     	
@@ -547,9 +554,11 @@ $(function(){
  	 	window.name = "parentForm";
             // window.open("open할 window", "자식창 이름", "팝업창 옵션");
             openWin = window.open(content,
-                    "childForm", "width=570, height=350, resizable = no, scrollbars = no"); 
-   	 });
+                    "childForm", "width=570, height=350, resizable = no, scrollbars = no");          
+   	 });   	              
   });
+
+	
 
 function goto_guide() {
     window.location = "https://developers.kakao.com/docs/latest/ko/vision"
@@ -558,6 +567,8 @@ function goto_guide() {
 function goto_partner() {
     window.location = "https://with.kakao.com/kakaoi/proposition"
 }
+
+
 
 
 $( document ).ready( function() {

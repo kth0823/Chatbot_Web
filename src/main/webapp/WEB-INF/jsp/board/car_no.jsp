@@ -30,7 +30,9 @@ li {
 }
 </style>
 <script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
+<link href="<c:url value="/resources/css/list.css?ver1.5" />" rel="stylesheet">
 <body>
+<div id = root>
 	<form role="form" method="get" action="servlet">				
 			<c:forEach items="${OCR}" var="OCR">
 					<label for="OCR">서버에서 찾은 고속사 코드 :</label>					
@@ -44,6 +46,7 @@ li {
 					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="width:30%;"/>
 			</c:forEach>
 	</form>
+</div>	
 </body>
 <script>
 //var co_info=$('#OCR_COID').val();
@@ -51,7 +54,9 @@ li {
 //window.open("ocr.jsp?co_info:"+co_info+"test:"+test);
 //location.href="/board/ocr?" + co_info + "/" + test;
 opener.document.getElementById("Co_id").value = document.getElementById("OCR_COID").value;
+opener.document.getElementById("qr_be").value += document.getElementById("OCR_COID").value;
+
 //document.write(x);
-document.write(y);
+//document.write(y);
 </script>
 </html>
