@@ -51,7 +51,7 @@
 </head>
 <body>
     <h3>로컬에 있는 이미지를 바로 브라우저에 표시</h3>
-<img id="preview" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역">
+<img id="preview" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역" onload="javascript:imageinfo(this)">
 <a id="download" download="thumbnail.jpg" target="_blank">
     <img id="thumbnail" src="" width="100" alt="썸네일영역 (클릭하면 다운로드 가능)">
 </a>
@@ -62,6 +62,13 @@
 
 var file = document.querySelector('#getfile');
 
+//로드 한 후
+var org_width; 
+var org_height;
+function imageinfo(obj){
+	org_width = obj.naturalWidth;
+	org_height = obj.naturalHeight;
+    }
 
 function dataURLtoBlob(dataurl) {
     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -72,6 +79,7 @@ function dataURLtoBlob(dataurl) {
     return new Blob([u8arr], {type:mime});
 }
 
+
 file.onchange = function () { 
     var fileList = file.files ;
     
@@ -79,7 +87,7 @@ file.onchange = function () {
     var reader = new FileReader();
     reader.readAsDataURL(fileList [0]);
 
-    //로드 한 후
+    
     reader.onload = function  () {
         document.querySelector('#preview').src = reader.result ;
         //썸네일 이미지 생성
@@ -89,13 +97,14 @@ file.onchange = function () {
             //리사이즈를 위해 캔버스 객체 생성
             var canvas = document.createElement('canvas');
             var canvasContext = canvas.getContext("2d");
+
             
             //캔버스 크기 설정
-            canvas.width = 800; //가로 800px
-            canvas.height = 800; //세로 800px
+            canvas.width = org_width/3; // 원본 1/3 너비 
+            canvas.height = org_height/3; // 원본 1/3 높이
             
             //이미지를 캔버스에 그리기
-            canvasContext.drawImage(this, 0, 0, 800, 800);
+            canvasContext.drawImage(this, 0, 0, canvas.width,  canvas.height);
             //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
             var dataURI = canvas.toDataURL("image/jpeg");
             
