@@ -37,6 +37,14 @@
 		</h1>
 
 </head>
+<style>
+img {
+    margin: 1em 0;
+    display: block;
+    background: rgb(240, 240, 240);
+    border: 1px solid rgb(0,0,0);
+}
+</style>
 <script>
 $(document).ready(function() {
 	var formObj = $("form[name='writeForm']");
@@ -437,10 +445,12 @@ function fn_valiChk() {
 					</div>
 				</div> 
 				<!--파일 수정-->
-				<img id="preview" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역" onload="javascript:imageinfo(this)"> <br>
-				<input type="file" id="getfile" accept="image/*"><br>
+				<p>핸드폰 사용시 여기에 먼저 올린후 다시 다운받아서 작업해주세요</p>
+				<img id="preview" src="" width="90%" alt="원본표시" onload="javascript:imageinfo(this)"> <br>
+				<input type="file" id="getfile" accept="image/*"><br><br>
+				<p>수정된 파일 : 이미지 눌러서 다운로드 진행</p>
 <a id="download" download=fileName+".jpg" target="_blank">
-    <img id="thumbnail" src="" width="100" alt="썸네일영역 (클릭하면 다운로드 가능)">
+    <img id="thumbnail" src="" width=30%" alt="보정된 이미지(클릭하면 다운로드 가능)">
 </a>
 
 
