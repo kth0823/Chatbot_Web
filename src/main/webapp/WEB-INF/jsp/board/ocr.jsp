@@ -439,7 +439,7 @@ function fn_valiChk() {
 				<!--파일 수정-->
 				<img id="preview" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역" onload="javascript:imageinfo(this)"> <br>
 				<input type="file" id="getfile" accept="image/*"><br>
-<a id="download" download="thumbnail.jpg" target="_blank">
+<a id="download" download=fileName+".jpg" target="_blank">
     <img id="thumbnail" src="" width="100" alt="썸네일영역 (클릭하면 다운로드 가능)">
 </a>
 
@@ -452,6 +452,8 @@ var file = document.querySelector('#getfile');
 //로드 한 후
 var org_width; 
 var org_height;
+var fileValue;
+var fileName;
 function imageinfo(obj){
 	org_width = obj.naturalWidth;
 	org_height = obj.naturalHeight;
@@ -484,6 +486,18 @@ file.onchange = function () {
             //리사이즈를 위해 캔버스 객체 생성
             var canvas = document.createElement('canvas');
             var canvasContext = canvas.getContext("2d");
+          //파일 경로.
+			var filePath = file.value;
+			//전체경로를 \ 나눔.
+			var filePathSplit = filePath.split('\\'); 
+			//전체경로를 \로 나눈 길이.
+			var filePathLength = filePathSplit.length;
+			//마지막 경로를 .으로 나눔.
+			var fileNameSplit = filePathSplit[filePathLength-1].split('.');
+			//파일명 : .으로 나눈 앞부분
+			var fileName = fileNameSplit[0];
+			//파일 확장자 : .으로 나눈 뒷부분
+			var fileExt = fileNameSplit[1];
 
             
             //캔버스 크기 설정
@@ -502,7 +516,9 @@ file.onchange = function () {
             var dataurl = canvas.toDataURL('image/jpeg',0.8);
             var blob = dataURLtoBlob(dataurl);
             var fd = new FormData();
-            fd.append("myFile", blob, "thumb.jpg");
+            fd.append("myFile", blob, fileName+".jpg");
+            document.getElementById('download').setAttribute('download',fileName+'.'+fileExt);      
+            
         };
     }; 
 }; 
