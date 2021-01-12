@@ -27,7 +27,7 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/github.min.css">
 <script src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/highlight.min.js"></script>
-
+<script type="text/javascript" src="/resources/js/dummy.js" charset="utf-8"></script>
 
 <!--<link type="text/css" rel="stylesheet" href="https://vision-api.kakao.com/static/css/common_20191226.css"> -->
 <link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.1"> 
@@ -436,7 +436,70 @@ function fn_valiChk() {
 						</form>
 					</div>
 				</div> 
+				<!--파일 수정-->
+				<img id="preview" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역"><br>
+				<input type="file" id="getfile" accept="image/*">
+				<a id="download" download="thumbnail.jpg" target="_blank"><br>
+    			<img id="thumbnail" src="" width="100" alt="썸네일영역 (클릭하면 다운로드 가능)">
+				</a>
+				
+				
+				<script type="text/javascript">
 
+
+var file = document.querySelector('#getfile');
+
+
+function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+}
+
+file.onchange = function () { 
+    var fileList = file.files ;
+    
+    // 읽기
+    var reader = new FileReader();
+    reader.readAsDataURL(fileList [0]);
+
+    //로드 한 후
+    reader.onload = function  () {
+        document.querySelector('#preview').src = reader.result ;
+        //썸네일 이미지 생성
+        var tempImage = new Image(); //drawImage 메서드에 넣기 위해 이미지 객체화
+        tempImage.src = reader.result; //data-uri를 이미지 객체에 주입
+        tempImage.onload = function() {
+            //리사이즈를 위해 캔버스 객체 생성
+            var canvas = document.createElement('canvas');
+            var canvasContext = canvas.getContext("2d");
+            
+            //캔버스 크기 설정
+            canvas.width = 800; //가로 800px
+            canvas.height = 800; //세로 800px
+            
+            //이미지를 캔버스에 그리기
+            canvasContext.drawImage(this, 0, 0, 800, 800);
+            //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
+            var dataURI = canvas.toDataURL("image/jpeg");
+            
+            //썸네일 이미지 보여주기
+            document.querySelector('#thumbnail').src = dataURI;
+            
+            //썸네일 이미지를 다운로드할 수 있도록 링크 설정
+            document.querySelector('#download').href = dataURI;
+            var dataurl = canvas.toDataURL('image/jpeg',0.8);
+            var blob = dataURLtoBlob(dataurl);
+            var fd = new FormData();
+            fd.append("myFile", blob, "thumb.jpg");
+        };
+    }; 
+}; 
+</script>
+				
 
 				<!-- OCR -->
 				<a name="ocr" id="section_ocr" class="section_link"></a>

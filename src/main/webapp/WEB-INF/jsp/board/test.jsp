@@ -32,21 +32,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="/resources/js/dummy.js" charset="utf-8"></script>
 
-<style>
-img {
-    margin: 1em 0;
-    display: block;
-    background: rgb(240, 240, 240);
-    border: 1px solid rgb(0,0,0);
-}
-</style>
- <script
-    type="text/javascript"
-    src="/js/lib/dummy.js"
-    
-  ></script>
 
-    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
 
 
   <style id="compiled-css" type="text/css">
@@ -71,7 +57,7 @@ img {
 </a>
 <input type="file" id="getfile" accept="image/*">
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
 
 var file = document.querySelector('#getfile');
@@ -125,8 +111,6 @@ file.onchange = function () {
         };
     }; 
 }; 
-
-
-  </script>
+</script>
 
 </html>
