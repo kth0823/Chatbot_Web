@@ -38,7 +38,33 @@
 
 </head>
 <script>
-var car_region="제주";
+$(document).ready(function() {
+	var formObj = $("form[name='writeForm']");
+	$("#searchBtn").on("click", function() {
+		if (fn_valiChk()) {
+			return false;
+		}
+		//formObj.attr("action", "/board/write");
+		//formObj.attr("method", "post");
+			//formObj.submit();
+	});
+	//fn_addFile();
+})
+function fn_valiChk() {
+	var regForm = $("form[name='writeForm'] .chk").length;
+	for (var i = 0; i < regForm; i++) {
+		if ($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null) {
+			alert($(".chk").eq(i).attr("title"));
+			return true;
+		}
+	}
+}
+
+
+
+
+
+
 </script>
 <body>
 <!--  
@@ -436,7 +462,7 @@ var car_region="제주";
 </div>  -->
 						</div>
 						<!-- 데모 API 영역 -->
-						<form class="option_api">
+						<form class="option_api" name="writeForm">
 							<fieldset>
 								<legend class="screen_out">데모 경로 입력 폼</legend>
 								<div class="addr_api">
@@ -453,7 +479,7 @@ var car_region="제주";
 								</div>
 								<br>
 								<label for="recog">인식된 문자 : </label>
-								<input type="text" name="recog_word" id="recog_word" class="recog_word">
+								<input type="text" name="recog_word" id="recog_word" class="recog_word" onchange="javascript:modify(this)">
 								<br><br>
 								<label for="qr_be">코드값 : </label>
 								<input type="text" name="qr_be" id="qr_be" class="qr_be">
@@ -469,23 +495,24 @@ var car_region="제주";
 								</select>							
 								
 								<label for="bus_typeid">차종 : </label>
-								<select name="bus_typeid" id="bus_typeid" class="chk" title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<select name="bus_typeid" id="bus_typeid"  title="고속사를 선택하세요" style="width: 5%;">																			 	 
 								<c:forEach var="bus_type" items="${bus_type}" varStatus="i">
 										<option value="${bus_type.bus_typeid}" id="${bus_type.bus_type}">${bus_type.bus_type}</option>
 								</c:forEach>
 								</select>
 								
 								<label for="region_no">지역번호 : </label>
-								<input type="text" name="region_no" id="region_no" class="region_no" style="width: 5%;">
+								<input type="text" name="region_no" id="region_no" class="chk" style="width: 5%;"title="지역번호 확인">
 								<br>
 								<label for="car_no">차량번호 : </label>
-								<input type="text" name="car_no" id="car_no" class="car_no"  value="${scri.keyword}" style="width: 5%;">								
+								<input type="text" name="car_no" id="car_no" class="chk"  value="${scri.keyword}" style="width: 5%;" title="차량번호 확인 ">								
 								<label for="Co_id">고속사번호 : </label>
-								<select name="Co_id" id="Co_id" class="Co_id" title="고속사를 선택하세요" onchange="javascript:change(this)" style="width: 5%;">																			 	 
+								<select name="Co_id" id="Co_id" class="Co_id"  onchange="javascript:change(this)" style="width: 5%;">																			 	 
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
 								</select>
+								<button id="changeBtn" type="button">변경</button>
 								<button id="searchBtn" type="button">서버검색</button>						
 							</fieldset>								
 						</form>
@@ -504,7 +531,7 @@ var car_region="제주";
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.6"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.1"></script>
 <script>
 var FIX_HEIGHT = 450;
 var before;
@@ -558,8 +585,6 @@ $(function(){
    	 });   	              
   });
 
-	
-
 function goto_guide() {
     window.location = "https://developers.kakao.com/docs/latest/ko/vision"
 }
@@ -574,6 +599,30 @@ function goto_partner() {
 $( document ).ready( function() {
     $( 'code:contains("recognition_words")' ).css( 'color', 'pink' );
   } );
+
+
+function modify(){
+	var car = document.getElementById("recog_word").value; //인식된 문자
+
+	//설정값들
+var car_region = document.getElementById("car_regionid").value;
+var bus_type=document.getElementById("bus_typeid").value;
+var region_no=document.getElementById("region_no").value;
+var car_no = document.getElementById("car_no").value;
+var modi_select=""; //수정 적용 
+var car_Region=car.slice(0,2);
+var bus_Type=car.slice(4,5);
+var region_No=car.slice(2, 4);
+var car_number = car.slice(-4, recog_word.length);
+if(car_Region!=car_region){
+	document.getElementById("car_no").value=car_number;
+}
+	
+	if(car_number!=car_no){
+		document.getElementById("car_no").value=car_number;
+	}
+
+}
 
 /*var name_by_class = $('.hljs-string').val();
 document.write(name_by_class);

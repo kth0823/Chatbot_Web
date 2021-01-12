@@ -305,6 +305,20 @@ public class BoardController {
 
 	}
 	
+	// 테스트 코드
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		logger.info("test");
+
+
+		//model.addAttribute("csr_req", service.csr_req(scri));
+
+		return "board/test";
+		//return "board/writeView";
+
+	}
+	
+	
 	// 요청지역 목록 조회
 	@RequestMapping(value = "/fix_area", method = RequestMethod.GET)
 	public String fix_area(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {

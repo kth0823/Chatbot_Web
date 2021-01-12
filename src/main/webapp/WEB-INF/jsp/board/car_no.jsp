@@ -55,6 +55,23 @@ li {
 //location.href="/board/ocr?" + co_info + "/" + test;
 opener.document.getElementById("Co_id").value = document.getElementById("OCR_COID").value;
 opener.document.getElementById("qr_be").value += document.getElementById("OCR_COID").value;
+var recog=opener.document.getElementById("recog_word").value;
+
+var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+ø<>@\#$%&\\\=\(\'\"]/gi;
+ 
+ 
+// test() ㅡ 찾는 문자열이 들어있는지 확인
+if(regExp.test(recog)){
+ 
+	var x=document.getElementById("OCR_CAR_NO").value;
+	alert( x );
+	var t=$('#OCR_CAR_NO').val();
+	alert( t );
+	var y=x.slice(0, 2);
+	alert("지역?" ,y );
+	opener.document.getElementById('#'+y).setAttribute('selected');
+	//$('#'+y).prop("selected", true);
+}
 
 //document.write(x);
 //document.write(y);
