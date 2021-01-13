@@ -28,6 +28,8 @@
 <link rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/github.min.css">
 <script src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/highlight.min.js"></script>
 <script type="text/javascript" src="/resources/js/dummy.js" charset="utf-8"></script>
+<script src="/resources/js/qrcode.js"></script>
+<script src="/resources/js/qrcode.min.js"></script>
 
 <!--<link type="text/css" rel="stylesheet" href="https://vision-api.kakao.com/static/css/common_20191226.css"> -->
 <link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.1"> 
@@ -610,7 +612,8 @@ file.onchange = function () {
 										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
 								</select>								
-								<button id="searchBtn" type="button">서버검색</button>						
+								<button id="searchBtn" type="button">서버검색</button>	
+								<div id="qrcode"></div>					
 							</fieldset>								
 						</form>
 					</div>
@@ -715,6 +718,16 @@ var region_No; // 인식된 문자의 지역번호
 var car_number; // 인식된 문자의 차량번호 
 var qr_be; // qr코드에 들어갈 값 
 
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: "http://jindo.dev.naver.com/collie",
+    width: 128,
+    height: 128,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});
+
+
 function modify(){
 	 car = document.getElementById("recog_word").value; //인식된 문자
 
@@ -761,7 +774,8 @@ function modify(){
 		qr_be+=car_number;
 		qr_be+=$("#Co_id option:selected").val();
 		document.getElementById("qr_be").value=qr_be;
-	
+		qrcode.clear();
+		qrcode.makeCode(qr_be);
 }
 
 function modi_set(){
@@ -781,8 +795,11 @@ function modi_set(){
 		qr_be+=region_no;
 		qr_be+=$("#Co_id option:selected").val();
 		document.getElementById("qr_be").value=qr_be;	
-		
+		qrcode.clear();
+		qrcode.makeCode(qr_be);	
 }
+
+
 
 
 
