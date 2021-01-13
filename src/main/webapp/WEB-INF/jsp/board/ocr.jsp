@@ -695,31 +695,69 @@ function goto_partner() {
 
 $( document ).ready( function() {
     $( 'code:contains("recognition_words")' ).css( 'color', 'pink' );
-  } );
+});
+
+//차량설치 정보에 대한 것 
+var car_region; // 선택된 지역 id 값 
+var bus_type; // 선택된 차종 id 값 
+var region_no; // 입력된 지역번호 값 
+var car_no; // 입력된 차량번호 4자리
+
+// 인식된 문자에서의 값들
+var car; // 인식된 문자를 가져온 값 : 인식된 문자의 전체값 
+var car_Region; // 인식된 문자의 지역
+var bus_Type; // 인식된 문자의  차종 
+var region_No; // 인식된 문자의 지역번호 
+var car_number; // 인식된 문자의 차량번호 
 
 
 function modify(){
-	var car = document.getElementById("recog_word").value; //인식된 문자
+	 car = document.getElementById("recog_word").value; //인식된 문자
 
 	//설정값들
-var car_region = document.getElementById("car_regionid").value;
-var bus_type=document.getElementById("bus_typeid").value;
-var region_no=document.getElementById("region_no").value;
-var car_no = document.getElementById("car_no").value;
-var modi_select=""; //수정 적용 
-var car_Region=car.slice(0,2);
-var bus_Type=car.slice(4,5);
-var region_No=car.slice(2, 4);
-var car_number = car.slice(-4, recog_word.length);
-if(car_Region!=car_region){
-	document.getElementById("car_no").value=car_number;
-}
-	
+ car_region =$("#car_regionid option:selected").text(); 
+	//document.getElementById("car_regionid").value;
+ bus_type= $("#bus_typeid option:selected").text();
+
+//document.getElementById("bus_typeid");
+ region_no=document.getElementById("region_no").value;
+ car_no = document.getElementById("car_no").value;
+ 
+ car_Region=car.slice(0,2);
+ bus_Type=car.slice(4,5);
+ region_No=car.slice(2, 4);
+ car_number = car.slice(-4, recog_word.length);
+
 	if(car_number!=car_no){
 		document.getElementById("car_no").value=car_number;
 	}
 
+	if (car_region!=car_Region){
+		$('#'+car_Region).prop("selected", true);
+	}
+
+	if (bus_type!=bus_Type){
+		$('#'+bus_Type).prop("selected", true);		
+	}
+	if (region_no!=region_No){
+		document.getElementById("region_no").value=region_No;		
+	}
+	
+	if(car_no!=car_number){
+		document.getElementById("car_no").value=car_number;
+	}
+
 }
+
+
+
+
+var getName=$(this).attr("name");
+
+var getClass=$(this).attr("class");
+
+
+
 
 /*var name_by_class = $('.hljs-string').val();
 document.write(name_by_class);
