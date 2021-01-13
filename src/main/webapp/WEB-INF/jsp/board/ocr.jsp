@@ -583,7 +583,7 @@ file.onchange = function () {
 								<br><br>								
 								<label for="reinstall_info">*차량 설치정보 </label><br>
 								<label for="region">지역 : </label>
-								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;" onchange="javascript:modi_set()">
+								<select name="car_regionid" id="car_regionid" class="chk" title="선택값 확인" style="width: 5%;" onchange="javascript:modi_set()">
 								<!-- <c:set var="car_region1" value=""/>	-->	
 								<c:forEach var="car_region" items="${car_region}" varStatus="i">
 										<option value="${car_region.car_regionid}" id="${car_region.car_region}">${car_region.car_region}</option>						
@@ -592,7 +592,7 @@ file.onchange = function () {
 								</select>							
 								
 								<label for="bus_typeid">차종 : </label>
-								<select name="bus_typeid" id="bus_typeid"  title="고속사를 선택하세요" style="width: 5%;" onchange="javascript:modi_set()">																			 	 
+								<select name="bus_typeid" id="bus_typeid"  title="선택값 확인" style="width: 5%;" onchange="javascript:modi_set()">																			 	 
 								<c:forEach var="bus_type" items="${bus_type}" varStatus="i">
 										<option value="${bus_type.bus_typeid}" id="${bus_type.bus_type}">${bus_type.bus_type}</option>
 								</c:forEach>
@@ -602,7 +602,8 @@ file.onchange = function () {
 								<input type="text" name="region_no" id="region_no" class="chk" style="width: 5%;"title="지역번호 확인" onchange="javascript:modi_set()">
 								<br>
 								<label for="car_no">차량번호 : </label>
-								<input type="text" name="car_no" id="car_no" class="chk"  value="${scri.keyword}" style="width: 5%;" title="차량번호 확인 "  onchange="javascript:modi_set()">								
+								<!--  <input type="text" name="car_no" id="car_no" class="chk"  value="${scri.keyword}" style="width: 5%;" title="차량번호 확인 "  onchange="javascript:modi_set()"> -->
+								 <input type="text" name="car_no" id="car_no" class="chk" style="width: 5%;" title="차량번호 확인 "  onchange="javascript:modi_set()">								
 								<label for="Co_id">고속사번호 : </label>
 								<select name="Co_id" id="Co_id" class="Co_id"  onchange="javascript:change(this)" style="width: 5%;">																			 	 
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
@@ -660,7 +661,11 @@ $( document ).ready( function() {
 $(function(){
     $('#searchBtn').click(function() {
       //self.location = "/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
-        var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent($('#car_no').val());
+        
+        var car_no=$('#car_no').val();
+        var bus_type=$("#bus_typeid option:selected").text();
+        var link=bus_type+" "+car_no;
+        var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(link);
        
         //$(".Co_id").append(content); 
  		
@@ -725,8 +730,7 @@ function modify(){
  car_Region=car.slice(0,2);
  bus_Type=car.slice(4,5);
  region_No=car.slice(2, 4);
- car_number = car.slice(-4, recog_word.length);
- qr_be=document.getElementById("qr_be").value;
+ car_number = car.slice(-4, recog_word.length); 
 
 	if(car_number!=car_no){
 		document.getElementById("car_no").value=car_number;
@@ -747,8 +751,7 @@ function modify(){
 		document.getElementById("car_no").value=car_number;
 	}
 	$('#recog_word').prop("change", true);
-	if(qr_be=="")
-	{
+	
 		qr_be="306 ";
 		qr_be+=$("#car_regionid option:selected").val();
 		qr_be+=" ";
@@ -756,8 +759,9 @@ function modify(){
 		qr_be+=" ";
 		qr_be+=region_No;
 		qr_be+=car_number;
+		qr_be+=$("#Co_id option:selected").val();
 		document.getElementById("qr_be").value=qr_be;
-	}
+	
 }
 
 function modi_set(){
@@ -767,18 +771,16 @@ function modi_set(){
  	car_no = document.getElementById("car_no").value;
 	car=car_region+region_no+bus_type+car_no;
 	document.getElementById("recog_word").value=car;
-	qr_be=document.getElementById("qr_be").value;
-	if(qr_be.length!=14)
-	{
+	
+	
 		qr_be="306 ";
 		qr_be+=$("#car_regionid option:selected").val();
 		qr_be+=" ";
 		qr_be+=$("#bus_typeid option:selected").val();
 		qr_be+=" ";
 		qr_be+=region_no;
-		qr_be+=car_no;
-		document.getElementById("qr_be").value=qr_be;
-	}
+		qr_be+=$("#Co_id option:selected").val();
+		document.getElementById("qr_be").value=qr_be;	
 		
 }
 

@@ -53,15 +53,24 @@ li {
 //var test = "test"
 //window.open("ocr.jsp?co_info:"+co_info+"test:"+test);
 //location.href="/board/ocr?" + co_info + "/" + test;
+if(opener.document.getElementById("Co_id").value!=document.getElementById("OCR_COID").value){
 opener.document.getElementById("Co_id").value = document.getElementById("OCR_COID").value;
 opener.document.getElementById("qr_be").value += document.getElementById("OCR_COID").value;
+}
 var recog=opener.document.getElementById("recog_word").value;
+var ocr_car_no=document.getElementById("OCR_CAR_NO").value;
+
+if(recog!=ocr_car_no){
+	opener.document.getElementById("recog_word").value=ocr_car_no;
+	opener.parent.modify();
+}
+	
 
 var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+ø<>@\#$%&\\\=\(\'\"]/gi;
  
  
 // test() ㅡ 찾는 문자열이 들어있는지 확인
-if(regExp.test(recog)){
+/*if(regExp.test(recog)){
  
 	var x=document.getElementById("OCR_CAR_NO").value;
 	alert( x );
@@ -72,6 +81,7 @@ if(regExp.test(recog)){
 	opener.document.getElementById('#'+y).setAttribute('selected');
 	//$('#'+y).prop("selected", true);
 }
+*/
 
 //document.write(x);
 //document.write(y);
