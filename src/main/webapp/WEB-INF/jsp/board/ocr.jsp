@@ -708,6 +708,7 @@ var car_Region; // 인식된 문자의 지역
 var bus_Type; // 인식된 문자의  차종 
 var region_No; // 인식된 문자의 지역번호 
 var car_number; // 인식된 문자의 차량번호 
+var qr_be; // qr코드에 들어갈 값 
 
 function modify(){
 	 car = document.getElementById("recog_word").value; //인식된 문자
@@ -725,6 +726,7 @@ function modify(){
  bus_Type=car.slice(4,5);
  region_No=car.slice(2, 4);
  car_number = car.slice(-4, recog_word.length);
+ qr_be=document.getElementById("qr_be").value;
 
 	if(car_number!=car_no){
 		document.getElementById("car_no").value=car_number;
@@ -744,7 +746,18 @@ function modify(){
 	if(car_no!=car_number){
 		document.getElementById("car_no").value=car_number;
 	}
-
+	$('#recog_word').prop("change", true);
+	if(qr_be=="")
+	{
+		qr_be="306 ";
+		qr_be+=$("#car_regionid option:selected").val();
+		qr_be+=" ";
+		qr_be+=$("#bus_typeid option:selected").val();
+		qr_be+=" ";
+		qr_be+=region_No;
+		qr_be+=car_number;
+		document.getElementById("qr_be").value=qr_be;
+	}
 }
 
 function modi_set(){
@@ -753,7 +766,20 @@ function modi_set(){
 	region_no=document.getElementById("region_no").value;
  	car_no = document.getElementById("car_no").value;
 	car=car_region+region_no+bus_type+car_no;
-	document.getElementById("recog_word").value=car;	
+	document.getElementById("recog_word").value=car;
+	qr_be=document.getElementById("qr_be").value;
+	if(qr_be.length!=14)
+	{
+		qr_be="306 ";
+		qr_be+=$("#car_regionid option:selected").val();
+		qr_be+=" ";
+		qr_be+=$("#bus_typeid option:selected").val();
+		qr_be+=" ";
+		qr_be+=region_no;
+		qr_be+=car_no;
+		document.getElementById("qr_be").value=qr_be;
+	}
+		
 }
 
 
