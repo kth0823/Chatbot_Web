@@ -576,14 +576,14 @@ file.onchange = function () {
 								</div>
 								<br>
 								<label for="recog">인식된 문자 : </label>
-								<input type="text" name="recog_word" id="recog_word" class="recog_word" onchange="javascript:modify(this)">
+								<input type="text" name="recog_word" id="recog_word" class="recog_word" onchange="javascript:modify()">
 								<br><br>
 								<label for="qr_be">코드값 : </label>
 								<input type="text" name="qr_be" id="qr_be" class="qr_be">
 								<br><br>								
 								<label for="reinstall_info">*차량 설치정보 </label><br>
 								<label for="region">지역 : </label>
-								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;">
+								<select name="car_regionid" id="car_regionid" class="chk" title="고속사를 선택하세요" style="width: 5%;" onchange="javascript:modi_set()">
 								<!-- <c:set var="car_region1" value=""/>	-->	
 								<c:forEach var="car_region" items="${car_region}" varStatus="i">
 										<option value="${car_region.car_regionid}" id="${car_region.car_region}">${car_region.car_region}</option>						
@@ -592,24 +592,23 @@ file.onchange = function () {
 								</select>							
 								
 								<label for="bus_typeid">차종 : </label>
-								<select name="bus_typeid" id="bus_typeid"  title="고속사를 선택하세요" style="width: 5%;">																			 	 
+								<select name="bus_typeid" id="bus_typeid"  title="고속사를 선택하세요" style="width: 5%;" onchange="javascript:modi_set()">																			 	 
 								<c:forEach var="bus_type" items="${bus_type}" varStatus="i">
 										<option value="${bus_type.bus_typeid}" id="${bus_type.bus_type}">${bus_type.bus_type}</option>
 								</c:forEach>
 								</select>
 								
 								<label for="region_no">지역번호 : </label>
-								<input type="text" name="region_no" id="region_no" class="chk" style="width: 5%;"title="지역번호 확인">
+								<input type="text" name="region_no" id="region_no" class="chk" style="width: 5%;"title="지역번호 확인" onchange="javascript:modi_set()">
 								<br>
 								<label for="car_no">차량번호 : </label>
-								<input type="text" name="car_no" id="car_no" class="chk"  value="${scri.keyword}" style="width: 5%;" title="차량번호 확인 ">								
+								<input type="text" name="car_no" id="car_no" class="chk"  value="${scri.keyword}" style="width: 5%;" title="차량번호 확인 "  onchange="javascript:modi_set()">								
 								<label for="Co_id">고속사번호 : </label>
 								<select name="Co_id" id="Co_id" class="Co_id"  onchange="javascript:change(this)" style="width: 5%;">																			 	 
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
-								</select>
-								<button id="changeBtn" type="button">변경</button>
+								</select>								
 								<button id="searchBtn" type="button">서버검색</button>						
 							</fieldset>								
 						</form>
@@ -628,7 +627,7 @@ file.onchange = function () {
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.1"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.2"></script>
 <script>
 var FIX_HEIGHT = 450;
 var before;
@@ -710,7 +709,6 @@ var bus_Type; // 인식된 문자의  차종
 var region_No; // 인식된 문자의 지역번호 
 var car_number; // 인식된 문자의 차량번호 
 
-
 function modify(){
 	 car = document.getElementById("recog_word").value; //인식된 문자
 
@@ -749,12 +747,17 @@ function modify(){
 
 }
 
+function modi_set(){
+	car_region =$("#car_regionid option:selected").text(); 
+	bus_type= $("#bus_typeid option:selected").text();
+	region_no=document.getElementById("region_no").value;
+ 	car_no = document.getElementById("car_no").value;
+	car=car_region+region_no+bus_type+car_no;
+	document.getElementById("recog_word").value=car;	
+}
 
 
 
-var getName=$(this).attr("name");
-
-var getClass=$(this).attr("class");
 
 
 
