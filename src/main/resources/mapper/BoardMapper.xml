@@ -687,15 +687,20 @@ SELECT
 	</delete>
 	
 	<!-- OCR 차량번호 검색 리스트 페이지  -->
-	<select id="OCR" resultType="hashMap">
-		<!--  SELECT DISTINCT CO_ID, CAR_NO from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1 -->
-		<!-- SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1-->
-		SELECT (SELECT DISTINCT B.CO_ID FROM tCo_Info B WHERE (SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like  '%' #{keyword} '%' limit 1)=B.CO_ID) CO_ID
-		 ,(SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE (SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like  '%' #{keyword} '%' limit 1)=B.CO_ID) CO_NM
-		,(SELECT DISTINCT A.CAR_NO FROM chatbot_temp.tCsr_Bo2 A where CAR_NO like   '%' #{keyword} '%' limit 1)
-		CAR_NO
-		limit 1 
-	</select>
+	   <select id="OCR" resultType="hashMap">
+      <!--  SELECT DISTINCT CO_ID, CAR_NO from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1 -->
+      <!-- SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1-->
+      <!--  SELECT (SELECT DISTINCT B.CO_ID FROM tCo_Info B WHERE (SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like  '%' #{keyword} '%' limit 1)=B.CO_ID) CO_ID
+       ,(SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE (SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like  '%' #{keyword} '%')=B.CO_ID) CO_NM
+      ,(SELECT DISTINCT A.CAR_NO FROM chatbot_temp.tCsr_Bo2 A where CAR_NO like   '%' #{keyword} '%' limit 1)
+      CAR_NO
+      limit 1 --> 
+      SELECT DISTINCT  
+      CO_ID, 
+      CAR_NO, 
+      (SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE A.CO_ID=B.CO_ID) CO_NM
+      from chatbot_temp.tCsr_Bo2 A where CAR_NO like '%' #{keyword} '%' AND CHAR_LENGTH(CAR_NO) > 4; 
+      </select>
 	
 	    	    
 </mapper>

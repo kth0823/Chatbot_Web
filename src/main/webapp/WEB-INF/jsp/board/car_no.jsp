@@ -35,17 +35,19 @@ li {
 <div id = root>
 	<form role="form" method="get" action="servlet">				
 			<c:forEach items="${OCR}" var="OCR">
-					<label for="OCR">서버에서 찾은 고속사 코드 :</label>					
+					<input class="checkbox-test" type="checkbox" id="${OCR.CO_ID}" name="check" value="${OCR.CAR_NO}" style="font-size : 1.0em;"/>
+					<label for="OCR" style="font-size : 1.0em;">서버에서 찾은 고속사 코드 :</label>					
 					<input type="text" id="OCR_COID"
-					name="OCR_COID" class="OCR_COID" value="${OCR.CO_ID}" style="width:30%;"/><br>
+					name="OCR_COID" class="${OCR.CO_ID}" value="${OCR.CO_ID}" style="width:30%;" style="font-size : 1.0em;"/><br>
 					<label for="OCR">서버에서 찾은 고속사 :</label>
 					<input type="text" id="OCR_CONM"
-					name="OCR_CONM" class="OCR_CONM" value="${OCR.CO_NM}" style="width:30%;"/><br>
-					<label for="OCR">서버에서 찾은 차량번호 :</label>
-					<input type="text" id="OCR_CAR_NO"
-					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="width:30%;"/>
+					name="OCR_CONM" class="OCR_CONM" value="${OCR.CO_NM}" style="width:30%;" style="font-size : 1.0em;"/><br>
+					<label for="OCR" style="font-size : 1.0em;">서버에서 찾은 차량번호 :</label>
+					<input type="text" id="${OCR.CAR_NO}"
+					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="width:30%;" style="font-size : 1.0em;"/><br><br>
 			</c:forEach>
 	</form>
+	<button id="selBtn" type="button">서버검색</button>
 </div>	
 </body>
 <script>
@@ -53,21 +55,44 @@ li {
 //var test = "test"
 //window.open("ocr.jsp?co_info:"+co_info+"test:"+test);
 //location.href="/board/ocr?" + co_info + "/" + test;
-if(opener.document.getElementById("Co_id").value!=document.getElementById("OCR_COID").value){
-opener.document.getElementById("Co_id").value = document.getElementById("OCR_COID").value;
-opener.document.getElementById("qr_be").value += document.getElementById("OCR_COID").value;
-}
+var checked;
+var co_id;
+var search;
 var recog=opener.document.getElementById("recog_word").value;
-var ocr_car_no=document.getElementById("OCR_CAR_NO").value;
 
-if(recog!=ocr_car_no){
-	opener.document.getElementById("recog_word").value=ocr_car_no;
-	opener.parent.modify();
+function close(){
+    self.close();   //자기자신창을 닫습니다.
 }
+
+
+$(".checkbox-test").on("click", function() {
+
+	  var size = document.getElementsByName("check").length;
+	    for(var i = 0; i < size; i++){
+	        if(document.getElementsByName("check")[i].checked == true){
+		        console.log(document.getElementsByName("check")[i].value);
+	            serach=document.getElementsByName("check")[i].value;
+	            co_id=document.getElementsByName("check")[i].id;
+	        	if(opener.document.getElementById("Co_id").value!=co_id){
+	        		opener.document.getElementById("Co_id").value = co_id;
+	        		opener.document.getElementById("qr_be").value += co_id;
+	        	}
+	        	if(recog!=document.getElementsByName("check")[i].value){
+	        		
+	        		opener.document.getElementById("recog_word").value=document.getElementsByName("check")[i].value;
+	        		opener.parent.modify();
+	        	}
+	        	            
+	        }
+	    }
+	    close();
+
+});
+
+
 	
 
 var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+ø<>@\#$%&\\\=\(\'\"]/gi;
- 
  
 // test() ㅡ 찾는 문자열이 들어있는지 확인
 /*if(regExp.test(recog)){
@@ -80,10 +105,12 @@ var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+ø<>@\#$%&\\\=\(\'\"]/gi;
 	alert("지역?" ,y );
 	opener.document.getElementById('#'+y).setAttribute('selected');
 	//$('#'+y).prop("selected", true);
+	
+//document.write(x);
+//document.write(y);
+ 
 }
 */
 
-//document.write(x);
-//document.write(y);
 </script>
 </html>

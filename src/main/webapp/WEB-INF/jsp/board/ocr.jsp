@@ -668,7 +668,8 @@ $(function(){
         var car_no=$('#car_no').val();
         var bus_type=$("#bus_typeid option:selected").text();
         var link=bus_type+" "+car_no;
-        var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(link);
+        //var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(link);
+        var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(car_no);
        
         //$(".Co_id").append(content); 
  		
