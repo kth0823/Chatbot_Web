@@ -718,6 +718,7 @@ var bus_Type; // 인식된 문자의  차종
 var region_No; // 인식된 문자의 지역번호 
 var car_number; // 인식된 문자의 차량번호 
 var qr_be; // qr코드에 들어갈 값 
+var content // 자식창 주소
 
 var qrcode = new QRCode(document.getElementById("qrcode"), {
     text: "http://jindo.dev.naver.com/collie",
@@ -748,7 +749,7 @@ function modify(){
 
 	if(car_number!=car_no){
 		document.getElementById("car_no").value=car_number;
-		var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(car_number);
+		content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(car_number);
 		window.name = "parentForm";
         // window.open("open할 window", "자식창 이름", "팝업창 옵션");
         openWin = window.open(content,
@@ -789,9 +790,19 @@ function modi_set(){
 	bus_type= $("#bus_typeid option:selected").text();
 	region_no=document.getElementById("region_no").value;
  	car_no = document.getElementById("car_no").value;
+ 	car = document.getElementById("recog_word").value;
+ 	car_number = car.slice(-4, recog_word.length);
+ 	
 	car=car_region+region_no+bus_type+car_no;
 	document.getElementById("recog_word").value=car;
-	
+	if(car_no!=car_number){
+	content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(car_no);
+	window.name = "parentForm";
+    // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+    openWin = window.open(content,
+            "childForm", "width=570, height=350, resizable = no, scrollbars = no");
+		
+	}
 	
 		qr_be="306 ";
 		qr_be+=$("#car_regionid option:selected").val();
