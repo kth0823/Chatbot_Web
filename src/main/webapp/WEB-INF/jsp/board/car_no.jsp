@@ -35,16 +35,16 @@ li {
 <div id = root>
 	<form role="form" method="get" action="servlet">				
 			<c:forEach items="${OCR}" var="OCR">
-					<input class="checkbox-test" type="checkbox" id="${OCR.CO_ID}" name="check" value="${OCR.CAR_NO}" style="font-size : 1.0em;"/>
-					<label for="OCR" style="font-size : 1.0em;">서버에서 찾은 고속사 코드 :</label>					
+					<input class="checkbox-test" type="checkbox" id="${OCR.CO_ID}" name="check" value="${OCR.CAR_NO}" style="font-size : 2.5em; width:2.0em; height:2.0em;" />
+					<label for="OCR" style="font-size : 2.5em;">서버에서 찾은 고속사 코드 :</label>					
 					<input type="text" id="OCR_COID"
-					name="OCR_COID" class="${OCR.CO_ID}" value="${OCR.CO_ID}" style="width:30%;" style="font-size : 1.0em;"/><br>
-					<label for="OCR">서버에서 찾은 고속사 :</label>
+					name="OCR_COID" class="${OCR.CO_ID}" value="${OCR.CO_ID}" style="font-size : 2.5em;"/><br>
+					<label for="OCR" style="font-size : 2.5em;">서버에서 찾은 고속사 :</label>
 					<input type="text" id="OCR_CONM"
-					name="OCR_CONM" class="OCR_CONM" value="${OCR.CO_NM}" style="width:30%;" style="font-size : 1.0em;"/><br>
-					<label for="OCR" style="font-size : 1.0em;">서버에서 찾은 차량번호 :</label>
+					name="OCR_CONM" class="OCR_CONM" value="${OCR.CO_NM}" style="font-size : 2.5em;"/><br>
+					<label for="OCR" style="font-size : 2.5em;">서버에서 찾은 차량번호 :</label>
 					<input type="text" id="${OCR.CAR_NO}"
-					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="width:30%;" style="font-size : 1.0em;"/><br><br>
+					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="font-size : 2.5em;"/><br><br>
 			</c:forEach>
 	</form>
 	<button id="selBtn" type="button">서버검색</button>
@@ -60,14 +60,31 @@ var co_id;
 var search;
 var recog=opener.document.getElementById("recog_word").value;
 
-function close(){
-    self.close();   //자기자신창을 닫습니다.
+/*function close()
+{
+ window.open('','_self').close(); 
+}
+*/
+if($("input[name=OCR_COID]").length==1)
+{
+	serach=document.getElementsByName("check")[0].value;
+    co_id=document.getElementsByName("check")[0].id;
+	if(opener.document.getElementById("Co_id").value!=co_id){
+		opener.document.getElementById("Co_id").value = co_id;
+		opener.document.getElementById("qr_be").value += co_id;
+	}
+	if(recog!=document.getElementsByName("check")[0].value){
+		
+		opener.document.getElementById("recog_word").value=document.getElementsByName("check")[0].value;
+		opener.parent.modify();
+	}
+	window.close();
 }
 
-
 $(".checkbox-test").on("click", function() {
-
+	
 	  var size = document.getElementsByName("check").length;
+	  console.log(size);
 	    for(var i = 0; i < size; i++){
 	        if(document.getElementsByName("check")[i].checked == true){
 		        console.log(document.getElementsByName("check")[i].value);
@@ -83,10 +100,9 @@ $(".checkbox-test").on("click", function() {
 	        		opener.parent.modify();
 	        	}
 	        	            
-	        }
+	        } 
 	    }
-	    close();
-
+	    window.close(); 
 });
 
 

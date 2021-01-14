@@ -748,6 +748,11 @@ function modify(){
 
 	if(car_number!=car_no){
 		document.getElementById("car_no").value=car_number;
+		var content="/board/car_no?" + '${pageMaker.makeQuery(1)}' + "&searchType=s" + "&keyword=" + encodeURIComponent(car_number);
+		window.name = "parentForm";
+        // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+        openWin = window.open(content,
+                "childForm", "width=570, height=350, resizable = no, scrollbars = no");
 	}
 
 	if (car_region!=car_Region){
