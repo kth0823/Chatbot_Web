@@ -449,7 +449,7 @@ function fn_valiChk() {
 				<!--파일 수정-->
 				<p>핸드폰 사용시 여기에 먼저 올린후 다시 다운받아서 작업해주세요</p>
 				<img id="preview" src="" width="90%" alt="원본표시" onload="javascript:imageinfo(this)"> <br>
-				<input type="file" id="getfile" accept="image/*"><br><br>
+				<input type="file" name="origion_file"id="getfile" accept="image/*"><br><br>
 				<p>수정된 파일 : 이미지 눌러서 다운로드 진행</p>
 <a id="download" download=fileName+".jpg" target="_blank">
     <img id="thumbnail" src="" width=30%" alt="보정된 이미지(클릭하면 다운로드 가능)">
@@ -460,6 +460,12 @@ function fn_valiChk() {
 
 
 var file = document.querySelector('#getfile');
+var filesize; 
+var minsize=2*1024*1024;
+
+
+
+
 
 //로드 한 후
 var org_width; 
@@ -482,8 +488,7 @@ function dataURLtoBlob(dataurl) {
 
 
 file.onchange = function () { 
-    var fileList = file.files ;
-    
+	var fileList = file.files ;
     // 읽기
     var reader = new FileReader();
     reader.readAsDataURL(fileList [0]);
@@ -493,7 +498,7 @@ file.onchange = function () {
         document.querySelector('#preview').src = reader.result ;
         //썸네일 이미지 생성
         var tempImage = new Image(); //drawImage 메서드에 넣기 위해 이미지 객체화
-        tempImage.src = reader.result; //data-uri를 이미지 객체에 주입
+        tempImage.src = reader.result; //data-uri를 이미지 객체에 주입        
         tempImage.onload = function() {
             //리사이즈를 위해 캔버스 객체 생성
             var canvas = document.createElement('canvas');
@@ -510,6 +515,20 @@ file.onchange = function () {
 			var fileName = fileNameSplit[0];
 			//파일 확장자 : .으로 나눈 뒷부분
 			var fileExt = fileNameSplit[1];
+	    	if(document.getElementById("getfile").value!=""){	
+
+	    		filesize=  document.getElementById("getfile").files[0].size;
+	    			if(minsize>filesize){
+	    			alert("용량이 작으니 OCR 항목에서 바로 업로드해주세요 ");
+	    			//썸네일 이미지 보여주기 초기화
+	    			document.querySelector('#thumbnail').src = ""; 
+	    			//썸네일 이미지를 다운로드할 수 있도록 링크 설정 초기화
+	                document.querySelector('#download').href = "";
+	              	//이미지를 캔버스에 그리기 초기화
+	                canvasContext.drawImage(this, 0, 0, 0, 0);
+	    			return ;
+	    		}    	       		 
+	    	}    	
 
             
             //캔버스 크기 설정
@@ -612,8 +631,11 @@ file.onchange = function () {
 										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
 								</select>								
-								<button id="searchBtn" type="button">서버검색</button>	
-								<div id="qrcode"></div>					
+								<button id="searchBtn" type="button" onclick="">서버검색</button>	
+								<div id="qrcode"></div>
+								<form name="form1">
+								<input type="button" value="클릭" id="btn1" onclick="goto_guide">
+								</form>					
 							</fieldset>								
 						</form>
 					</div>
@@ -631,7 +653,7 @@ file.onchange = function () {
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.2"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
 <script>
 var FIX_HEIGHT = 450;
 var before;
@@ -814,6 +836,7 @@ function modi_set(){
 		document.getElementById("qr_be").value=qr_be;	
 		qrcode.clear();
 		qrcode.makeCode(qr_be);	
+		
 }
 
 
