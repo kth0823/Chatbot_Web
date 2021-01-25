@@ -46,6 +46,8 @@ img {
     background: rgb(240, 240, 240);
     border: 1px solid rgb(0,0,0);
 }
+#qrcode{width:80%; text-align:center; margin:0px auto;}
+
 </style>
 <script>
 $(document).ready(function() {
@@ -632,10 +634,7 @@ file.onchange = function () {
 								</c:forEach>
 								</select>								
 								<button id="searchBtn" type="button" onclick="">서버검색</button>	
-								<div id="qrcode"></div>
-								<form name="form1">
-								<input type="button" value="클릭" id="btn1" onclick="goto_guide">
-								</form>					
+								<div id="qrcode"></div>													
 							</fieldset>								
 						</form>
 					</div>
@@ -838,14 +837,6 @@ function modi_set(){
 		qrcode.makeCode(qr_be);	
 		
 }
-
-
-
-
-
-
-
-
 
 /*var name_by_class = $('.hljs-string').val();
 document.write(name_by_class);
