@@ -687,7 +687,7 @@ SELECT
 	</delete>
 	
 	<!-- OCR 차량번호 검색 리스트 페이지  -->
-	   <select id="OCR" resultType="hashMap">
+	<select id="OCR" resultType="hashMap">
       <!--  SELECT DISTINCT CO_ID, CAR_NO from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1 -->
       <!-- SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1-->
       <!--  SELECT (SELECT DISTINCT B.CO_ID FROM tCo_Info B WHERE (SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like  '%' #{keyword} '%' limit 1)=B.CO_ID) CO_ID
@@ -700,8 +700,51 @@ SELECT
       CAR_NO, 
       (SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE A.CO_ID=B.CO_ID) CO_NM
       from chatbot_temp.tCsr_Bo2 A where CAR_NO like '%' #{keyword} '%' AND CHAR_LENGTH(CAR_NO) > 4; 
-      </select>
+    </select>
+	<insert id="insertCar" parameterType="com.example.demo.vo.BusVO" useGeneratedKeys="true" keyProperty="cno">
+		INSERT INTO chatbot_temp.tBus_Info(		
+		CO_ID,
+		CAR_NO
+		)VALUES(
+		#{Co_id},
+		#{Car_no}		
+		)
+	</insert>
 	
+	 <select id="CarlistPage" resultType="com.example.demo.vo.BusVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT CNO
+		,CO_ID
+		,CAR_NO		 
+	 FROM 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.CNO 
+	,A.CO_ID 
+	,A.CAR_NO	 	 
+	 FROM 
+	 chatbot_temp.tBus_Info A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="search"></include>
+	<![CDATA[ORDER BY CNO desc
+	 ) carlist 
+	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
+	
+	<!-- F/W 리스트 페이지  -->
+	<select id="CarlistCount" resultType="int">
+
+		SELECT COUNT(CNO)
+		FROM chatbot_temp.tBus_Info
+		WHERE 1=1
+		<include refid="search"></include>
+		and CNO > 0
+	</select>
 	    	    
 </mapper>
 

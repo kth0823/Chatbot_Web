@@ -432,4 +432,25 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update("boardMapper.FWupdateFile", map);
 	}
 	
+	// 차량 등록 작성
+	@Override
+	public void Carwrite(BusVO vo) throws Exception {
+			sqlSession.insert("boardMapper.insertCar", vo);
+
+	}
+	
+	// 차량등록 목록 조회
+	@Override
+	public List<BusVO> Carlist(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardMapper.CarlistPage", scri);
+	}
+
+	// 차량등록 리스트 총 개수
+	@Override
+	public int CarlistCount(SearchCriteria scri) throws Exception {
+			// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.CarlistCount", scri);		
+	}
+	
 }

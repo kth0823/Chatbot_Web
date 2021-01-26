@@ -170,4 +170,13 @@ public interface  BoardDAO {
 	// F/W 첨부파일 수정
 	public void FWupdateFile(Map<String, Object> map) throws Exception;
 	
+	// 차량 등록 작성
+	public void Carwrite(BusVO vo) throws Exception;
+	
+	// 차량리스트 목록 조회
+	public List<BusVO> Carlist(SearchCriteria scri) throws Exception;
+			
+	// 차량리스트 총 개수 
+	public int CarlistCount(SearchCriteria scri) throws Exception;
+	
 }

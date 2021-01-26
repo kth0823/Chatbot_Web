@@ -78,6 +78,7 @@ if($("input[name=OCR_COID]").length==1)
 		opener.document.getElementById("recog_word").value=document.getElementsByName("check")[0].value;
 		opener.parent.modify();
 	}
+	alert("QR코드 생성 완료.");
 	window.close();
 }
 
@@ -102,6 +103,7 @@ $(".checkbox-test").on("click", function() {
 	        	            
 	        } 
 	    }
+	    alert("QR코드 생성 완료.");
 	    window.close(); 
 });
 

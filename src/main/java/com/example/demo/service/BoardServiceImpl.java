@@ -449,4 +449,27 @@ public class BoardServiceImpl implements  BoardService {
 			}
 		}
 	}
+	
+	// 차량등록 작성
+	@Override
+	public void Carwrite(BusVO vo) throws Exception {
+			dao.Carwrite(vo);
+				
+			
+	}
+	
+	// 차량등록 목록 조회
+	@Override
+	public List<BusVO> Carlist(SearchCriteria scri) throws Exception {
+
+		return dao.Carlist(scri);
+	}
+		
+	// 차량등록 리스트  총 개수 
+	@Override
+	public int CarlistCount(SearchCriteria scri) throws Exception{
+			// TODO Auto-generated method stub
+		return dao.CarlistCount(scri);
+	}
+	
 }

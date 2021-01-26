@@ -708,7 +708,7 @@ $(function(){
             // window.open("open할 window", "자식창 이름", "팝업창 옵션");
             openWin = window.open(content,
                     "childForm", "width=570, height=350, resizable = no, scrollbars = no");          
-   	 });   	              
+   	 });       	              
   });
 
 function goto_guide() {
@@ -774,9 +774,8 @@ function modify(){
 		window.name = "parentForm";
         // window.open("open할 window", "자식창 이름", "팝업창 옵션");
         openWin = window.open(content,
-                "childForm", "width=570, height=350, resizable = no, scrollbars = no");
-	}
-
+                "childForm", "width=570, height=350, resizable = no, scrollbars = no");        
+	}	
 	if (car_region!=car_Region){
 		$('#'+car_Region).prop("selected", true);
 	}

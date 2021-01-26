@@ -169,5 +169,14 @@ public interface BoardService {
 	// F/W 파일 수정
 	public void FWupdate(FWVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 	
+	// 차량등록 작성
+	public void Carwrite(BusVO vo) throws Exception;
+	
+	// 차량 목록 조회
+	public List<BusVO> Carlist(SearchCriteria scri) throws Exception;
+
+	// 차량 리스트 총 갯수
+	public int CarlistCount(SearchCriteria scri) throws Exception;
+	
 	
 }

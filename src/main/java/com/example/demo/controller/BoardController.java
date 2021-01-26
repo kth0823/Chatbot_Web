@@ -1064,6 +1064,37 @@ public class BoardController {
 			
 			//return "board/client04";
 	}
+	
+	// F/W 등록 작성 화면
+	@RequestMapping(value = "/board/CarwriteView", method = RequestMethod.GET)
+	public void CarwriteView(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		model.addAttribute("co_info", service.co_info(scri));
+		logger.info("CarwriteView");
+
+	}
+			
+	// 차량등록 글 작성
+	@RequestMapping(value = "/board/Carwrite", method = RequestMethod.POST)
+	public String Carwrite(BusVO vo) throws Exception {
+		logger.info("Carwrite");
+
+		service.Carwrite(vo);
+
+		return "redirect:/board/Carlist";
+	}
+	
+	// 차량등록 목록 조회
+	@RequestMapping(value = "/Carlist", method = RequestMethod.GET)
+	public String Carlist(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		logger.info("Carlist");
+		model.addAttribute("Carlist", service.Carlist(scri));		
+				
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.CarlistCount(scri));		
+			model.addAttribute("pageMaker", pageMaker);
+			return "board/Carlist";
+	}
 		
 //		// 게시판 수정뷰
 //		@RequestMapping(value = "/updateView", method = RequestMethod.GET)
