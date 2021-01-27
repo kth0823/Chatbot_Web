@@ -716,13 +716,13 @@ SELECT
 	<![CDATA[
 	 SELECT CNO
 		,CO_ID
-		,CAR_NO		 
-	 FROM 
+		,CAR_NO				 
+	 FROM 	 
 	 ( 
 	 SELECT 
 	 @ROWNUM:=@ROWNUM+1 RNUM, 
 	 A.CNO 
-	,A.CO_ID 
+	,A.CO_ID
 	,A.CAR_NO	 	 
 	 FROM 
 	 chatbot_temp.tBus_Info A, 
@@ -731,8 +731,8 @@ SELECT
 	 1=1]]>
 		<include refid="search"></include>
 	<![CDATA[ORDER BY CNO desc
-	 ) carlist 
-	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ) carlist	  
+	  WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
 	 ]]>
 	</select>
 	
@@ -745,6 +745,31 @@ SELECT
 		<include refid="search"></include>
 		and CNO > 0
 	</select>
+	<select id="Carread" parameterType="int" resultType="com.example.demo.vo.BusVO">
+		SELECT CNO,
+		CO_ID,
+		CAR_NO		
+		FROM
+		chatbot_temp.tBus_Info
+		WHERE CNO = #{cno}
+	</select>
+	
+	<!-- 차량내역 업데이트 -->
+	<update id="Carupdate" parameterType="com.example.demo.vo.BusVO">
+		UPDATE chatbot_temp.tBus_Info
+		SET  
+		CO_ID=#{Co_id},
+		CAR_NO=#{Car_no}
+		WHERE CNO = #{cno}
+	</update>	
+
+	<!-- 차량 내역 삭제  -->
+	<delete id="Cardelete" parameterType="int">
+		DELETE
+		FROM
+		chatbot_temp.tBus_Info
+		WHERE CNO = #{cno}
+	</delete>
 	    	    
 </mapper>
 

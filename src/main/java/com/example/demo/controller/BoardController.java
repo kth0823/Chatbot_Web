@@ -1087,7 +1087,8 @@ public class BoardController {
 	@RequestMapping(value = "/Carlist", method = RequestMethod.GET)
 	public String Carlist(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		logger.info("Carlist");
-		model.addAttribute("Carlist", service.Carlist(scri));		
+		model.addAttribute("Carlist", service.Carlist(scri));
+		model.addAttribute("co_info", service.co_info(scri));
 				
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
@@ -1095,6 +1096,61 @@ public class BoardController {
 			model.addAttribute("pageMaker", pageMaker);
 			return "board/Carlist";
 	}
+	
+	// 차량 등록내역 조회
+	@RequestMapping(value = "/CarreadView", method = RequestMethod.GET)
+	public String Carread(BusVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+		logger.info("Carread");
+
+		model.addAttribute("Carread", service.Carread(vo.getCno()));			
+		model.addAttribute("co_info", service.co_info(scri));
+		//System.out.println("FW List :" +FWfileList+"\n"  );
+				
+			return "board/CarreadView";
+	}
+	
+	// 차량등록내역 수정뷰
+		@RequestMapping(value = "/CarupdateView", method = RequestMethod.GET)
+		public String CarupdateView(BusVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+			logger.info("CarupdateView");
+
+			model.addAttribute("Carupdate", service.Carread(vo.getCno()));
+			model.addAttribute("scri", scri);			
+			model.addAttribute("co_info", service.co_info(scri));
+			return "board/CarupdateView";
+		}
+
+		// 차량등록내역 수정처리
+		@RequestMapping(value = "/Carupdate", method = RequestMethod.POST)
+		public String Carupdate(BusVO vo, @ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr 
+					) throws Exception {
+			logger.info("Carupdate");
+
+			service.Carupdate(vo);
+
+			rttr.addAttribute("page", scri.getPage());
+			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+			rttr.addAttribute("searchType", scri.getSearchType());
+			rttr.addAttribute("keyword", scri.getKeyword());
+			
+			return "redirect:/board/Carlist";
+		}
+
+		// 게시판 삭제
+		@RequestMapping(value = "/Cardelete", method = RequestMethod.POST)
+		public String Cardelete(BusVO vo,@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+		
+			logger.info("Cardelete");
+
+			service.Cardelete(vo.getCno());
+
+			rttr.addAttribute("page", scri.getPage());
+			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+			rttr.addAttribute("searchType", scri.getSearchType());
+			rttr.addAttribute("keyword", scri.getKeyword());
+			
+			return "redirect:/board/Carlist";
+		}
 		
 //		// 게시판 수정뷰
 //		@RequestMapping(value = "/updateView", method = RequestMethod.GET)

@@ -453,4 +453,23 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("boardMapper.CarlistCount", scri);		
 	}
 	
+	// 차량내역 조회
+	@Override
+	public BusVO Carread(int cno) throws Exception {		
+		return sqlSession.selectOne("boardMapper.Carread", cno);
+	}
+	
+	// 차량내역 수정
+	@Override
+	public void Carupdate(BusVO vo) throws Exception {
+
+		sqlSession.update("boardMapper.Carupdate", vo);
+	}
+
+	// 차량내역 삭제
+	@Override
+	public void Cardelete(int cno) throws Exception {
+
+		sqlSession.delete("boardMapper.Cardelete", cno);
+	}
 }

@@ -82,8 +82,7 @@ li {
 						<tbody>
 							<tr>
 
-								<td><c:forEach var="co_info" items="${co_info}"
-										varStatus="i">
+								<td><c:forEach var="co_info" items="${co_info}">
 										<c:if test="${list2.co_id eq co_info.co_id}">${co_info.co_nm}</c:if>
 									</c:forEach></td>
 								<td><c:out value="${list2.car_no}" /></td>

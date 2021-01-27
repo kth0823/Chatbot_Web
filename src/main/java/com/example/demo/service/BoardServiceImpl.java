@@ -472,4 +472,25 @@ public class BoardServiceImpl implements  BoardService {
 		return dao.CarlistCount(scri);
 	}
 	
+	// 차량내역  조회
+	@Override
+	public BusVO Carread(int cno) throws Exception {
+
+		return dao.Carread(cno);
+	}
+	
+	//차량 내역 업데이트 
+	@Override
+	public void Carupdate(BusVO vo) throws Exception {
+
+		dao.Carupdate(vo);		
+	}
+	
+	// 차량 내역 삭제 
+	@Override
+	public void Cardelete(int cno) throws Exception {
+
+		dao.Cardelete(cno);
+	}
 }
+

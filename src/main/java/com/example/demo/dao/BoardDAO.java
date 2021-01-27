@@ -179,4 +179,13 @@ public interface  BoardDAO {
 	// 차량리스트 총 개수 
 	public int CarlistCount(SearchCriteria scri) throws Exception;
 	
+	// 차량 내역 조회
+	public BusVO Carread(int cno) throws Exception;
+	
+	// 차량내역 수정
+	public void Carupdate(BusVO vo) throws Exception;
+		
+	// 차량내역 삭제
+	public void Cardelete(int cno) throws Exception;
+	
 }
