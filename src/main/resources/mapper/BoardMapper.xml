@@ -729,7 +729,7 @@ SELECT
 	 (SELECT @ROWNUM := 0) R 
 	 WHERE 
 	 1=1]]>
-		<include refid="search"></include>
+		<include refid="searchcar"></include>
 	<![CDATA[ORDER BY CNO desc
 	 ) carlist	  
 	  WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
@@ -742,7 +742,7 @@ SELECT
 		SELECT COUNT(CNO)
 		FROM chatbot_temp.tBus_Info
 		WHERE 1=1
-		<include refid="search"></include>
+		<include refid="searchcar"></include>
 		and CNO > 0
 	</select>
 	<select id="Carread" parameterType="int" resultType="com.example.demo.vo.BusVO">
@@ -770,6 +770,18 @@ SELECT
 		chatbot_temp.tBus_Info
 		WHERE CNO = #{cno}
 	</delete>
+	
+	<sql id="searchcar">
+		<if test="searchType != null">			
+			<if test="searchType == 'c'.toString()">AND CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%')</if>
+			<if test="searchType == 's'.toString()">AND CAR_NO LIKE '%' #{keyword} '%'</if>
+			
+			<if test="searchType == 'al'.toString()">AND (CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%'))or 
+				
+				(CAR_NO LIKE '%' #{keyword} '%')
+			</if>
+		</if>
+	</sql>	
 	    	    
 </mapper>
 
