@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
 <html>
 <head>
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
@@ -21,12 +21,13 @@
 <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="192x192">
 <link rel="apple-touch-icon-precomposed" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
 <meta name="msapplication-TileImage" content="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
-
-<meta charset="UTF-8">
-<title>엑셀 업로드</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
-<script>
+
+
+<title>차량등록 화면</title>
+</head>
+<script type="text/javascript">
 $(document).ready(function() {
 	var formObj = $("form[name='writeForm']");
 	$(".write_btn").on("click", function() {		
@@ -35,9 +36,13 @@ $(document).ready(function() {
 			formObj.submit();
 	});	
 })
+
 var i=0;
+var Co_id="Co_id["+i+"]";
+var Car_no="Car_no["+i+"]";
 var co_id;
 var car_no;
+
 function excelExport(event){
 	excelExportCommon(event, handleExcelDataAll);
 }
@@ -72,7 +77,7 @@ function handleExcelDataJson(sheet){
 	for(idx=0;idx<len;idx++){
 		co_id=text[idx].CO_ID;
 		car_no=text[idx].CAR_NO;
- 		tableCreate();
+		exceltableCreate();
 	}
     //$("#displayExcelJson").html(JSON.stringify(XLSX.utils.sheet_to_json (sheet)));
 }
@@ -83,7 +88,6 @@ function handleExcelDataHtml(sheet){
 	var data2=XLSX.utils.sheet_to_html (sheet);
     $("#displayExcelHtml").html(XLSX.utils.sheet_to_html (sheet));
 }
-
 function get_header_row(sheet) {
     var headers = [];
     var range = XLSX.utils.decode_range(sheet['!ref']);
@@ -101,10 +105,34 @@ function get_header_row(sheet) {
 }
 
 
-//var Co_id="Co_id["+i+"]";
-//var Car_no="Car_no["+i+"]";
-
 function tableCreate(){
+	var tc = new Array();
+	var ent = '';
+				
+	var co_id = $("#inCo_id").val();
+	var car_no = $("#inCar_no").val();
+	i+=1;				
+	ent += '<tr>';
+	ent += '<td>'+i+'</td>';
+	//ent += '<td><input type="text" placeholder="고속사코드" name="Co_id"></td>';
+	ent += '<td><select name="Co_id"><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
+	ent += '<td><input type="text" placeholder="차량번호" name="Car_no"></td>';
+	ent += '</tr>';
+	i-=1;
+					
+	$("#dynamicTable").append(ent);	
+				
+	$("#inCo_id").val('');
+	$("#inCar_no").val('');
+	document.getElementsByName("Co_id")[i].value=co_id;
+	document.getElementsByName("Car_no")[i].value=car_no;
+	//$("#Co_id :tdeq(i)").val(co_id);	
+	//$("#Car_no :tdeq(i)").val(car_no);
+	
+	i++;
+}
+
+function exceltableCreate(){
 	var tc = new Array();
 	var ent = '';
 				
@@ -132,25 +160,59 @@ function tableCreate(){
 	i++;
 }
 
+function tableDelete(){
+	$('#dynamicTable tbody tr:last').remove();
+	i--;
+}
 </script>
-</head>
 <body>
-<header>
-			<h1>엑셀로 차량등록하기</h1>
-</header>
-파일 선택 : <input type="file" id="excelFile" onchange="excelExport(event)"/>
-<!--  <h1>Header 정보 보기</h1>
-<div id="displayHeaders"></div> 
-<h1>JSON 형태로 보기</h1>
-<div id="displayExcelJson"></div>
-<h1>CSV 형태로 보기</h1>
-<div id="displayExcelCsv"></div> 
-<h1>HTML 형태로 보기</h1>
-<div id="displayExcelHtml"></div> -->
+	<header>
+			<h1>차량 등록화면</h1>
+	</header>
+	
+	<div>
+			<%@include file="nav.jsp"%>
+	</div>
+			
+<div>
 <form name="writeForm" method="post" action="/board/Carwrite" enctype="multipart/form-data">
 <table style="border: 1px; font-size: 2.0em;" id="dynamicTable" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;'>
+<thead>
+<tr>
+<th>작업번호</th>
+<th>고속사</th>
+<th>차량번호</th>
+</tr>
+</thead>
+<tbody id="dynamicTbody">
+
+	
+</tbody>
 </table>
 </form>
-<button class="write_btn btn btn-success" type="submit"> 등록 </button>
-</body>
+</div>
+<div>
+
+<!--<input type="text" placeholder="고속사" id="inCo_id"> -->
+<select name="Co_id" id="inCo_id" class="chk" title="고속사를 선택하세요."  style="width: 45%; font-size: 2.0em;" >										
+		<c:forEach var="co_info" items="${co_info}" varStatus="i">
+					<option value="${co_info.co_id}">${co_info.co_nm}</option>
+		</c:forEach>
+</select>
+<input type="text" placeholder="차량번호" id="inCar_no" style="width: 45%; font-size: 2.0em;"> 
+
+
+<button onclick="tableCreate()">입력추가</button>
+<button onclick="tableDelete()">입력삭제</button>
+<tr>
+							<td>					
+					    		<button class="write_btn btn btn-success" type="submit"> 등록 </button>					
+							</td>
+</tr>
+<!-- <button class="write_btn btn btn-success" type="file" id="excelFile" onchange="excelExport(event)">엑셀가져오기</button>  --> 
+<br><label>엑셀파일 가져오기</label>
+<input type="file" id="excelFile" onchange="excelExport(event)" />  
+
+</div>
+	</body>
 </html>
