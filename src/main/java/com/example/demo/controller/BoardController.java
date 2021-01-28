@@ -306,7 +306,7 @@ public class BoardController {
 	}
 	
 	// 테스트 코드
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		logger.info("test");
 
@@ -316,7 +316,7 @@ public class BoardController {
 		return "board/test";
 		//return "board/writeView";
 
-	}
+	} */
 	
 	
 	// 요청지역 목록 조회
@@ -1158,6 +1158,17 @@ public class BoardController {
 			rttr.addAttribute("keyword", scri.getKeyword());
 			
 			return "redirect:/board/Carlist";
+		}
+		
+		// 테스트 페이지
+		@RequestMapping(value = "/board/test",  method = {RequestMethod.GET, RequestMethod.POST})
+		public void test(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			model.addAttribute("co_info", service.co_info(scri));
+			logger.info("test");		
+			
+			//service.Carwrite(vo);
+
+			//return "redirect:/board/Carlist";
 		}
 		
 //		// 게시판 수정뷰
