@@ -453,8 +453,28 @@ public class BoardServiceImpl implements  BoardService {
 	// 차량등록 작성
 	@Override
 	public void Carwrite(BusVO vo) throws Exception {
-			dao.Carwrite(vo);
-				
+			//dao.Carwrite(vo);
+			String [] str1; 
+			String [] str2;
+			
+			str1 = vo.getCo_id().split(",");
+			str2 = vo.getCar_no().split(",");
+			int i=str1.length;
+			if(i==0) {
+				dao.Carwrite(vo);
+				return;
+			}
+			else {
+			int y=str2.length;			
+				for (int idx=0;idx<i;idx++) {
+					System.out.println("co_id :" +str1[idx]+"\n"  );
+					vo.setCo_id(str1[idx]);
+					System.out.println("Car_no :" +str2[idx]+"\n"  );
+					//for (int idx=0;idx<y;idx++)
+					vo.setCar_no(str2[idx]);
+					dao.Carwrite(vo);
+				}
+			}
 			
 	}
 	

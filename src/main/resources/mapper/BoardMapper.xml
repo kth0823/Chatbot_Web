@@ -702,13 +702,13 @@ SELECT
       from chatbot_temp.tCsr_Bo2 A where CAR_NO like '%' #{keyword} '%' AND CHAR_LENGTH(CAR_NO) > 4; 
     </select>
 	<insert id="insertCar" parameterType="com.example.demo.vo.BusVO" useGeneratedKeys="true" keyProperty="cno">
-		INSERT INTO chatbot_temp.tBus_Info(		
+		INSERT INTO chatbot_temp.tBus_Info(				
 		CO_ID,
 		CAR_NO
-		)VALUES(
+		)VALUES (  		
 		#{Co_id},
 		#{Car_no}		
-		)
+		)		
 	</insert>
 	
 	 <select id="CarlistPage" resultType="com.example.demo.vo.BusVO"

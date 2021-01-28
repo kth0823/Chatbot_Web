@@ -85,7 +85,8 @@
 	}
 	#root {
 		width: auto;
-		margin: 10 auto;
+		/*margin: 10 auto; */
+		margin: 0 auto;
 		/* background-color:rgb(200,300,400); **/
 		color: #597;
 		font-size: 1.0em;

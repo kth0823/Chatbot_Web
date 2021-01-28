@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link href="<c:url value="/resources/css/list.css?ver1.4" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/list.css?ver1.5" />" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -89,7 +89,7 @@
 				</table>
 				<div class="search row">
 					<div class="col-xs-2 col-sm-2">
-				  	<select name="searchType" class="form-control">
+				  	<select name="searchType" class="form-control" style="width:80%;">
 				      <option value="al"<c:out value="${scri.searchType eq 'al' ? 'selected' : ''}"/>>전체</option>				      
 				      <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>고속사</option>
 				      <option value="s"<c:out value="${scri.searchType eq 's' ? 'selected' : ''}"/>>차량번호</option>				      				

@@ -80,7 +80,7 @@
 					<tbody>						
 						<tr>
 							<td><label for="">고속사</label><br>								
-								 <select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요."  style="width: 98%;" >										
+								<select name="Co_id" id="Co_id" class="chk" title="고속사를 선택하세요."  style="width: 98%;" >										
 								<c:forEach var="co_info" items="${co_info}" varStatus="i">
 										<option value="${co_info.co_id}">${co_info.co_nm}</option>
 								</c:forEach>

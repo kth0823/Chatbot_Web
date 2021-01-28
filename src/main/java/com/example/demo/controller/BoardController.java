@@ -1065,19 +1065,27 @@ public class BoardController {
 			//return "board/client04";
 	}
 	
-	// F/W 등록 작성 화면
+	// 차량 등록 작성 화면
 	@RequestMapping(value = "/board/CarwriteView", method = RequestMethod.GET)
 	public void CarwriteView(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		model.addAttribute("co_info", service.co_info(scri));
 		logger.info("CarwriteView");
 
 	}
+	
+	// 차량 등록 작성 화면
+	@RequestMapping(value = "/board/CarwriteView2", method = RequestMethod.GET)
+	public void CarwriteView2(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			model.addAttribute("co_info", service.co_info(scri));
+			logger.info("CarwriteView2");
+
+		}
 			
 	// 차량등록 글 작성
 	@RequestMapping(value = "/board/Carwrite", method = RequestMethod.POST)
 	public String Carwrite(BusVO vo) throws Exception {
-		logger.info("Carwrite");
-
+		logger.info("Carwrite");		
+		
 		service.Carwrite(vo);
 
 		return "redirect:/board/Carlist";

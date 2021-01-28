@@ -34,19 +34,24 @@
 <!--<link type="text/css" rel="stylesheet" href="https://vision-api.kakao.com/static/css/common_20191226.css"> -->
 <link rel="stylesheet" type="text/css" href="/resources/css/ocr.css?ver1.1"> 
 <link type="text/css" rel="stylesheet" href="/resources/css/styles.css?ver1.2" media="screen,projection">
-		<h1>
-			<img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/>			
-		</h1>
-
+	<!--	<h1>
+						
+		  </h1> -->
+		  <img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/>
+		<div>
+			<%@include file="nav.jsp"%>
+		</div>
 </head>
 <style>
-img {
+#download img {
     margin: 1em 0;
     display: block;
     background: rgb(240, 240, 240);
     border: 1px solid rgb(0,0,0);
 }
-#qrcode{width:80%; text-align:center; margin:0px auto;}
+#qrcode{/* 이하 필수 설정 */
+  			position: absolute; left: 50%;  
+  			transform: translate(-50%, 0%); text-align: center;}
 
 </style>
 <script>
@@ -71,11 +76,6 @@ function fn_valiChk() {
 		}
 	}
 }
-
-
-
-
-
 
 </script>
 <body>
@@ -633,7 +633,7 @@ file.onchange = function () {
 										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
 								</select>								
-								<button id="searchBtn" type="button" onclick="">서버검색</button>	
+								<button id="searchBtn" type="button" onclick="">서버검색</button><br><br>	
 								<div id="qrcode"></div>													
 							</fieldset>								
 						</form>
@@ -644,7 +644,7 @@ file.onchange = function () {
 
 			</div>
 		</div>
-	</div>
+	</div><br><br><br><br>
 	<hr class="hide">
 	<div id="kakaoFoot" class="k_foot">
 		<small class="corp_info">Copyright <a href="http://www.kakaocorp.com" class="link_kakaocorp">&copy; ATEC T& Corp. </a>All rights reserved.</small>
