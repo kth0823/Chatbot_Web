@@ -132,7 +132,7 @@
 				</div>								
 			</form>			
 		</section>
-		<input type="button" id="car_ent" class="btn btn-success" value="차량등록" style="width:80%;height:40px;font-weight:bold;" onclick="location.href='/board/CarwriteView'" />
+		<input type="button" id="car_ent" class="btn btn-success" value="차량등록" style="width:80%;height:40px;font-weight:bold;" onclick="location.href='/board/CarwriteView2'" />
 		<hr />
 	</div>
 </body>

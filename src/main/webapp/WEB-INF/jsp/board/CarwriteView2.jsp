@@ -242,6 +242,12 @@ function tableDelete(){
 <button onclick="tableCreate()">입력추가</button>
 <button onclick="tableDelete()">입력삭제</button>
 <br><br>
+<div class="filebox">
+<label for="excelFile">엑셀파일 가져오기</label>
+<input type="file" id="excelFile" onchange="excelExport(event)" />  
+</div>
+<br>
+
 <tr>
 							<td>					
 					    		<button class="write_btn btn btn-success" type="submit"> 등록 </button>					
@@ -250,10 +256,7 @@ function tableDelete(){
 <!-- <button class="write_btn btn btn-success" type="file" id="excelFile" onchange="excelExport(event)">엑셀가져오기</button>  --> 
 
 <br>
-<div class="filebox">
-<label for="excelFile">엑셀파일 가져오기</label>
-<input type="file" id="excelFile" onchange="excelExport(event)" />  
-</div>
+
 </div>
 	</body>
 </html>
