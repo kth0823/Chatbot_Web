@@ -187,4 +187,7 @@ public interface BoardService {
 	// 차량 내역 수정
 	public void Carupdate(BusVO vo) throws Exception;
 	
+	// 차량등록대수
+	public List<Map<String, Object>> cartot(SearchCriteria scri) throws Exception;
+	
 }

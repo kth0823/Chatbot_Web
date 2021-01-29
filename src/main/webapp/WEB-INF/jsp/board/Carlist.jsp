@@ -59,19 +59,23 @@
 			<%@include file="nav.jsp"%>
 		</div>
 		<section id="container">
-			<form role="form" method="get" >
-					<table id="TableToExcel" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;' >
+			<form role="form" method="get" >			
+				<c:forEach items="${cartot}" var="cartot">
+					<label for="cartot">총등록 차량수 : </label><c:out value="${cartot.NUM}" /><br>					
+					<!--  <input type="text" id="cartot" name="cartot"  value="${cartot.NUM}" style="width: 98%;"/> -->
+				</c:forEach>				
+					<table id="TableToExcel" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse; text-align: center;' >
 					<div class="row">
 					<thead>
 						<tr>
 							<!--  <th>작성자</th>-->
-							<th>등록대수</th>
-							<th>고속사</th>
-							<th>차량번호</th>												
+							<th style="text-align: center;">No.</th>
+							<th style="text-align: center;">고속사</th>
+							<th style="text-align: center;">차량번호</th>												
 						</tr>
 					</thead>
 					</div>	
-					<c:forEach items="${Carlist}" var="Carlist"  varStatus="i">
+					<c:forEach items="${Carlist}" var="Carlist"  varStatus="i">					
 					<tbody>
 							<tr>	
 						  		<td><c:out value="${i.count}" /></td>								
@@ -132,7 +136,9 @@
 				</div>								
 			</form>			
 		</section>
-		<input type="button" id="car_ent" class="btn btn-success" value="차량등록" style="width:80%;height:40px;font-weight:bold;" onclick="location.href='/board/CarwriteView2'" />
+				
+				<br><br>
+		<input type="button" id="car_ent" class="btn btn-success" value="차량등록" style="width:80%;height:40px;font-weight:bold; " onclick="location.href='/board/CarwriteView2'" />
 		<hr />
 	</div>
 </body>

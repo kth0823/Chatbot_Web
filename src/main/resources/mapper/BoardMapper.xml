@@ -699,7 +699,7 @@ SELECT
       CO_ID, 
       CAR_NO, 
       (SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE A.CO_ID=B.CO_ID) CO_NM
-      from chatbot_temp.tCsr_Bo2 A where CAR_NO like '%' #{keyword} '%' AND CHAR_LENGTH(CAR_NO) > 4; 
+      from chatbot_temp.tBus_Info A where CAR_NO like '%' #{keyword} '%' AND CHAR_LENGTH(CAR_NO) > 4; 
     </select>
 	<insert id="insertCar" parameterType="com.example.demo.vo.BusVO" useGeneratedKeys="true" keyProperty="cno">
 		INSERT INTO chatbot_temp.tBus_Info(				
@@ -736,10 +736,10 @@ SELECT
 	 ]]>
 	</select>
 	
-	<!-- F/W 리스트 페이지  -->
+	<!-- 등록된 차량대수  -->
 	<select id="CarlistCount" resultType="int">
 
-		SELECT COUNT(CNO)
+		SELECT COUNT(CNO) AS NUM
 		FROM chatbot_temp.tBus_Info
 		WHERE 1=1
 		<include refid="searchcar"></include>
@@ -781,7 +781,12 @@ SELECT
 				(CAR_NO LIKE '%' #{keyword} '%')
 			</if>
 		</if>
-	</sql>	
+	</sql>
+	
+	<select id="cartot" resultType="hashMap"
+		parameterType="com.example.demo.vo.Criteria">
+		  SELECT COUNT(*) AS NUM FROM chatbot_temp.tBus_Info   
+	</select>
 	    	    
 </mapper>
 

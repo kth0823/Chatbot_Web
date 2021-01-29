@@ -472,4 +472,12 @@ public class BoardDAOImpl implements BoardDAO {
 
 		sqlSession.delete("boardMapper.Cardelete", cno);
 	}
+	
+	// 차량등록대수
+	@Override
+	public List<Map<String, Object>> cartot(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub		
+		return sqlSession.selectList("boardMapper.cartot", scri);
+
+	}
 }

@@ -67,7 +67,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var formObj = $("form[name='writeForm']");
-	$(".write_btn").on("click", function() {		
+	$(".write_btn").on("click", function() {
+		if (fn_valiChk()) {
+			return false;
+		}		
 		formObj.attr("action", "/board/Carwrite");
 		formObj.attr("method", "post");
 			formObj.submit();
@@ -152,8 +155,8 @@ function tableCreate(){
 	ent += '<tr>';
 	ent += '<td>'+i+'</td>';
 	//ent += '<td><input type="text" placeholder="고속사코드" name="Co_id"></td>';
-	ent += '<td><select name="Co_id"><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
-	ent += '<td><input type="text" placeholder="차량번호" name="Car_no"></td>';
+	ent += '<td><select name="Co_id" class="chk" title="고속사를 선택하세요."><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
+	ent += '<td><input type="text" placeholder="차량번호" name="Car_no" class="chk" title="차량번호를 입력하세요."></td>';
 	ent += '</tr>';
 	i-=1;
 					
@@ -179,8 +182,8 @@ function exceltableCreate(){
 	ent += '<tr>';
 	ent += '<td>'+i+'</td>';
 	//ent += '<td><input type="text" placeholder="고속사코드" name="Co_id"></td>';
-	ent += '<td><select name="Co_id"style="width:300px;"><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
-	ent += '<td><input type="text" placeholder="차량번호" name="Car_no"></td>';
+	ent += '<td><select name="Co_id" class="chk"  title="고속사를 선택하세요." style="width:300px;"><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
+	ent += '<td><input type="text" placeholder="차량번호" name="Car_no" class="chk" title="차량번호를 입력하세요."></td>';
 	ent += '</tr>';
 	i-=1;
 					
@@ -201,6 +204,17 @@ function tableDelete(){
 	$('#dynamicTable tbody tr:last').remove();
 	i--;
 }
+
+function fn_valiChk() {
+	var regForm = $("form[name='writeForm'] .chk").length;
+	for (var i = 0; i < regForm; i++) {
+		if ($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null) {
+			alert($(".chk").eq(i).attr("title"));
+			return true;
+		}
+	}
+}
+
 </script>
 <body>
 	<header>
@@ -231,16 +245,16 @@ function tableDelete(){
 <div>
 
 <!--<input type="text" placeholder="고속사" id="inCo_id"> -->
-<select name="Co_id" id="inCo_id" class="chk" title="고속사를 선택하세요."  style="width: 45%; font-size: 2.0em;" >										
+<select name="Co_id" id="inCo_id" title="고속사를 선택하세요."  style="width: 45%; font-size: 2.0em;" >										
 		<c:forEach var="co_info" items="${co_info}" varStatus="i">
 					<option value="${co_info.co_id}">${co_info.co_nm}</option>
 		</c:forEach>
 </select>
 <input type="text" placeholder="차량번호" id="inCar_no" style="width: 45%; font-size: 2.0em;"> 
 
-
-<button onclick="tableCreate()">입력추가</button>
-<button onclick="tableDelete()">입력삭제</button>
+<br>
+<button onclick="tableCreate()">+</button>
+<button onclick="tableDelete()">-</button>
 <br><br>
 <div class="filebox">
 <label for="excelFile">엑셀파일 가져오기</label>

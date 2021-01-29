@@ -512,5 +512,13 @@ public class BoardServiceImpl implements  BoardService {
 
 		dao.Cardelete(cno);
 	}
+	
+	// 차량등록대수
+	@Override
+	public List<Map<String, Object>> cartot(SearchCriteria scri) throws Exception {		
+		
+		return dao.cartot(scri);
+	}
+
 }
 

@@ -1097,6 +1097,7 @@ public class BoardController {
 		logger.info("Carlist");
 		model.addAttribute("Carlist", service.Carlist(scri));
 		model.addAttribute("co_info", service.co_info(scri));
+		model.addAttribute("cartot", service.cartot(scri));
 				
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);

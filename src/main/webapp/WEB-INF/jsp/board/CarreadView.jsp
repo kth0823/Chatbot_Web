@@ -92,7 +92,7 @@
 			</div>
 			<div class="form-group">
 				 <label for="car_no">차량번호</label><br>
-				  <input type="text" id="car_no" name="car_no" value="${Carread.car_no}" /> 
+				  <input type="text" id="car_no" name="car_no" value="${Carread.car_no}" style="width: 98%;" /> 
 			</div>			
 			<div>
 			    <button type="button" class="update_btn btn btn-warning">수정하기</button>
