@@ -1074,21 +1074,32 @@ public class BoardController {
 	}
 	
 	// 차량 등록 작성 화면
-	@RequestMapping(value = "/board/CarwriteView2", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/CarwriteView2", method = {RequestMethod.GET, RequestMethod.POST})
 	public void CarwriteView2(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 			model.addAttribute("co_info", service.co_info(scri));
+			
 			logger.info("CarwriteView2");
 
 		}
 			
 	// 차량등록 글 작성
 	@RequestMapping(value = "/board/Carwrite", method = RequestMethod.POST)
-	public String Carwrite(BusVO vo) throws Exception {
+	public String Carwrite(Model model, BusVO vo, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		logger.info("Carwrite");		
 		//service.redelete(vo.getCo_id());
 		
-		service.Carwrite(vo);
-
+		String str=scri.getKeyword();
+		int len=str.length();
+		
+		System.out.println("키워드값 :" +str+"\n"  );
+		System.out.println("키워드값 :" +len+"\n"  );
+		if(len==2)
+		{
+			service.redelete(scri);
+			System.out.println("삭제되는 키워드 :" +scri+"\n"  );
+		}
+		
+		service.Carwrite(vo);		
 		return "redirect:/board/Carlist";
 	}
 	
@@ -1176,6 +1187,17 @@ public class BoardController {
 
 			//return "redirect:/board/Carlist";
 		}
+		
+		// 차량등록내역 수정처리
+		@RequestMapping(value = "/redelete", method = {RequestMethod.GET, RequestMethod.POST})
+		public String redelete(Model model, BusVO vo, @ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr 
+					) throws Exception {
+			logger.info("redelete");
+
+			model.addAttribute("redelete");
+			return "redirect:/board/Carlist";
+		}
+
 		
 //		// 게시판 수정뷰
 //		@RequestMapping(value = "/updateView", method = RequestMethod.GET)

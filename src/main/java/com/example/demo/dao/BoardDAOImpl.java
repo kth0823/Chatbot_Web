@@ -483,9 +483,8 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// 차량내역 삭제
 	@Override
-	public void redelete(String co_id) throws Exception {
-		System.out.println("dao co_id :" +co_id+"\n"  );
-		sqlSession.delete("boardMapper.redelete", co_id);
+	public void redelete(SearchCriteria scri) throws Exception {		
+		sqlSession.delete("boardMapper.redelete", scri);
 	}
 	
 }

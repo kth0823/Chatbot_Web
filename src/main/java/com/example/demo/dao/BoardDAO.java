@@ -189,7 +189,7 @@ public interface  BoardDAO {
 	public void Cardelete(int cno) throws Exception;
 	
 	// 엑셀용 차량내역 삭제
-	public void redelete(String co_id) throws Exception;
+	public void redelete(SearchCriteria scri) throws Exception;
 	
 	// 차량등록 대수  
 	public List<Map<String, Object>> cartot(SearchCriteria scri) throws Exception;
