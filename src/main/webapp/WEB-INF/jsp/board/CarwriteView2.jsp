@@ -116,9 +116,10 @@ function handleExcelDataJson(sheet){
 	var idx;
 	for(idx=0;idx<len;idx++){
 		co_id=text[idx].CO_ID;
-		car_no=text[idx].CAR_NO;
+		car_no=text[idx].CAR_NO;		
 		exceltableCreate();
 	}
+	document.getElementsByName("keyword")[0].value=co_id;
     //$("#displayExcelJson").html(JSON.stringify(XLSX.utils.sheet_to_json (sheet)));
 }
 function handleExcelDataCsv(sheet){
@@ -191,7 +192,8 @@ function exceltableCreate(){
 				
 	$("#inCo_id").val('');
 	$("#inCar_no").val('');
-	document.getElementsByName("Co_id")[i].value=co_id;	
+	document.getElementsByName("Co_id")[i].value=co_id;
+	//	
 	//$('#'+co_id).prop("selected", true);
 	document.getElementsByName("Car_no")[i].value=car_no;
 	//$("#Co_id :tdeq(i)").val(co_id);	
@@ -268,9 +270,24 @@ function fn_valiChk() {
 							</td>
 </tr>
 <!-- <button class="write_btn btn btn-success" type="file" id="excelFile" onchange="excelExport(event)">엑셀가져오기</button>  --> 
-
 <br>
-
 </div>
+<br>
+<label for="refresh">* 고속사 차량 초기화 작업</label>
+<br>
+<div class="col-xs-10 col-sm-10">
+	<div class="input-group">
+	<select name="keyword" id="keywordInput" title="고속사를 선택하세요."  value="${scri.keyword}"class="form-control" style="width: 90%; font-size: 2.0em;" >										
+		<c:forEach var="co_info" items="${co_info}" varStatus="i">
+					<option value="${co_info.co_id}">${co_info.co_nm}</option>
+		</c:forEach>
+	</select>
+	<!--  	<input type="text" name="keyword" id="keywordInput"	value="${scri.keyword}"class="form-control"/> -->
+			<span class="input-group-btn">
+					<button id="searchBtn" type="button"class="btn btn-default">삭제</button>
+			</span>
+	</div>
+</div>
+
 	</body>
 </html>

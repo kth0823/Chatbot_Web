@@ -519,6 +519,20 @@ public class BoardServiceImpl implements  BoardService {
 		
 		return dao.cartot(scri);
 	}
+	
+	// 엑셀 차량 내역 삭제 
+	@Override
+	public void redelete(BusVO vo) throws Exception {
+		String str1; 
+		String str2;
+		
+		str1 = vo.getCo_id();
+		str2 = vo.getCar_no();
+		System.out.println("co_id :" +str1+"\n"  );
+		System.out.println("car_no :" +str2+"\n"  );
+		
+		dao.redelete(str1);
+	}
 
 }
 

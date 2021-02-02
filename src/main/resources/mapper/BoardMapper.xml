@@ -787,6 +787,10 @@ SELECT
 		parameterType="com.example.demo.vo.Criteria">
 		  SELECT COUNT(*) AS NUM FROM chatbot_temp.tBus_Info   
 	</select>
+	<!-- 엑셀 차량 내역 삭제  -->
+	<delete id="redelete" parameterType="com.example.demo.vo.BusVO">
+		DELETE FROM chatbot_temp.tBus_Info WHERE CO_ID=#{Co_id}		
+	</delete>
 	    	    
 </mapper>
 

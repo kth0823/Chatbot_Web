@@ -1085,6 +1085,7 @@ public class BoardController {
 	@RequestMapping(value = "/board/Carwrite", method = RequestMethod.POST)
 	public String Carwrite(BusVO vo) throws Exception {
 		logger.info("Carwrite");		
+		//service.redelete(vo.getCo_id());
 		
 		service.Carwrite(vo);
 
@@ -1130,7 +1131,7 @@ public class BoardController {
 		}
 
 		// 차량등록내역 수정처리
-		@RequestMapping(value = "/Carupdate", method = RequestMethod.POST)
+		@RequestMapping(value = "/Carupdate", method = {RequestMethod.GET, RequestMethod.POST})
 		public String Carupdate(BusVO vo, @ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr 
 					) throws Exception {
 			logger.info("Carupdate");
@@ -1152,7 +1153,11 @@ public class BoardController {
 			logger.info("Cardelete");
 
 			service.Cardelete(vo.getCno());
-
+			//System.out.println("control cno :" +vo.getCno()+"\n"  );
+			//System.out.println("control co_id :" +vo.getCo_id()+"\n"  );			
+			//System.out.println("control co_id :" +vo.getCar_no()+"\n"  );
+			//service.redelete(vo);
+			
 			rttr.addAttribute("page", scri.getPage());
 			rttr.addAttribute("perPageNum", scri.getPerPageNum());
 			rttr.addAttribute("searchType", scri.getSearchType());
