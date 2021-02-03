@@ -75,6 +75,11 @@ $(document).ready(function() {
 		formObj.attr("method", "post");
 			formObj.submit();
 	});	
+
+	$(".insert_btn").on("click", function() {
+		
+			return false;
+	});
 })
 
 var i=0;
@@ -165,8 +170,8 @@ function tableCreate(){
 				
 	$("#inCo_id").val('');
 	$("#inCar_no").val('');
-	document.getElementsByName("Co_id")[i].value=co_id;
-	document.getElementsByName("Car_no")[i].value=car_no;
+	//document.getElementsByName("Co_id")[i].value=co_id;
+	//document.getElementsByName("Car_no")[i].value=car_no;
 	//$("#Co_id :tdeq(i)").val(co_id);	
 	//$("#Car_no :tdeq(i)").val(car_no);
 	
@@ -242,36 +247,14 @@ function fn_valiChk() {
 	
 </tbody>
 </table>
-</form>
-</div>
-<div>
-
-<!--<input type="text" placeholder="고속사" id="inCo_id"> -->
-<select name="Co_id" id="inCo_id" title="고속사를 선택하세요."  style="width: 45%; font-size: 2.0em;" >										
-		<c:forEach var="co_info" items="${co_info}" varStatus="i">
-					<option value="${co_info.co_id}">${co_info.co_nm}</option>
-		</c:forEach>
-</select>
-<input type="text" placeholder="차량번호" id="inCar_no" style="width: 45%; font-size: 2.0em;"> 
 
 <br>
-<button onclick="tableCreate()">+</button>
-<button onclick="tableDelete()">-</button>
-<br><br>
-<div class="filebox">
-<label for="excelFile">엑셀파일 가져오기</label>
-<input type="file" id="excelFile" onchange="excelExport(event)" />  
-</div>
+<label for="input">차량등록 항목설정</label>
 <br>
+<button class="insert_btn" onclick="tableCreate()">+</button>
+<button class="delete_btn" onclick="tableDelete()">-</button>
+<br><br> 
 
-<tr>
-							<td>					
-					    		<button class="write_btn btn btn-success" type="submit"> 등록 </button>					
-							</td>
-</tr>
-<!-- <button class="write_btn btn btn-success" type="file" id="excelFile" onchange="excelExport(event)">엑셀가져오기</button>  --> 
-<br>
-</div>
 <br>
 <label for="refresh">* 고속사 차량 초기화 작업</label>
 <br>
@@ -288,6 +271,45 @@ function fn_valiChk() {
 			</span>
 	</div>
 </div>
+<br>
+<br>
+
+</form>
+</div>
+<div>
+
+<!--<input type="text" placeholder="고속사" id="inCo_id"> -->
+<!--  
+<select name="Co_id" id="inCo_id" title="고속사를 선택하세요."  style="width: 45%; font-size: 2.0em;" >										
+		<c:forEach var="co_info" items="${co_info}" varStatus="i">
+					<option value="${co_info.co_id}">${co_info.co_nm}</option>
+		</c:forEach>
+</select>
+<input type="text" placeholder="차량번호" id="inCar_no" style="width: 45%; font-size: 2.0em;"> 
+
+<br> -->
+<!-- 
+<label for="input">차량등록 항목설정</label>
+<button class="insert_btn" onclick="tableCreate()">+</button>
+<button class="delete_btn" onclick="tableDelete()">-</button>
+<br><br>  -->
+<div class="filebox">
+<label for="excelFile">엑셀파일 가져오기</label>
+<input type="file" id="excelFile" onchange="excelExport(event)" />  
+</div>
+
+
+<br>
+
+<tr>
+							<td>					
+					    		<button class="write_btn btn btn-success" type="submit"> 등록 </button>					
+							</td>
+</tr>
+<!-- <button class="write_btn btn btn-success" type="file" id="excelFile" onchange="excelExport(event)">엑셀가져오기</button>  --> 
+<br>
+</div>
+
 
 	</body>
 </html>
