@@ -449,13 +449,29 @@ function fn_valiChk() {
 					</div>
 				</div> 
 				<!--파일 수정-->
+				<div id=minsize>
 				<p>핸드폰 사용시 여기에 먼저 올린후 다시 다운받아서 작업해주세요</p>
 				<img id="preview" src="" width="90%" alt="원본표시" onload="javascript:imageinfo(this)"> <br>
 				<input type="file" name="origion_file"id="getfile" accept="image/*"><br><br>
 				<p>수정된 파일 : 이미지 눌러서 다운로드 진행</p>
-<a id="download" download=fileName+".jpg" target="_blank">
-    <img id="thumbnail" src="" width=30%" alt="보정된 이미지(클릭하면 다운로드 가능)">
-</a>
+				<a id="download" download=fileName+".jpg" target="_blank">
+    				<img id="thumbnail" src="" width=30%" alt="보정된 이미지(클릭하면 다운로드 가능)">
+				</a>				
+				</div>
+				<!--  <br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				-->
+				
 
 
 <script type="text/javascript">
@@ -526,8 +542,9 @@ file.onchange = function () {
 	    			document.querySelector('#thumbnail').src = ""; 
 	    			//썸네일 이미지를 다운로드할 수 있도록 링크 설정 초기화
 	                document.querySelector('#download').href = "";
+	                document.querySelector('#downloadbtn').href = "";
 	              	//이미지를 캔버스에 그리기 초기화
-	                canvasContext.drawImage(this, 0, 0, 0, 0);
+	                canvasContext.drawImage(this, 0, 0, 0, 0);	     
 	    			return ;
 	    		}    	       		 
 	    	}    	
@@ -550,10 +567,11 @@ file.onchange = function () {
             var blob = dataURLtoBlob(dataurl);
             var fd = new FormData();
             fd.append("myFile", blob, fileName+".jpg");
-            document.getElementById('download').setAttribute('download',fileName+'.'+fileExt);      
-            
+            document.getElementById('download').setAttribute('download',fileName+'.'+fileExt);  
+            document.getElementById("download").click();                             
         };
     }; 
+   
 }; 
 </script>
 				
@@ -633,7 +651,7 @@ file.onchange = function () {
 										<option value="${co_info.co_id}"  id="${co_info.co_nm}" >${co_info.co_nm}</option>
 								</c:forEach>
 								</select>								
-								<button id="searchBtn" type="button" onclick="">서버검색</button><br><br>	
+								<button class="btn btn-info" id="searchBtn" type="button" onclick="">서버검색</button><br><br>	
 								<div id="qrcode"></div>													
 							</fieldset>								
 						</form>
@@ -652,7 +670,7 @@ file.onchange = function () {
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.0"></script>
 <script>
 var FIX_HEIGHT = 450;
 var before;
