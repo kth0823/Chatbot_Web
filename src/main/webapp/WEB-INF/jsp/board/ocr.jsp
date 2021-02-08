@@ -670,7 +670,7 @@ file.onchange = function () {
 	<div class="dimmed_layer"></div>
 </div>
 
-<script src="/resources/js/app_20200818r1.min.js?ver1.0"></script>
+<script src="/resources/js/app_20200818r1.min.js?ver1.3"></script>
 <script>
 var FIX_HEIGHT = 450;
 var before;
