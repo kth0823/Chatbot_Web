@@ -26,131 +26,54 @@
 <title>엑셀 업로드</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
-<script>
-$(document).ready(function() {
-	var formObj = $("form[name='writeForm']");
-	$(".write_btn").on("click", function() {		
-		formObj.attr("action", "/board/Carwrite");
-		formObj.attr("method", "post");
-			formObj.submit();
-	});	
-})
-var i=0;
-var co_id;
-var car_no;
-function excelExport(event){
-	excelExportCommon(event, handleExcelDataAll);
-}
-function excelExportCommon(event, callback){
-    var input = event.target;
-    var reader = new FileReader();
-    reader.onload = function(){
-        var fileData = reader.result;
-        var wb = XLSX.read(fileData, {type : 'binary'});
-        var sheetNameList = wb.SheetNames; // 시트 이름 목록 가져오기 
-        var firstSheetName = sheetNameList[0]; // 첫번째 시트명
-        var firstSheet = wb.Sheets[firstSheetName]; // 첫번째 시트 
-        callback(firstSheet);      
-    };
-    reader.readAsBinaryString(input.files[0]);
-}
-function handleExcelDataAll(sheet){
-	handleExcelDataHeader(sheet); // header 정보 
-	handleExcelDataJson(sheet); // json 형태
-	handleExcelDataCsv(sheet); // csv 형태
-	handleExcelDataHtml(sheet); // html 형태
-}
-function handleExcelDataHeader(sheet){
-    var headers = get_header_row(sheet);
-    $("#displayHeaders").html(JSON.stringify(headers));
-}
-function handleExcelDataJson(sheet){
-	var data=JSON.stringify(XLSX.utils.sheet_to_json (sheet));
-	var text=JSON.parse(data);
-	var len=text.length;
-	var idx;
-	for(idx=0;idx<len;idx++){
-		co_id=text[idx].CO_ID;
-		car_no=text[idx].CAR_NO;
- 		tableCreate();
-	}
-    //$("#displayExcelJson").html(JSON.stringify(XLSX.utils.sheet_to_json (sheet)));
-}
-function handleExcelDataCsv(sheet){
-    $("#displayExcelCsv").html(XLSX.utils.sheet_to_csv (sheet));
-}
-function handleExcelDataHtml(sheet){
-	var data2=XLSX.utils.sheet_to_html (sheet);
-    $("#displayExcelHtml").html(XLSX.utils.sheet_to_html (sheet));
-}
-
-function get_header_row(sheet) {
-    var headers = [];
-    var range = XLSX.utils.decode_range(sheet['!ref']);
-    var C, R = range.s.r; /* start in the first row */
-    /* walk every column in the range */
-    for(C = range.s.c; C <= range.e.c; ++C) {
-        var cell = sheet[XLSX.utils.encode_cell({c:C, r:R})] /* find the cell in the first row */
-
-        var hdr = "UNKNOWN " + C; // <-- replace with your desired default 
-        if(cell && cell.t) hdr = XLSX.utils.format_cell(cell);
-
-        headers.push(hdr);
-    }
-    return headers;
-}
-
-
-//var Co_id="Co_id["+i+"]";
-//var Car_no="Car_no["+i+"]";
-
-function tableCreate(){
-	var tc = new Array();
-	var ent = '';
-				
-	//var co_id = $("#inCo_id").val();
-	//var car_no = $("#inCar_no").val();
-	i+=1;				
-	ent += '<tr>';
-	ent += '<td>'+i+'</td>';
-	//ent += '<td><input type="text" placeholder="고속사코드" name="Co_id"></td>';
-	ent += '<td><select name="Co_id"style="width:300px;"><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
-	ent += '<td><input type="text" placeholder="차량번호" name="Car_no"></td>';
-	ent += '</tr>';
-	i-=1;
-					
-	$("#dynamicTable").append(ent);	
-				
-	$("#inCo_id").val('');
-	$("#inCar_no").val('');
-	document.getElementsByName("Co_id")[i].value=co_id;	
-	//$('#'+co_id).prop("selected", true);
-	document.getElementsByName("Car_no")[i].value=car_no;
-	//$("#Co_id :tdeq(i)").val(co_id);	
-	//$("#Car_no :tdeq(i)").val(car_no);
-	
-	i++;
-}
-
-</script>
-</head>
-<body>
-<header>
-			<h1>엑셀로 차량등록하기</h1>
-</header>
-파일 선택 : <input type="file" id="excelFile" onchange="excelExport(event)"/>
-<!--  <h1>Header 정보 보기</h1>
-<div id="displayHeaders"></div> 
-<h1>JSON 형태로 보기</h1>
-<div id="displayExcelJson"></div>
-<h1>CSV 형태로 보기</h1>
-<div id="displayExcelCsv"></div> 
-<h1>HTML 형태로 보기</h1>
-<div id="displayExcelHtml"></div> -->
-<form name="writeForm" method="post" action="/board/Carwrite" enctype="multipart/form-data">
-<table style="border: 1px; font-size: 2.0em;" id="dynamicTable" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;'>
-</table>
-</form>
-<button class="write_btn btn btn-success" type="submit"> 등록 </button>
-</body>
+ <script type="text/javascript">
+     function fileinfo(){
+            var file = document.getElementById("file").files[0];
+        document.getElementById("table").innerHTML += "<tr><td>파일이름</td><td>"+file.name+"</td></tr>";
+        document.getElementById("table").innerHTML += "<tr><td>파일크기</td><td>"+file.size+"</td></tr>";
+        document.getElementById("table").innerHTML += "<tr><td>파일타입</td><td>"+file.type+"</td></tr>";
+        document.getElementById("table").innerHTML += "<tr><td>파일수정날짜</td><td>"+file.lastModifiedDate+"</td></tr>";
+ 
+ 
+     }
+     function fileread(){
+        var file = document.getElementById("file").files[0];
+        var reader = new FileReader();
+        reader.readAsText(file, "utf-8");
+        reader.onload=function(){
+            var view=document.getElementById("content");
+            var down=[];
+            view.textContent = reader.result;
+            down= reader.result.split("\n");
+            //document.getElementById("download").value=down.substr(1,9);
+            document.getElementById("download").value=down[0];
+        };
+        reader.onerror = function(event){
+            switch(event.target.error.code){
+                case error.NOT_FOUND_ERR:
+                    alert("읽을 파일을 찾지 못하였습니다..");break;
+                case error.SECURITY_ERR:
+                    alert("보안상 안전하지 않습니다..");break;
+                case error.ABORT_ERR:
+                    alert("읽기가 중지되었습니다."); break;
+                case error.NOT_READABLE_ERR:
+                    alert("읽기 권한이 없습니다."); break;
+                case error.ENCODING_ERR:
+                    alert("파일 용량이 상한을 초과하였습니다."); break;
+ 
+            }
+       
+        };
+     }
+  </script>
+ </head>   
+ <body>
+    <input id="file" type="file">
+    <input type="button" onclick="fileinfo()" value="파일 정보확인">
+    <input type="button" onclick="fileread()" value="파일 내용 확인">
+    <br/>
+    <table id="table"></table>
+    <textarea id="content" readonly style="width:600px; height:500px;"></textarea>
+    <textarea id="download" readonly style="width:600px; height:500px;"></textarea>
+ </body>
 </html>
