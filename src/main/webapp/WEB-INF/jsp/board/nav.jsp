@@ -13,9 +13,10 @@
 
 <style type="text/css">
 ul{
- 	width:100%;	
+ 	 /* 이하 필수 설정 */  	 	 
+ 	 text-align: center;	
 	 overflow-x:auto;
-     white-space: nowrap;
+	 white-space: nowrap;    
 }
 li {
 	list-style: none;

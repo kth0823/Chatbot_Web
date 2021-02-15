@@ -52,6 +52,9 @@
 #qrcode{/* 이하 필수 설정 */
   			position: absolute; left: 50%;  
   			transform: translate(-50%, 0%); text-align: center;}
+  			#minsize{
+  			text-align: center;
+  			}
 
 </style>
 <script>
@@ -452,10 +455,10 @@ function fn_valiChk() {
 				<div id=minsize>
 				<p>핸드폰 사용시 여기에 먼저 올린후 다시 다운받아서 작업해주세요</p>
 				<img id="preview" src="" width="90%" alt="원본표시" onload="javascript:imageinfo(this)"> <br>
-				<input type="file" name="origion_file"id="getfile" accept="image/*"><br><br>
+				<input type="file" name="origion_file"id="getfile" accept="image/*" style="margin: auto;"><br><br>
 				<p>수정된 파일 : 이미지 눌러서 다운로드 진행</p>
 				<a id="download" download=fileName+".jpg" target="_blank">
-    				<img id="thumbnail" src="" width=30%" alt="보정된 이미지(클릭하면 다운로드 가능)">
+    				<img id="thumbnail" src="" width=30%" alt="보정된 이미지(클릭하면 다운로드 가능)" style="margin: auto;">
 				</a>				
 				</div>
 				<!--  <br>
@@ -628,8 +631,7 @@ file.onchange = function () {
 	    			//썸네일 이미지 보여주기 초기화
 	    			document.querySelector('#thumbnail').src = ""; 
 	    			//썸네일 이미지를 다운로드할 수 있도록 링크 설정 초기화
-	                document.querySelector('#download').href = "";
-	                document.querySelector('#downloadbtn').href = "";
+	                document.querySelector('#download').href = "";	                
 	              	//이미지를 캔버스에 그리기 초기화
 	                canvasContext.drawImage(this, 0, 0, 0, 0);	     
 	    			return ;
