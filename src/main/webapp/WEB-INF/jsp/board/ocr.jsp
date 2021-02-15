@@ -452,7 +452,7 @@ function fn_valiChk() {
 					</div>
 				</div> 
 				<!--파일 수정-->
-				<div id=minsize>
+				<div id="minsize">
 				<p>핸드폰 사용시 여기에 먼저 올린후 다시 다운받아서 작업해주세요</p>
 				<img id="preview" src="" width="90%" alt="원본표시" onload="javascript:imageinfo(this)"> <br>
 				<input type="file" name="origion_file"id="getfile" accept="image/*" style="margin: auto;"><br><br>
