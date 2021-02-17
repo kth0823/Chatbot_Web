@@ -42,11 +42,38 @@
         reader.readAsText(file, "utf-8");
         reader.onload=function(){
             var view=document.getElementById("content");
-            var down=[];
+            var down;
             view.textContent = reader.result;
             down= reader.result.split("\n");
+            //down= reader.result.split("");
+            var t=0
+            var x=0;
+            var log;
+            var y=[];
+            var i=0;
+            while (x!=-1){
+            	//x=reader.result.indexOf("GPS", x+i);            	
+            	//y[i]=reader.result.indexOf("GPS", x);
+            	  while (x==-1){
+            		x=down[i].indexOf("GPS", x+i);                	
+                	i++;    	
+            		
+            	}
+              	if(x!=-1&&x!=0){
+              		
+              		y[t]=down[x];
+              		log+=y[t];
+                }            	
+            	//y[i]=down[i].indexOf("GPS", x);
+            	//log+=reader.result[y[i]];
+            	//log+=down[y[i]];
+            	
+            	t++;
+            	//document.getElementById("download").value=down[y];            	   
+            }
+            document.getElementById("download").value=log;
             //document.getElementById("download").value=down.substr(1,9);
-            document.getElementById("download").value=down[0];
+            //document.getElementById("download").value=down[0];
         };
         reader.onerror = function(event){
             switch(event.target.error.code){
