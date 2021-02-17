@@ -59,8 +59,8 @@
                 	i++;    	
             		
             	}
-              	if(x!=-1&&x!=0){
-              		
+              	if((x!=-1)&&(x!=0)){
+              		t++;	
               		y[t]=down[x];
               		log+=y[t];
                 }            	
@@ -68,7 +68,7 @@
             	//log+=reader.result[y[i]];
             	//log+=down[y[i]];
             	
-            	t++;
+            	
             	//document.getElementById("download").value=down[y];            	   
             }
             document.getElementById("download").value=log;
