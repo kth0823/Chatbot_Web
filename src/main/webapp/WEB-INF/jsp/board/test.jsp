@@ -32,8 +32,7 @@
         document.getElementById("table").innerHTML += "<tr><td>파일이름</td><td>"+file.name+"</td></tr>";
         document.getElementById("table").innerHTML += "<tr><td>파일크기</td><td>"+file.size+"</td></tr>";
         document.getElementById("table").innerHTML += "<tr><td>파일타입</td><td>"+file.type+"</td></tr>";
-        document.getElementById("table").innerHTML += "<tr><td>파일수정날짜</td><td>"+file.lastModifiedDate+"</td></tr>";
- 
+        document.getElementById("table").innerHTML += "<tr><td>파일수정날짜</td><td>"+file.lastModifiedDate+"</td></tr>";   	
  
      }
      function fileread(){
@@ -43,34 +42,57 @@
         reader.onload=function(){
             var view=document.getElementById("content");
             var down;
+            var setting=$("input:checkbox[name='setting']:checked").val()
+            //var setting=$('input:checkbox[id="setting"]').val();
             view.textContent = reader.result;
             down= reader.result.split("\n");
             //down= reader.result.split("");
             var t=0
-            var x=0;
-            var log;
-            var y=[];
-            var i=0;
-            while (x!=-1){
-            	//x=reader.result.indexOf("GPS", x+i);            	
-            	//y[i]=reader.result.indexOf("GPS", x);
-            	  while (x==-1){
-            		x=down[i].indexOf("GPS", x+i);                	
-                	i++;    	
+            var x=new Array();
+            var index=new Array();
+            var log="";
+            var y=new Array();
+            var len=down.length-1;
+            //index[0]=down[t].indexOf("GPS", 0);
+            for (t=0;t<len;t++){
+            	
+            	x[t]=down[t].indexOf(setting, 0);
+            	//x[t]=down[t].indexOf("GPS", 0);
+           		 //while (x[t]!=-1){
+           		 if (x[t]!=-1){
+            		log+=down[t];
+            		log+="\n";	
+				//x[t]=down[t].indexOf("GPS", index[t]);
+          		//y[t]=down[t].indexOf("GPS", x[t]);
+          		//log+=down[y[t]];
+            	
             		
-            	}
-              	if((x!=-1)&&(x!=0)){
-              		t++;	
-              		y[t]=down[x];
-              		log+=y[t];
-                }            	
-            	//y[i]=down[i].indexOf("GPS", x);
+          		//y[t]=down[x];
+          		//log+=y[t];
+          		//log+=down[y[i]];
+          		//for(var i=0;x[t]<0;i++)
+              	//{
+          			
+              	//}
+          		          		
+          		//x[i]=down[i].indexOf("GPS", index+i);
+            	//y[i]=down[i].indexOf("GPS", x[i+1]);
             	//log+=reader.result[y[i]];
-            	//log+=down[y[i]];
+            	//log+=down[t];
+            	if (t==len) break;
+            	//t++;
             	
-            	
-            	//document.getElementById("download").value=down[y];            	   
+            	//document.getElementById("download").value=down[y];
+               	//t++;            	   
+            	}
             }
+            
+        	/*
+          	if(t<down.length){
+          		t++;	
+          		y[t]=down[x];
+          		log+=y[t];
+            } */           	
             document.getElementById("download").value=log;
             //document.getElementById("download").value=down.substr(1,9);
             //document.getElementById("download").value=down[0];
@@ -98,6 +120,11 @@
     <input id="file" type="file">
     <input type="button" onclick="fileinfo()" value="파일 정보확인">
     <input type="button" onclick="fileread()" value="파일 내용 확인">
+    <br/>
+    <br/>
+    <p>추출할 값</p>
+    <input type="checkbox" id="setting" name="setting" value="GPS" style="font-size:1.0em;">GPS</input>
+    <input type="checkbox" id="setting"name="setting" value="LTE" style="font-size:1.0em;">LTE</input>
     <br/>
     <table id="table"></table>
     <textarea id="content" readonly style="width:600px; height:500px;"></textarea>
