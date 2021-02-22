@@ -23,7 +23,7 @@
 <meta name="msapplication-TileImage" content="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico">
 
 <meta charset="UTF-8">
-<title>엑셀 업로드</title>
+<title>로그 추출 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
  <script type="text/javascript">
@@ -42,60 +42,31 @@
         reader.onload=function(){
             var view=document.getElementById("content");
             var down;
-            var setting=$("input:checkbox[name='setting']:checked").val()
-            //var setting=$('input:checkbox[id="setting"]').val();
+            var setting="";
+           	setting=$("input:checkbox[name='setting']:checked").val();
+           	if((setting!="GPS")&&(setting!="LTE")){
+           		setting=$('input[name=search]').val();
+            }            
             view.textContent = reader.result;
-            down= reader.result.split("\n");
-            //down= reader.result.split("");
+            down= reader.result.split("\n");            
+            
             var t=0
             var x=new Array();
             var index=new Array();
             var log="";
             var y=new Array();
-            var len=down.length-1;
-            //index[0]=down[t].indexOf("GPS", 0);
-            for (t=0;t<len;t++){
-            	
+            var len=down.length-1;            
+            for (t=0;t<len;t++){            	
             	x[t]=down[t].indexOf(setting, 0);
-            	//x[t]=down[t].indexOf("GPS", 0);
-           		 //while (x[t]!=-1){
-           		 if (x[t]!=-1){
+            	 if (x[t]!=-1){
             		log+=down[t];
             		log+="\n";	
-				//x[t]=down[t].indexOf("GPS", index[t]);
-          		//y[t]=down[t].indexOf("GPS", x[t]);
-          		//log+=down[y[t]];
-            	
-            		
-          		//y[t]=down[x];
-          		//log+=y[t];
-          		//log+=down[y[i]];
-          		//for(var i=0;x[t]<0;i++)
-              	//{
-          			
-              	//}
-          		          		
-          		//x[i]=down[i].indexOf("GPS", index+i);
-            	//y[i]=down[i].indexOf("GPS", x[i+1]);
-            	//log+=reader.result[y[i]];
-            	//log+=down[t];
-            	if (t==len) break;
-            	//t++;
-            	
-            	//document.getElementById("download").value=down[y];
-               	//t++;            	   
-            	}
+					if (t==len) break;
+                }
             }
-            
-        	/*
-          	if(t<down.length){
-          		t++;	
-          		y[t]=down[x];
-          		log+=y[t];
-            } */           	
+              	
             document.getElementById("download").value=log;
-            //document.getElementById("download").value=down.substr(1,9);
-            //document.getElementById("download").value=down[0];
+          
         };
         reader.onerror = function(event){
             switch(event.target.error.code){
@@ -122,12 +93,15 @@
     <input type="button" onclick="fileread()" value="파일 내용 확인">
     <br/>
     <br/>
-    <p>추출할 값</p>
-    <input type="checkbox" id="setting" name="setting" value="GPS" style="font-size:1.0em;">GPS</input>
-    <input type="checkbox" id="setting"name="setting" value="LTE" style="font-size:1.0em;">LTE</input>
+    <label for="">추출할 값</label>    
+    <input type="checkbox" id="setting" name="setting" value="GPS" style="font-size:6;">GPS</input>
+    <input type="checkbox" id="setting"name="setting" value="LTE" style="font-size:6;">LTE</input><br>
+    <label for="">검색어</label>
+    <input type="text" id="search"name="search" value="" placeholder="검색어를 입력하세요." style="font-size:6;"/>
     <br/>
     <table id="table"></table>
-    <textarea id="content" readonly style="width:600px; height:500px;"></textarea>
-    <textarea id="download" readonly style="width:600px; height:500px;"></textarea>
+    <textarea id="content" readonly style="width:90%; height:500px;"></textarea><br><br>
+    <label for="">추출된 로그</label><br>
+    <textarea id="download" readonly style="width:90%; height:500px;"></textarea>
  </body>
 </html>
