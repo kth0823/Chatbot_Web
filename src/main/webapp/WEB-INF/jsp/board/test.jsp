@@ -86,19 +86,23 @@
         };
      }
   </script>
+  <img src="http://gw.atectn.com/upload/img/logo/atec/2029/IMG_COMP_LOGO_2029.png"/>
  </head>   
  <body>
+ 	<header>
+			<h1>로그분석</h1>
+	</header>
     <input id="file" type="file">
-    <input type="button" onclick="fileinfo()" value="파일 정보확인">
-    <input type="button" onclick="fileread()" value="파일 내용 확인">
-    <br/>
-    <br/>
     <label for="">추출할 값</label>    
     <input type="checkbox" id="setting" name="setting" value="GPS" style="font-size:6;">GPS</input>
     <input type="checkbox" id="setting"name="setting" value="LTE" style="font-size:6;">LTE</input><br>
     <label for="">검색어</label>
     <input type="text" id="search"name="search" value="" placeholder="검색어를 입력하세요." style="font-size:6;"/>
     <br/>
+    <input type="button" onclick="fileinfo()" value="파일 정보">
+    <input type="button" onclick="fileread()" value="파일 내용 ">
+    <br/>
+    <br/>    
     <table id="table"></table>
     <textarea id="content" readonly style="width:90%; height:500px;"></textarea><br><br>
     <label for="">추출된 로그</label><br>
