@@ -22,7 +22,7 @@
 <!-- //meta -->
 
 <link rel="shortcut icon" href="https://developers.kakao.com/vassets/img/favicon.ico" type="image/x-icon" />
-<!--  <link type="text/css" rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/styles.css" media="screen,projection"> -->
+<link type="text/css" rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/styles.css" media="screen,projection">
 <script type="text/javascript" src="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/js/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://t1.daumcdn.net/alvolo/_vision/openapi/r2/css/github.min.css">
@@ -682,7 +682,7 @@ file.onchange = function () {
 						<!-- 데모 API 영역 -->
 						<div class="demo_api">
 							<div id="ocr_sample_image_box" class="image_box">
-					            <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/ocr.jpg)"></div>
+					            <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/ocr.jpg);"></div>
 								<canvas id="ocr_mask_canvas" width="544" height="277" class="mask_canvas"></canvas>
 					        </div>
 <!--  <div class="code_api">
