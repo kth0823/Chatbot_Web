@@ -7,7 +7,7 @@
 
 <html lang="ko">
 <head>
-<title>버노판 모바일 테스트</title>
+<title>모바일 번호판 설치</title>
 <meta charset="UTF-8">
 <!-- meta -->
 <meta content="website"       property="og:type"  />
@@ -52,7 +52,7 @@
 #qrcode{/* 이하 필수 설정 */
   			position: absolute; left: 50%;  
   			transform: translate(-50%, 0%); text-align: center;}
-  			#minsize{
+#minsize{
   			text-align: center;
   			}
 
@@ -454,7 +454,7 @@ function fn_valiChk() {
 				<!--파일 수정-->
 				<div id="minsize">
 				<p>핸드폰 사용시 여기에 먼저 올린후 다시 다운받아서 작업해주세요</p>
-				<img id="preview" src="" width="90%" alt="원본표시" onload="javascript:imageinfo(this)"> <br>
+				<img id="preview" src="/resources/images/example.png" width="90%" alt="원본표시" onload="javascript:imageinfo(this)" style="background-image:url(http://localhost:8080/resources/images/example.png);"> <br>				
 				<input type="file" name="origion_file"id="getfile" accept="image/*" style="margin: auto;"><br><br>
 				<p>수정된 파일 : 이미지 눌러서 다운로드 진행</p>
 				<a id="download" download=fileName+".jpg" target="_blank">
