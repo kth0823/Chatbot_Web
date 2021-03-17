@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import com.example.config.*;
+//import com.example.config.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -675,7 +675,12 @@ public class BoardController {
 		public String car_no(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 			logger.info("car_no");
 			model.addAttribute("OCR", service.OCR(scri));
-			
+			List<Map<String, Object>> OCR = service.OCR(scri);
+			if(OCR.size()<2)
+			{
+				System.out.println("OCR List :" +OCR.size()+"\n"  );
+				return "redirect:/board/FWlist";
+			}
 
 			return "board/car_no";
 
@@ -1182,6 +1187,17 @@ public class BoardController {
 		public void test(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 			model.addAttribute("co_info", service.co_info(scri));
 			logger.info("test");		
+			
+			//service.Carwrite(vo);
+
+			//return "redirect:/board/Carlist";
+		}
+		
+		// 테스트 페이지2
+		@RequestMapping(value = "/board/test2",  method = {RequestMethod.GET, RequestMethod.POST})
+		public void test2(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			//model.addAttribute("co_info", service.co_info(scri));
+			logger.info("test2");		
 			
 			//service.Carwrite(vo);
 

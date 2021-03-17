@@ -34,7 +34,7 @@ li {
 <body>
 <div id = root>
 	<form role="form" method="get" action="servlet">				
-			<c:forEach items="${OCR}" var="OCR">
+			<c:forEach items="${OCR}" var="OCR">					
 					<input class="checkbox-test" type="checkbox" id="${OCR.CO_ID}" name="check" value="${OCR.CAR_NO}" style="font-size : 2.5em; width:2.0em; height:2.0em;" />
 					<label for="OCR" style="font-size : 2.5em;">서버에서 찾은 고속사 코드 :</label>					
 					<input type="text" id="OCR_COID"
@@ -47,7 +47,7 @@ li {
 					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="font-size : 2.5em;"/><br><br>
 			</c:forEach>
 	</form>
-	<button id="selBtn" type="button">서버검색</button>
+<!--  	<button id="selBtn" type="button">서버검색</button> -->
 </div>	
 </body>
 <script>
@@ -65,6 +65,11 @@ var recog=opener.document.getElementById("recog_word").value;
  window.open('','_self').close(); 
 }
 */
+
+if (document.getElementsByName("OCR_CAR_NO")[0].id==null)	
+{
+	document.write("검색한 차량이 없습니다");
+}
 if($("input[name=OCR_COID]").length==1)
 {
 	serach=document.getElementsByName("check")[0].value;
