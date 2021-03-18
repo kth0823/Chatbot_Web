@@ -676,15 +676,24 @@ public class BoardController {
 			logger.info("car_no");
 			model.addAttribute("OCR", service.OCR(scri));
 			List<Map<String, Object>> OCR = service.OCR(scri);
-			if(OCR.size()<2)
+			if(OCR.size()==0)
 			{
-				System.out.println("OCR List :" +OCR.size()+"\n"  );
-				return "redirect:/board/FWlist";
+				//System.out.println("OCR List :" +OCR.size()+"\n"  );
+				return "redirect:/board/ocr_fail";
 			}
 
 			return "board/car_no";
 
 		}
+		
+	// ocr 서버의 차량정보 
+	@RequestMapping(value = "/board/ocr_fail", method = RequestMethod.GET)
+	public void ocr_fail(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+			logger.info("ocr_fail");			
+					
+
+	}
+
 	// F/W 등록 작성 화면
 	@RequestMapping(value = "/board/FWwriteView", method = RequestMethod.GET)
 	public void FWwriteView(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {

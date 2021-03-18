@@ -454,7 +454,7 @@ function fn_valiChk() {
 				<!--파일 수정-->
 				<div id="minsize">
 				<p>핸드폰 사용시 여기에 먼저 올린후 다시 다운받아서 작업해주세요</p>
-				<img id="preview" src="/resources/images/example.png" width="90%" alt="원본표시" onload="javascript:imageinfo(this)" style="background-image:url(http://localhost:8080/resources/images/example.png);"> <br>				
+				<img id="preview" src="/resources/images/example.png" width="90%" alt="원본표시" onload="javascript:imageinfo(this)" style="background-image:url(/resources/images/example.png);"> <br>				
 				<input type="file" name="origion_file"id="getfile" accept="image/*" style="margin: auto;"><br><br>
 				<p>수정된 파일 : 이미지 눌러서 다운로드 진행</p>
 				<a id="download" download=fileName+".jpg" target="_blank">
@@ -682,7 +682,8 @@ file.onchange = function () {
 						<!-- 데모 API 영역 -->
 						<div class="demo_api">
 							<div id="ocr_sample_image_box" class="image_box">
-					            <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/ocr.jpg);"></div>
+					        <!--      <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(https://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/ocr.jpg);"></div> -->
+					        <div id="ocr_sample_image" class="sample_image" org_width="720" org_height="960" style="background-image:url(/resources/images/example.png);"></div>
 								<canvas id="ocr_mask_canvas" width="544" height="277" class="mask_canvas"></canvas>
 					        </div>
 <!--  <div class="code_api">

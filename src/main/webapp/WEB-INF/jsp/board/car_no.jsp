@@ -65,11 +65,6 @@ var recog=opener.document.getElementById("recog_word").value;
  window.open('','_self').close(); 
 }
 */
-
-if (document.getElementsByName("OCR_CAR_NO")[0].id==null)	
-{
-	document.write("검색한 차량이 없습니다");
-}
 if($("input[name=OCR_COID]").length==1)
 {
 	serach=document.getElementsByName("check")[0].value;
