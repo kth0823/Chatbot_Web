@@ -678,7 +678,7 @@ public class BoardController {
 			List<Map<String, Object>> OCR = service.OCR(scri);
 			if(OCR.size()==0)
 			{
-				//System.out.println("OCR List :" +OCR.size()+"\n"  );
+				System.out.println("OCR List :" +OCR.size()+"\n"  );
 				return "redirect:/board/ocr_fail";
 			}
 

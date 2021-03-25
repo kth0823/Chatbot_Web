@@ -853,8 +853,9 @@ var car_number; // 인식된 문자의 차량번호
 var qr_be; // qr코드에 들어갈 값 
 var content // 자식창 주소
 
+
 var qrcode = new QRCode(document.getElementById("qrcode"), {
-    text: "http://jindo.dev.naver.com/collie",
+    text: "",
     width: 128,
     height: 128,
     colorDark : "#000000",
@@ -912,7 +913,7 @@ function modify(){
 		qr_be+=region_No;
 		qr_be+=car_number;
 		qr_be+=$("#Co_id option:selected").val();
-		document.getElementById("qr_be").value=qr_be;
+		document.getElementById("qr_be").value=qr_be;		
 		qrcode.clear();
 		qrcode.makeCode(qr_be);
 }
@@ -943,7 +944,7 @@ function modi_set(){
 		qr_be+=" ";
 		qr_be+=region_no;
 		qr_be+=$("#Co_id option:selected").val();
-		document.getElementById("qr_be").value=qr_be;	
+		document.getElementById("qr_be").value=qr_be;			
 		qrcode.clear();
 		qrcode.makeCode(qr_be);	
 		
