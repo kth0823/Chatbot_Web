@@ -38,6 +38,8 @@
 </div>	
 </body>
 <script>
+	alert("검색한 차량의 정보가 없습니다");
 	opener.parent.document.getElementById('qrcode').style.visibility="hidden";
+	window.close();
 </script>
 </html>
