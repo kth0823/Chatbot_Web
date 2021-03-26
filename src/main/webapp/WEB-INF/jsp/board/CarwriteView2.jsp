@@ -278,7 +278,7 @@ function exceltableCreate(){
 	</select>
 	<!--  	<input type="text" name="keyword" id="keywordInput"	value="${scri.keyword}"class="form-control"/> -->
 			<span class="input-group-btn">
-					<button id="searchBtn" type="button"class="btn btn-default">삭제</button>
+					<button id="searchBtn" type="button"class="btn btn-danger">삭제</button>
 			</span>
 	</div>
 </div>
