@@ -74,12 +74,15 @@ $(document).ready(function() {
 		formObj.attr("action", "/board/Carwrite");
 		formObj.attr("method", "post");
 			formObj.submit();
+	});
+	$(".delete_btn").on("click", function() {
+		
+		return false;
 	});	
-
 	$(".insert_btn").on("click", function() {
 		
 			return false;
-	});
+	});	
 })
 
 var i=0;
@@ -87,6 +90,27 @@ var Co_id="Co_id["+i+"]";
 var Car_no="Car_no["+i+"]";
 var co_id;
 var car_no;
+
+
+function tableDelete(){	
+	if(i==0)
+	{
+		return;
+	}
+	$('#dynamicTable tbody tr:last').remove();	
+	i--;
+	return false;
+}
+
+function fn_valiChk() {
+	var regForm = $("form[name='writeForm'] .chk").length;
+	for (var i = 0; i < regForm; i++) {
+		if ($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null) {
+			alert($(".chk").eq(i).attr("title"));
+			return true;
+		}
+	}
+}
 
 function excelExport(event){
 	excelExportCommon(event, handleExcelDataAll);
@@ -159,10 +183,10 @@ function tableCreate(){
 	var car_no = $("#inCar_no").val();
 	i+=1;				
 	ent += '<tr>';
-	ent += '<td>'+i+'</td>';
+	ent += '<td style="text-align: center;">'+i+'</td>';
 	//ent += '<td><input type="text" placeholder="고속사코드" name="Co_id"></td>';
-	ent += '<td><select name="Co_id" class="chk" title="고속사를 선택하세요."><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
-	ent += '<td><input type="text" placeholder="차량번호" name="Car_no" class="chk" title="차량번호를 입력하세요."></td>';
+	ent += '<td style="text-align: center;"><select name="Co_id" class="chk" title="고속사를 선택하세요."><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
+	ent += '<td style="text-align: center;"><input type="text" placeholder="차량번호" name="Car_no" class="chk" title="차량번호를 입력하세요."></td>';
 	ent += '</tr>';
 	i-=1;
 					
@@ -186,10 +210,10 @@ function exceltableCreate(){
 	//var car_no = $("#inCar_no").val();
 	i+=1;				
 	ent += '<tr>';
-	ent += '<td>'+i+'</td>';
+	ent += '<td style="text-align: center;">'+i+'</td>';
 	//ent += '<td><input type="text" placeholder="고속사코드" name="Co_id"></td>';
-	ent += '<td><select name="Co_id" class="chk"  title="고속사를 선택하세요." style="width:300px;"><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
-	ent += '<td><input type="text" placeholder="차량번호" name="Car_no" class="chk" title="차량번호를 입력하세요."></td>';
+	ent += '<td style="text-align: center;"><select name="Co_id" class="chk"  title="고속사를 선택하세요." style="width:300px;"><c:forEach var="co_info" items="${co_info}" varStatus="i"><option value="${co_info.co_id}">${co_info.co_nm}</option></c:forEach></td>';
+	ent += '<td style="text-align: center;"><input type="text" placeholder="차량번호" name="Car_no" class="chk" title="차량번호를 입력하세요."></td>';
 	ent += '</tr>';
 	i-=1;
 					
@@ -207,20 +231,7 @@ function exceltableCreate(){
 	i++;
 }
 
-function tableDelete(){
-	$('#dynamicTable tbody tr:last').remove();
-	i--;
-}
 
-function fn_valiChk() {
-	var regForm = $("form[name='writeForm'] .chk").length;
-	for (var i = 0; i < regForm; i++) {
-		if ($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null) {
-			alert($(".chk").eq(i).attr("title"));
-			return true;
-		}
-	}
-}
 
 </script>
 <body>
@@ -237,9 +248,9 @@ function fn_valiChk() {
 <table style="border: 1px; font-size: 2.0em;" id="dynamicTable" border=1 width=auto cellpadding=0 cellspacing=0 class='table table-bordered' align=center style='border-collapse:collapse;'>
 <thead>
 <tr>
-<th>작업번호</th>
-<th>고속사</th>
-<th>차량번호</th>
+<th style="text-align: center;">작업번호</th>
+<th style="text-align: center;">고속사</th>
+<th style="text-align: center;">차량번호</th>
 </tr>
 </thead>
 <tbody id="dynamicTbody">
@@ -258,9 +269,9 @@ function fn_valiChk() {
 <br>
 <label for="refresh">* 고속사 차량 초기화 작업</label>
 <br>
-<div class="col-xs-10 col-sm-10">
+<div class="col-xs-10 col-sm-10" > 
 	<div class="input-group">
-	<select name="keyword" id="keywordInput" title="고속사를 선택하세요."  value="${scri.keyword}"class="form-control" style="width: 90%; font-size: 2.0em;" >										
+	<select name="keyword" id="keywordInput" title="고속사를 선택하세요."  value="${scri.keyword}"class="form-control" style="width: 90%; font-size: 2.0em; text-align: center;" >										
 		<c:forEach var="co_info" items="${co_info}" varStatus="i">
 					<option value="${co_info.co_id}">${co_info.co_nm}</option>
 		</c:forEach>
