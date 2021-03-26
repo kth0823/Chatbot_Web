@@ -62,7 +62,7 @@
 
 </style>
 
-<title>차량등록 화면</title>
+<title>차량등록/삭제 화면</title>
 </head>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -225,7 +225,7 @@ function fn_valiChk() {
 </script>
 <body>
 	<header>
-			<h1>차량 등록화면</h1>
+			<h1>차량 등록/삭제 화면</h1>
 	</header>
 	
 	<div>

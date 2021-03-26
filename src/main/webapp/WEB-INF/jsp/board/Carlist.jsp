@@ -135,11 +135,9 @@
 					</ul>					
 				</div>								
 			</form>			
-		</section>
-				
-				<br><br>
-		<input type="button" id="car_ent" class="btn btn-success" value="차량등록" style="width:80%;height:40px;font-weight:bold; " onclick="location.href='/board/CarwriteView2'" />
-		<hr />
+		</section>								
+		<input type="button" id="car_ent" class="btn btn-success" value="차량등록/삭제" style="width:80%;height:40px;font-weight:bold; font-size:0.8em;" onclick="location.href='/board/CarwriteView2'" />
+		
 	</div>
 </body>
 </html>

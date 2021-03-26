@@ -65,7 +65,7 @@
 
 	<div id="root">
 		<header>
-			<h1>차량 등록화면</h1>
+			<h1>차량 등록/삭제 화면</h1>
 		</header>
 		<hr />
 
