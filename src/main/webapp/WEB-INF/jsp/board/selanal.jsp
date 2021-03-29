@@ -76,7 +76,12 @@
 		         showOn: "both",	        	 
 	        	 currentText: '오늘 날짜', 
 	             closeText: '닫기', 
-	             dateFormat: "yy-mm-dd"            	 
+	             dateFormat: "yy-mm-dd",
+	             onClose: function( selectedDate ) {    
+	                        // 시작일(fromDate) datepicker가 닫힐때
+	                        // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+	                        $("#keyword2").datepicker( "option", "minDate", selectedDate );
+	        }            	                 	 
 		  });
 		  	//초기값을 오늘 날짜로 설정
 	        $('#keyword1').datepicker('setDate', 'today-1M'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
@@ -93,7 +98,12 @@
 		         showOn: "both",
 	        	 currentText: '오늘 날짜', 
 	             closeText: '닫기', 
-	             dateFormat: "yy-mm-dd"            	 
+	             dateFormat: "yy-mm-dd",
+	            	 onClose: function( selectedDate ) {
+	                        // 종료일(toDate) datepicker가 닫힐때
+	                        // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+	                        $("#keyword1").datepicker( "option", "maxDate", selectedDate );
+	                    } 		                         	 
 		  });
 		  	//초기값을 오늘 날짜로 설정
 	        $('#keyword2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)

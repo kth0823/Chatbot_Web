@@ -260,16 +260,16 @@ function exceltableCreate(){
 </table>
 
 <br>
-<label for="input">차량등록 항목설정</label>
+<label for="input" style="font-size: 2.0em; text-align: center;">차량등록 항목설정</label>
 <br>
-<button class="insert_btn" onclick="tableCreate()">+</button>
-<button class="delete_btn" onclick="tableDelete()">-</button>
+<button class="insert_btn" onclick="tableCreate()" style="width: 100%; font-size: 2.0em; text-align: center;">+</button><br><br><br>
+<button class="delete_btn" onclick="tableDelete()" style="width: 100%; font-size: 2.0em; text-align: center;">-</button>
 <br><br> 
 
-<br>
+<!--  <br>
 <label for="refresh">* 고속사 차량 초기화 작업</label>
-<br>
-<div class="col-xs-10 col-sm-10" > 
+<br> -->
+<div class="col-xs-10 col-sm-10" style="visibility:hidden" > 
 	<div class="input-group">
 	<select name="keyword" id="keywordInput" title="고속사를 선택하세요."  value="${scri.keyword}"class="form-control" style="width: 90%; font-size: 2.0em; text-align: center;" >										
 		<c:forEach var="co_info" items="${co_info}" varStatus="i">
@@ -305,16 +305,16 @@ function exceltableCreate(){
 <button class="delete_btn" onclick="tableDelete()">-</button>
 <br><br>  -->
 <div class="filebox">
-<label for="excelFile">엑셀파일 가져오기</label>
+<label for="excelFile" style="width: 100%; font-size: 2.0em; text-align: center;">엑셀파일 가져오기</label>
 <input type="file" id="excelFile" onchange="excelExport(event)" />  
 </div>
 
-
+<br>
 <br>
 
 <tr>
 							<td>					
-					    		<button class="write_btn btn btn-success" type="submit"> 등록 </button>					
+					    		<button class="write_btn btn btn-success" type="submit" style="width: 100%; font-size: 2.0em; text-align: center;"> 등록 </button>					
 							</td>
 </tr>
 <!-- <button class="write_btn btn btn-success" type="file" id="excelFile" onchange="excelExport(event)">엑셀가져오기</button>  --> 

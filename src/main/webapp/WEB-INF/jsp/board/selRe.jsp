@@ -37,7 +37,7 @@
 			li {list-style: none; float: left; padding: 6px;}
 		</style>
 		<script type="text/javascript"> 
-
+		var mindate;
 		$(document).ready(function() {
 			var formObj = $("form[name='writeForm']");
 			$(".write_btn").on("click", function() {
@@ -48,8 +48,8 @@
 				formObj.attr("method", "post");
 	 			formObj.submit();
 			});
-			//fn_addFile();
-		})
+			//fn_addFile();			
+		})	
 		
 		$(function() {
 		    $( "#keyword1" ).datepicker({
@@ -62,14 +62,19 @@
 		         showOn: "both",	        	 
 	        	 currentText: '오늘 날짜', 
 	             closeText: '닫기', 
-	             dateFormat: "yy-mm-dd"            	 
+	             dateFormat: "yy-mm-dd",
+	            	 onClose: function( selectedDate ) {    
+	                        // 시작일(fromDate) datepicker가 닫힐때
+	                        // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+	                        $("#keyword2").datepicker( "option", "minDate", selectedDate );
+	        }            	 
 		  });
 		  	//초기값을 오늘 날짜로 설정
 	        $('#keyword1').datepicker('setDate', 'today-1M'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 		});
-
-		$(function() {
-		    $( "#keyword2" ).datepicker({
+		
+		$(function() {															
+		    $( "#keyword2" ).datepicker({		    	
 		         changeMonth: true,	       
 		         dayNames: ['일요일','월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
 		         dayNamesMin: ['일','월', '화', '수', '목', '금', '토'], 
@@ -77,13 +82,22 @@
 		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 		         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 		         showOn: "both",
+		         //minDate: mindate(),
 	        	 currentText: '오늘 날짜', 
 	             closeText: '닫기', 
-	             dateFormat: "yy-mm-dd"            	 
+	             dateFormat: "yy-mm-dd",
+	            	 onClose: function( selectedDate ) {
+	                        // 종료일(toDate) datepicker가 닫힐때
+	                        // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+	                        $("#keyword1").datepicker( "option", "maxDate", selectedDate );
+	                    } 		                         	 
 		  });
 		  	//초기값을 오늘 날짜로 설정
-	        $('#keyword2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+	        $('#keyword2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)	        
 		});
+
+		
+			
 	
 </script>
 </head>
