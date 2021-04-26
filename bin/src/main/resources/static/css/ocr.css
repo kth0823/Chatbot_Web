@@ -1,0 +1,156 @@
+@charset "utf-8";
+
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,button{margin:0;padding:0}
+fieldset,img{border:0 none}
+dl,ul,ol,menu,li{list-style:none}
+blockquote, q{quotes:none}
+blockquote:before, blockquote:after,q:before, q:after{content:'';content:none}
+input,select,textarea,button{vertical-align:middle;font-size:100%;border-radius:0}
+button{border:0 none;background-color:transparent;cursor:pointer}
+table{border-collapse:collapse;border-spacing:0}
+body{-webkit-text-size-adjust:none} /* 뷰포트 변환시 폰트크기 자동확대 방지. */
+input:checked[type='checkbox']{background-color:#666; -webkit-appearance:checkbox}
+input[type='text'],input[type='password'],input[type='submit'],input[type='search'],input[type='tel'],input[type='email'],html input[type='button'],input[type='reset']{-webkit-appearance:none;border-radius:0}
+input[type='search']::-webkit-search-cancel-button{-webkit-appearance:none}
+ 
+body{background:#fff}
+body,th,td,input,select,textarea,button{font-size:14px;line-height:1.5;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#000} /* color값은 디자인가이드에 맞게사용 */
+ 
+a{color:#333;text-decoration:none}
+a:active, a:hover{text-decoration:none}
+address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
+
+/* global */
+#kakaoIndex{overflow:hidden;position:absolute;left:-9999px;width:0;height:1px;margin:0;padding:0} /* 스킵네비게이션 */
+.ir_pm{display:block;overflow:hidden;font-size:0;line-height:0;text-indent:-9999px} /* PC용 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir_pm{display:block;overflow:hidden;font-size:1px;line-height:0;color:transparent}/* Mobile용 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir_wa{display:block;overflow:hidden;position:relative;z-index:-1;width:100%;height:100%} /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스트를 보여주고자 할때 */
+.ir_caption{overflow:hidden;width:1px;font-size:1px;line-height:0;text-indent:-9999px} /* Table caption에 숨김텍스트를 제공할때 */
+.screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px} /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를 제공할때 */
+.show{display:block}
+.hide{display:none}
+
+/* Common */
+.ico_comm {display:inline-block;overflow:hidden;font-size:0;line-height:0;background:url(../images/ico_api.png) no-repeat;text-indent:-9999px;vertical-align:top}
+
+/* Layout */
+#mArticle {height:100%}
+
+/* Header */
+.k_head {overflow:hidden;position:absolute;top:0;left:0;width:100%;z-index:10}
+.k_head h1 {display:inline-block;margin:31px 0 0 41px}
+.k_head #kakaoLogo {display:inline-block;overflow:hidden;width:178px;height:22px;font-size:0;line-height:0;background:url(../images/logo_api_190717.png) no-repeat;text-indent:-9999px;vertical-align:top} /* 2019-07-17_v3 수정 */
+
+/* Footer */
+.k_foot {overflow:hidden;height:105px;border-top:1px solid #d6d6d6;color:#777;text-align:center}
+.k_foot .corp_info {display:block;margin-top:16px;font-size:16px}
+.k_foot .link_kakaocorp {color:#777}
+
+/* Visual */
+.intro_api {position:relative;overflow:hidden;width:100%;min-width:1000px;height:450px;background:url(../images/thumb_intro_171207.jpg) no-repeat;background-size:cover;background-position:50% 50%} /* 2017-12-07_v2수정 */
+.intro_api .detail_api {width:1000px;margin:155px auto 0}
+.intro_api .detail_api .tit_intro {display:inline-block;overflow: hidden;width:228px;height:42px;margin-bottom:15px;font-size:0;line-height:0;background:url(../images/tit_api.png) no-repeat;vertical-align:top} /* 2017-12-07_v2 수정 */
+.intro_api .detail_api .desc_intro {margin-bottom:19px;font-size:18px;line-height:29px;color:rgba(255,255,255,.7);letter-spacing:-1px}
+.intro_api .detail_api .btn_intro {width:166px;height:53px;margin-left:3px;border:1px solid rgba(255,255,255,.34);color:#fff;font-size:18px}
+.intro_api .detail_api .btn_partner {width:166px;height:53px;margin-left:3px;border:1px solid rgba(255,255,255,.34);color:#fff;font-size:18px}
+
+/* Content */
+.guide_api {overflow:hidden}
+.box_g {overflow:hidden}
+.fst.box_g .inner_api {padding-top:48px} /* 2017-12-07 추가 */
+.box_gray {background-color:#f9f9f9}
+.inner_api {overflow:hidden;width:1000px;margin:0 auto;padding:46px 0 50px;letter-spacing:-1px} /* 2017-12-07 수정 */
+.tit_g {display:block;margin-bottom:4px;font-size:34px;font-weight:normal;letter-spacing:-0.02em} /* 2017-12-07 수정 */
+.tit_sub {display:block;margin-bottom:11px;font-size:18px;font-weight:normal;letter-spacing:-2px}
+.txt_sub {display:inline-block;margin-left:10px;font-size:18px;color:#919191;line-height:22px} /* 2017-12-07 수정 */
+.desc_g {margin-bottom:21px;line-height:30px;font-size:18px;color:#333;letter-spacing:-1px} /* 2017-12-07 수정 */
+.link_guide {display:block;width:173px;height:54px;margin-bottom:36px;color:#fff;font-size:18px;background-color:#00d6b0;text-align:center;line-height:54px;letter-spacing:0px} /* 2017-11-22 수정 */
+.txt_btn {display:block;margin-top:-4px}
+
+/* Tab */
+.tab_api {height:73px;border-bottom:1px solid #e5e5e5;background-color:#fff}
+.tab_api .list_api {width:1000px;margin:0 auto}
+.tab_api .list_api li {float:left;margin-right:74px}
+.tab_api .list_api .link_tab {display:block;position:relative;font-size:20px;padding:22px 0;letter-spacing:-2px}
+.tab_api .list_api .on .link_tab {font-weight:bold}
+.tab_api .list_api .on .link_tab:after {content:'';position:absolute;bottom:-2px;left:0;width:100%;height:3px;background-color:#000}
+
+/* fixed */
+.tab_fixed .tab_api {position:fixed;top:0;left:0;width:100%;z-index:999}
+.tab_fixed .fst.box_g .inner_api {margin-top:74px}
+
+/** Demo view **/
+.demo_api {overflow:hidden;position:relative;margin-bottom:20px} /* 2017-12-07 수정 */
+.demo_api .thumb_img {width:100%;vertical-align:top}
+.option_api {overflow:hidden;margin-bottom:20px;background-color:#fff}
+.addr_api {position:relative;width:10%;height:44px;padding:0 265px 0 10px;border:1px solid #dfdfdf;letter-spacing:0}
+.addr_api .inp_addr {width:100%;height:44px;border:0 none;outline:0 none}
+.addr_api .inp_empty {color: #777}
+.addr_api .txt_filename {display:block;line-height:40px}
+.addr_api .addr_option {position:absolute;top:-1px;right:-1px;width:244px;height:45px;font-size:0}
+.addr_api .addr_option .btn_clip {display:inline-block;position:relative;width:65px;height:100%;vertical-align:top;cursor:pointer}
+.addr_api .addr_option .btn_clip:before {content:'';position:absolute;top:1px;left:0;width:1px;height:44px;background-color:#f3f3f3}
+.addr_api .addr_option .ico_clip {width:25px;height:24px;margin:11px auto;background-position:0 -50px}
+.addr_api .addr_option .lab_upload {display:block;width:100%;height:100%;text-align:center}
+.addr_api .addr_option .inp_thumb {position:absolute;top:0;left:0;width:100%;height:100%;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";filter:alpha(opacity=1);opacity:0.01;cursor:pointer}
+.addr_api .addr_option .btn_detect {display:inline-block;width:179px;height:46px;color:#30cfb3;border:1px solid #30cfb3;font-size:15px;font-weight:bold} /* 2017-12-07 수정 */
+
+.addr_api .addr_option_ocr {position:absolute;top:-1px;right:-1px;width:64px;height:45px;font-size:0}
+.addr_api .addr_option_ocr .btn_clip {display:inline-block;position:relative;width:65px;height:100%;vertical-align:top;cursor:pointer}
+.addr_api .addr_option_ocr .btn_clip:before {content:'';position:absolute;top:1px;left:0;width:1px;height:44px;background-color:#f3f3f3}
+.addr_api .addr_option_ocr .ico_clip {width:25px;height:24px;margin:11px auto;background-position:0 -50px}
+.addr_api .addr_option_ocr .lab_upload {display:block;width:100%;height:100%;text-align:center}
+.addr_api .addr_option_ocr .inp_thumb {position:absolute;top:0;left:0;width:100%;height:100%;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";filter:alpha(opacity=1);opacity:0.01;cursor:pointer}
+
+.code_api {overflow:hidden;overflow-y:auto;overflow-x:auto;height:358px;padding:15px;border:1px solid rgba(0,0,0,.08);border-left:0 none;background-color:#fff;letter-spacing:0} /* 2017-12-07 수정 */
+
+/* Face Detection */
+.view_comm {position:relative;overflow:hidden;min-height:390px;}
+.view_comm .thumb_img {display:block}
+.view_comm .link_thumb {display:block;position:relative;width:100%;height:100%}
+.view_comm .frame_g {display:block;position:absolute;left:0;top:0;border:1px solid #000;filter:alpha(opacity:10);opacity:0.1}
+.photo_detail {float:left;width:450px;height:100%}
+.photo_bit {overflow:hidden;margin-left:-10px}
+.photo_bit .list_photo {display:inline;overflow:hidden;}
+.list_photo li {overflow:hidden;float:left;width:160px;height:140px;margin-left:10px}
+.list_photo li .link_thumb {display:block;height:100%}
+.list_photo .thumb_g {display:block;position:relative}
+.list_photo .thumb_g:after {content:'';position:absolute;top:0;left:0;width:158px;height:138px;border:1px solid rgba(0,0,0,.1);}
+.list_photo .on .thumb_g:after {width:154px;height:134px;border:3px solid #30cfb3} /* 2017-12-07 수정 */
+.list_photo .thumb_img {width:100%;vertical-align:top}
+.add_photo {display:inline-block;position:relative;width:151px;height:140px;margin-left:9px;background-color:#f6f6f6}
+.add_photo .lab_upload {display:block;text-align:center;color:rgba(0,0,0,.55);letter-spacing:-1px}
+.add_photo .lab_upload .ico_comm {display:block;width:28px;height:28px;margin:42px auto 17px;background-position:0 -80px}
+.add_photo .inp_thumb {position:absolute;top:0;left:0;width:100%;height:100%;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";filter:alpha(opacity=1);opacity:0.01;text-indent:-9999px;cursor:pointer;}
+
+.demo_tag {position:absolute;bottom:5px;left:10px;width:430px;font-size:0} /* 2017-12-08 수정 */
+.demo_tag .info_tag {display:inline-block;padding:4px 15px 7px;margin:0 5px 5px 0;font-size:14px;color:#fff;background-color:rgba(80,204,178,.8);border-radius:2px} /* 2017-12-08 수정 */
+
+/* 기능데모 오버라이딩 스타일처리 */
+.image_box {float:left;width:450px;height:390px}
+.image_box:after {content:'';position:absolute;top:0;left:0;width:448px;height:388px;border:1px solid rgba(0,0,0,.08)}
+.face_rect {position:absolute;border:2px solid rgba(255,255,255,.7)} /* 2017-12-07 수정 */
+.face_rect .info {position:absolute;top:0;left:-47px;padding:4px 6px;background:#000;color:#fff;white-space:nowrap;font-size:12px;letter-spacing:0} /* 2017-12-07 수정 */
+.face_rect .info:after {content:'';position:absolute;top:0;right:-5px;border-style:solid;border-width:5px;border-color:#000 transparent transparent transparent}
+.product_rect {position:absolute;border:2px solid rgba(255,255,255,.7)}  /* 2017-12-07 수정 */
+.product_rect .info {position:absolute;top:0;left:-47px;padding:4px 6px;background:#000;color:#fff;white-space:nowrap;font-size:12px;letter-spacing:0} /* 2017-12-07 수정 */
+.product_rect .info:after {content:'';position:absolute;top:0;right:-5px;border-style:solid;border-width:5px;border-color:#000 transparent transparent transparent}
+.product_rect  .info_right {left:auto;right:-47px}
+.product_rect .info_right:after {right:auto;left:-5px}
+/* code 오버라이딩 색상 변경 */
+.hljs {padding:0;background:#fff;font-size:16px;font-family:Arial,'Malgun Gothic','맑은 고딕',sans-serif;}
+.hljs-string, .hljs-doctag {color:#ff0000}
+.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {color:#00b696}
+
+
+/* 2017-12-07_v2 이미지 2배대응건 추가 시작 */
+@media
+only screen and (-webkit-min-device-pixel-ratio:1.5),
+only screen and (min-device-pixel-ratio:1.5),
+only screen and (min-resolution:144dpi),
+only screen and (min-resolution:1.5dppx) {
+	.k_head #kakaoLogo{background-image:url(../images/retina/logo_api_190717.png);-webkit-background-size:178px 22px;background-size:178px 22px}
+	.intro_api .detail_api .tit_intro {background-image:url(../images/retina/tit_api.png);-webkit-background-size:228px 42px;background-size:228px 42px}
+}
+/* 2017-12-07_v2 이미지 2배대응건 추가 끝 */

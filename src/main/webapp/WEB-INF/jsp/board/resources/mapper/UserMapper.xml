@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+	<!-- 게시판 글 작성 -->
+	<insert id="register">
+	INSERT INTO user_info(
+						    User_Id,
+						    User_phone,
+						    User_passwd						    
+						    )VALUES(
+						    #{User_Id},
+						    #{User_phone},
+						    #{User_passwd})
+						    
+    </insert>
+    <!-- 게시판 글 작성 -->
+   <insert id="insert">
+   INSERT INTO CSR_BOARD
+               SELECT '' BNO,  
+              #{CO_NO} CO_NO,  
+              #{CAR_NO} CAR_NO,  
+              #{CO_NO} PHON_NO,  
+              #{CO_NO} CSR_CONTENTS,  
+              #{CO_NO} FIX_AREA,  
+              #{CO_NO} FIX_CONT,  
+              #{CO_NO} BE_PROCESS,  
+              #{CO_NO} AF_PROCESS,  
+              #{CO_NO} FIX_USER, 
+              NOW() REGDATE
+        FROM DUAL;
+   
+  
+    <!--  
+	//   INSERT INTO MP_BOARD(    BNO 
+	  // 					      , TITLE 
+	   					      , CONTENT 
+	   					      , WRITER  )
+	                 VALUES(    MP_BOARD_SEQ.NEXTVAL 
+	                 		  , #{title}
+	                 		  , #{content}
+	                 		  , #{writer}  )-->
+   
+   </insert>
+</mapper>

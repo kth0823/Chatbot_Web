@@ -34,7 +34,7 @@ li {
 <body>
 <div id = root>
 	<form role="form" method="get" action="servlet">				
-			<c:forEach items="${OCR}" var="OCR">
+			<c:forEach items="${OCR}" var="OCR">					
 					<input class="checkbox-test" type="checkbox" id="${OCR.CO_ID}" name="check" value="${OCR.CAR_NO}" style="font-size : 2.5em; width:2.0em; height:2.0em;" />
 					<label for="OCR" style="font-size : 2.5em;">서버에서 찾은 고속사 코드 :</label>					
 					<input type="text" id="OCR_COID"
@@ -47,7 +47,7 @@ li {
 					name="OCR_CAR_NO" class="OCR_CAR_NO" value="${OCR.CAR_NO}" style="font-size : 2.5em;"/><br><br>
 			</c:forEach>
 	</form>
-	<button id="selBtn" type="button">서버검색</button>
+<!--  	<button id="selBtn" type="button">서버검색</button> -->
 </div>	
 </body>
 <script>
@@ -59,7 +59,7 @@ var checked;
 var co_id;
 var search;
 var recog=opener.document.getElementById("recog_word").value;
-
+opener.parent.document.getElementById('qrcode').style.visibility="visible";
 /*function close()
 {
  window.open('','_self').close(); 
@@ -75,11 +75,11 @@ if($("input[name=OCR_COID]").length==1)
 	}
 	if(recog!=document.getElementsByName("check")[0].value){
 		
-		opener.document.getElementById("recog_word").value=document.getElementsByName("check")[0].value;
-		opener.parent.modify();
+		opener.document.getElementById("recog_word").value=document.getElementsByName("check")[0].value;		
 	}
 	alert("QR코드 생성 완료.");
 	window.close();
+	opener.parent.modify();
 }
 
 $(".checkbox-test").on("click", function() {
@@ -91,20 +91,20 @@ $(".checkbox-test").on("click", function() {
 		        console.log(document.getElementsByName("check")[i].value);
 	            serach=document.getElementsByName("check")[i].value;
 	            co_id=document.getElementsByName("check")[i].id;
-	        	if(opener.document.getElementById("Co_id").value!=co_id){
+	        	//if(opener.document.getElementById("Co_id").value!=co_id){
 	        		opener.document.getElementById("Co_id").value = co_id;
 	        		opener.document.getElementById("qr_be").value += co_id;
-	        	}
+	        	//}
 	        	if(recog!=document.getElementsByName("check")[i].value){
 	        		
-	        		opener.document.getElementById("recog_word").value=document.getElementsByName("check")[i].value;
-	        		opener.parent.modify();
+	        		opener.document.getElementById("recog_word").value=document.getElementsByName("check")[i].value;	        		
 	        	}
 	        	            
 	        } 
 	    }
 	    alert("QR코드 생성 완료.");
-	    window.close(); 
+	    window.close();
+	    opener.parent.modify(); 
 });
 
 

@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+	<!-- 게시판 글 작성 -->
+	<insert id="insert" parameterType="com.example.demo.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
+		INSERT INTO chatbot_temp.tCsr_Bo2(
+		DATE,
+		CSR_TYPEID,
+		CO_ID,
+		CAR_NO,
+		PRO_DATE,
+		CSR_REQID,
+		CSR_CONT,
+		FIX_AREAID,
+		ZONEID,
+		DEVICEID,
+		FIX_CTGID,
+		FIX_CONT,
+		BE_IH,
+		AF_IH,
+		ETC,
+		USERID,
+		STATUSID,
+		GPS_ANT,
+		AUDIO_CAB,
+		VIDEO_CAB,
+		LED_CAB,
+		Y_CAB,
+		AFC_CAB,
+		BMS_CAB,
+		AUDIO_GENDER,
+		CUSHION,
+		LTE_ANT,
+		WIFI_ANT,
+		PRINT_BAR,
+		HEXBOLT,
+		BASEPLATE,
+		SIMPLEID,
+		REGDATE
+		)VALUES(
+		#{Date},
+		#{Csr_typeid},
+		#{Co_id},		
+		#{Car_no},
+		#{Pro_date},
+		#{Csr_reqid},
+		#{Csr_cont},
+		#{Fix_areaid},
+		#{Zoneid},
+		#{Deviceid},
+		#{Fix_ctgid},
+		#{Fix_cont},
+		#{Be_ih},
+		#{Af_ih},
+		#{Etc},
+		#{Userid},
+		#{Statusid},
+		#{Gps_ant},
+		#{Audio_cab},
+		#{Video_cab},
+		#{Led_cab},
+		#{Y_cab},
+		#{Afc_cab},
+		#{Bms_cab},
+		#{Audio_gender},
+		#{Cushion},
+		#{Lte_ant},
+		#{Wifi_ant},
+		#{Print_bar},
+		#{Hexbolt},
+		#{Baseplate},
+		#{Simpleid},
+		NOW())
+	</insert>
+
+
+	<select id="read" parameterType="int"
+		resultType="com.example.demo.vo.BoardVO">
+		SELECT BNO,
+		DATE,
+		CSR_TYPEID,
+		CO_ID,
+		CAR_NO,
+		PRO_DATE,
+		CSR_REQID,
+		CSR_CONT,
+		FIX_AREAID,
+		ZONEID,
+		DEVICEID,
+		FIX_CTGID,
+		FIX_CONT,
+		BE_IH,
+		AF_IH,
+		ETC,
+		USERID,
+		STATUSID,
+		GPS_ANT,
+		AUDIO_CAB,
+		VIDEO_CAB,
+		LED_CAB,
+		Y_CAB,
+		AFC_CAB,
+		BMS_CAB,
+		AUDIO_GENDER,
+		CUSHION,
+		LTE_ANT,
+		WIFI_ANT,
+		PRINT_BAR,
+		HEXBOLT,
+		BASEPLATE,
+		SIMPLEID		
+		FROM
+		chatbot_temp.tCsr_Bo2
+		WHERE BNO = #{bno}
+	</select>
+
+	<update id="update" parameterType="com.example.demo.vo.BoardVO">
+		UPDATE chatbot_temp.tCsr_Bo2
+		SET DATE=#{Date},
+		CSR_TYPEID=#{Csr_typeid},
+		CO_ID=#{Co_id},
+		CAR_NO=#{Car_no},
+		PRO_DATE=#{Pro_date},
+		CSR_REQID=#{Csr_reqid},
+		CSR_CONT=#{Csr_cont},
+		FIX_AREAID=#{Fix_areaid},
+		ZONEID=#{Zoneid},
+		DEVICEID=#{Deviceid},
+		FIX_CTGID=#{Fix_ctgid},
+		FIX_CONT=#{Fix_cont},
+		BE_IH=#{Be_ih},
+		AF_IH=#{Af_ih},
+		ETC=#{Etc},
+		USERID=#{Userid},
+		STATUSID=#{Statusid},
+		GPS_ANT=#{Gps_ant},
+		AUDIO_CAB=#{Audio_cab},
+		VIDEO_CAB=#{Video_cab},
+		LED_CAB=#{Led_cab},
+		Y_CAB=#{Y_cab},
+		AFC_CAB=#{Afc_cab},
+		BMS_CAB=#{Bms_cab},
+		AUDIO_GENDER=#{Audio_gender},
+		CUSHION=#{Cushion},
+		LTE_ANT=#{Lte_ant},
+		WIFI_ANT=#{Wifi_ant},
+		PRINT_BAR=#{Print_bar},
+		HEXBOLT=#{Hexbolt},
+		BASEPLATE=#{Baseplate},
+		SIMPLEID=#{Simpleid}
+		WHERE BNO = #{bno}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM
+		chatbot_temp.tCsr_Bo2
+		WHERE BNO = #{bno}
+	</delete>	
+	
+	<select id="listPage" resultType="com.example.demo.vo.BoardVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT BNO
+		,USERID
+		,CSR_REQID
+		,STATUSID
+		,DATE 
+	 FROM 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.BNO 
+	,A.USERID 
+	,A.CSR_REQID 
+	,A.STATUSID 
+	 ,A.DATE 
+	 FROM 
+	 chatbot_temp.tCsr_Bo2 A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="search"></include>
+	<![CDATA[ORDER BY REGDATE desc
+	 ) list 
+	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
+	
+	<select id="listTot" resultType="com.example.demo.vo.BoardVO"
+		parameterType="com.example.demo.vo.Criteria">
+SELECT 	  
+	 A.BNO
+	,A.DATE
+	,A.REGDATE	 
+	,(SELECT DISTINCT B.CSR_TYPE FROM tCsr_Type B WHERE A.CSR_TYPEID=B.CSR_TYPEID) CSR_TYPE  
+	,(SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE A.CO_ID=B.CO_ID) CO_NM
+	,A.CAR_NO 	
+	,(SELECT DISTINCT B.CSR_REQ FROM tCsr_Req B WHERE A.CSR_REQID=B.CSR_REQID) CSR_REQ
+	,A.CSR_CONT 
+	,(SELECT DISTINCT B.FIX_AREA FROM tFix_Area B WHERE A.FIX_AREAID=B.FIX_AREAID) FIX_AREA
+	,(SELECT DISTINCT B.ZONE FROM tZone B WHERE A.ZONEID=B.ZONEID) ZONE
+	,(SELECT DISTINCT B.DEVICE FROM tDevice B WHERE A.DEVICEID=B.DEVICEID) DEVICE
+	,(SELECT DISTINCT B.FIX_CTG FROM tFix_Ctg B WHERE A.FIX_CTGID=B.FIX_CTGID) FIX_CTG
+	,A.FIX_CONT
+	,A.BE_IH
+	,A.AF_IH
+	,A.ETC	 
+	,(SELECT DISTINCT B.USER FROM tUser B WHERE A.USERID=B.USERID) USER
+	,A.GPS_ANT
+	,A.AUDIO_CAB
+	,A.VIDEO_CAB
+	,A.LED_CAB
+	,A.Y_CAB
+	,A.AFC_CAB
+	,A.BMS_CAB
+	,A.AUDIO_GENDER
+	,A.CUSHION
+	,A.LTE_ANT	
+	,A.PRINT_BAR
+	,A.HEXBOLT
+	,A.BASEPLATE	
+	 FROM 
+	 chatbot_temp.tCsr_Bo2 A   	 	 
+	 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2}
+	 ORDER BY BNO ASC
+	 </select>
+	
+	<select id="comp" resultType="com.example.demo.vo.BoardVO"
+		parameterType="com.example.demo.vo.Criteria">
+		SELECT CAR_NO, CSR_REQID, CO_ID, count(*) as num FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2} GROUP BY CAR_NO, CSR_REQID, CO_ID  HAVING num>1
+	</select>
+	
+	<select id="tot" resultType="hashMap"
+		parameterType="com.example.demo.vo.Criteria">
+		  SELECT COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2}  
+	</select>
+	
+	<select id="anal1" resultType="hashMap"
+		parameterType="com.example.demo.vo.Criteria">
+		SELECT CSR_REQID, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2} GROUP BY CSR_REQID ORDER BY NUM DESC
+	</select>
+	
+	<select id="anal2" resultType="hashMap"
+		parameterType="com.example.demo.vo.Criteria">
+		SELECT CO_ID, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 WHERE DATE(DATE) BETWEEN #{keyword1} AND #{keyword2} GROUP BY CO_ID ORDER BY NUM DESC
+	</select>
+	<select id="month" resultType="hashMap"
+		parameterType="com.example.demo.vo.Criteria">
+		SELECT CONCAT(YEAR(DATE), '-', MONTH(DATE)) YM, COUNT(*) AS NUM FROM chatbot_temp.tCsr_Bo2 GROUP BY YM ORDER BY YEAR(DATE) DESC, MONTH(DATE) DESC LIMIT 12
+	</select>
+
+	<select id="listCount" resultType="int">
+
+		SELECT COUNT(BNO)
+		FROM chatbot_temp.tCsr_Bo2
+		WHERE 1=1
+		<include refid="search"></include>
+		and BNO > 0
+
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'u'.toString()">AND USERID IN (select USERID from chatbot_temp.tUser where USER like '%' #{keyword} '%')</if>
+			<if test="searchType == 'c'.toString()">AND CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%')</if>
+			<if test="searchType == 's'.toString()">AND CAR_NO LIKE '%'
+				#{keyword} '%'</if>
+			<if test="searchType == 'd'.toString()">AND DATE LIKE '%' #{keyword}
+				'%'</if>
+			<if test="searchType == 'r'.toString()">AND CSR_REQID IN (select CSR_REQID from chatbot_temp.tCsr_Req where CSR_REQ like '%' #{keyword} '%')</if>				
+			<if test="searchType == 't'.toString()">AND BE_IH LIKE '%' #{keyword} '%' or AF_IH LIKE '%' #{keyword} 
+				'%'</if>
+			<if test="searchType == 'al'.toString()">AND (DATE LIKE '%' #{keyword}
+				'%') or (CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%'))or 
+				
+				<if test="keyword.length == 4"> (CAR_NO LIKE '%' #{keyword} '%')or </if>
+				(CSR_REQID IN (select CSR_REQID from chatbot_temp.tCsr_Req where CSR_REQ like '%' #{keyword} '%'))or 
+				(CSR_CONT LIKE '%' #{keyword} '%')or
+				(FIX_AREAID IN (select FIX_AREAID from chatbot_temp.tFix_Area where FIX_AREA like '%' #{keyword} '%'))or
+				(ZONEID IN (select ZONEID from chatbot_temp.tZone where ZONE like '%' #{keyword} '%'))or 
+				(DEVICEID IN (select DEVICEID from chatbot_temp.tDevice where DEVICE like '%' #{keyword} '%'))or 
+				(FIX_CONT LIKE '%' #{keyword} '%')or
+				<if test="keyword.length != 4"> (BE_IH LIKE '%' #{keyword} '%')or
+				(AF_IH LIKE '%' #{keyword} '%')or </if>
+				(USERID IN (select USERID from chatbot_temp.tUser where USER like '%' #{keyword} '%'))or
+				(STATUSID IN (select STATUSID from chatbot_temp.tStatus where STATUS like '%' #{keyword} '%'))
+			</if>
+		</if>
+	</sql>	
+	
+	
+	<select id="listPage2" resultType="com.example.demo.vo.BoardVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT BNO
+		,CO_ID
+		,CAR_NO
+		,CSR_REQID		 
+	 FROM 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.BNO 
+	,A.CO_ID
+	,A.CAR_NO 
+	,A.CSR_REQID	  
+	 FROM 
+	 chatbot_temp.tCsr_Bo2 A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="search2"></include>
+	<![CDATA[ORDER BY REGDATE desc
+	 ) list 
+	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
+
+	<select id="listCount2" resultType="int">
+
+		SELECT COUNT(BNO)
+		FROM chatbot_temp.tCsr_Bo2
+		WHERE 1=1
+		<include refid="search2"></include>
+		and BNO > 0
+	</select>
+	<sql id="search2">
+		<if test='searchType1 =="c"  or searchType2 =="s"'>
+			 AND CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword1} '%' AND CAR_NO LIKE '%' #{keyword2} '%')  			
+		</if>
+	</sql>
+	
+	<!-- 첨부파일 업로드 -->
+	 <insert id="insertFile" parameterType="hashMap">
+		INSERT INTO chatbot_temp.tCsr_File(
+			FILE_NO,
+			BNO,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			#{FILE_NO},
+			#{BNO},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO,
+			   ORG_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM chatbot_temp.tCsr_File
+		 WHERE BNO = #{BNO}
+		   AND DEL_GB = 'N'
+		 ORDER BY FILE_NO ASC
+	</select>
+	
+	<!-- 첨부파일 다운 -->
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT 
+			STORED_FILE_NAME,
+			ORG_FILE_NAME
+		FROM chatbot_temp.tCsr_File
+		WHERE FILE_NO = #{FILE_NO}
+	</select>
+	<update id="updateFile" parameterType="hashMap">
+    	UPDATE chatbot_temp.tCsr_File SET
+    	DEL_GB = 'Y'
+    	WHERE FILE_NO = #{FILE_NO}
+    </update>
+    <select id="co_info" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tCo_Info
+		ORDER BY CO_ID ASC
+	</select>
+	<select id="csr_req" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tCsr_Req
+		ORDER BY CSR_REQID ASC
+	</select>
+	<select id="fix_area" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tFix_Area
+		ORDER BY FIX_AREAID ASC
+	</select>
+	<select id="zone" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tZone
+		ORDER BY ZONEID ASC
+	</select>
+    <select id="device" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tDevice
+		ORDER BY DEVICEID ASC
+	</select>
+    <select id="user" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tUser
+		ORDER BY USERID ASC
+	</select>
+	<select id="status" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tStatus
+		ORDER BY STATUSID ASC
+	</select>
+	<select id="csr_type" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tCsr_Type
+		ORDER BY CSR_TYPEID ASC
+	</select>
+	<select id="fix_ctg" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tFix_Ctg
+		ORDER BY FIX_CTGID ASC
+	</select>
+	<select id="simple" parameterType="int" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM chatbot_temp.tSimple
+		ORDER BY SIMPLEID ASC
+	</select>
+	
+	<select id="car_region" parameterType="int" resultType="com.example.demo.vo.BusVO">
+		SELECT *
+		FROM chatbot_temp.tCar_region
+		ORDER BY car_regionid ASC
+	</select>
+	
+	<select id="bus_type" parameterType="int" resultType="com.example.demo.vo.BusVO">
+		SELECT *
+		FROM chatbot_temp.tBus_type
+		ORDER BY bus_typeid ASC
+	</select>
+	
+	<insert id="client04" parameterType="com.example.demo.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
+		INSERT INTO chatbot_temp.tCsr_Bo2(
+		DATE,
+		CO_ID,
+		CAR_NO,
+		CSR_REQID
+		)VALUES(
+		#{Date},
+		#{Co_id},		
+		#{Car_no},
+		#{Csr_reqid})
+	</insert>
+	
+	<!-- 메뉴얼 글 작성 -->
+	<insert id="insertManual" parameterType="com.example.demo.vo.ManualVO" useGeneratedKeys="true" keyProperty="mno">
+		INSERT INTO chatbot_temp.tManual(		
+		MFW,
+		MCOMMENT,
+		MREGDATE
+		)VALUES(
+		#{Mfw},
+		#{Mcomment},
+		NOW())
+	</insert>
+	
+		<!-- 메뉴얼 파일 업로드 -->
+	 <insert id="insertmanualFile" parameterType="hashMap">
+		INSERT INTO chatbot_temp.tManual_File(
+			mFILE_NO,
+			MNO,
+			mORG_FILE_NAME,
+			mSTORED_FILE_NAME,
+			mFILE_SIZE
+		)VALUES(
+			#{mFILE_NO},
+			#{MNO},
+			#{mORG_FILE_NAME},
+			#{mSTORED_FILE_NAME},
+			#{mFILE_SIZE}
+		)
+    </insert>
+    
+    	<!-- 메뉴얼 파일 조회 -->
+	<select id="manualselectFileList" parameterType="int" resultType="hashMap">
+		SELECT mFILE_NO,
+			   mORG_FILE_NAME,
+			   ROUND(mFILE_SIZE/1024,1) AS mFILE_SIZE
+		  FROM chatbot_temp.tManual_File
+		 WHERE MNO = #{MNO}
+		   AND mDEL_GB = 'N'
+		 ORDER BY mFILE_NO ASC
+	</select>
+	
+	<!-- 메뉴얼 파일 다운 -->
+	<select id="manselectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT 
+			mSTORED_FILE_NAME,
+			mORG_FILE_NAME
+		FROM chatbot_temp.tManual_File
+		WHERE mFILE_NO = #{mFILE_NO}
+	</select>
+	
+	<!-- 메뉴얼 파일 업데이트 -->
+	<update id="manualupdateFile" parameterType="hashMap">
+    	UPDATE chatbot_temp.tManual_File SET
+    	mDEL_GB = 'Y'
+    	WHERE mFILE_NO = #{mFILE_NO}
+    </update>
+    
+       <!-- 메뉴얼 리스트 페이지  -->
+    <select id="manuallistPage" resultType="com.example.demo.vo.ManualVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT MNO
+		,MREGDATE
+		,MFW
+		,MCOMMENT		 
+	 FROM 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.MNO 
+	,A.MREGDATE 
+	,A.MFW
+	,A.MCOMMENT 	 
+	 FROM 
+	 chatbot_temp.tManual A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="search"></include>
+	<![CDATA[ORDER BY MREGDATE desc
+	 ) manuallist 
+	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
+	
+	<!-- 메뉴얼 리스트 페이지  -->
+	<select id="manuallistCount" resultType="int">
+
+		SELECT COUNT(MNO)
+		FROM chatbot_temp.tManual
+		WHERE 1=1
+		<include refid="search"></include>
+		and MNO > 0
+	</select>
+	
+	<select id="manualread" parameterType="int"
+		resultType="com.example.demo.vo.ManualVO">
+		SELECT MNO,
+		MREGDATE,
+		MFW,
+		MCOMMENT
+		FROM
+		chatbot_temp.tManual
+		WHERE MNO = #{mno}
+	</select>
+	
+	<!-- 메뉴얼 업데이트 -->
+	<update id="maupdate" parameterType="com.example.demo.vo.ManualVO">
+		UPDATE chatbot_temp.tManual
+		SET MREGDATE=NOW(), 
+		MFW=#{Mfw},
+		MCOMMENT=#{Mcomment}
+		WHERE MNO = #{mno}
+	</update>	
+
+	<!-- 메뉴얼 내역 삭제  -->
+	<delete id="mandelete" parameterType="int">
+		DELETE
+		FROM
+		chatbot_temp.tManual
+		WHERE MNO = #{mno}
+	</delete>
+
+	<insert id="insertFW" parameterType="com.example.demo.vo.FWVO" useGeneratedKeys="true" keyProperty="fno">
+		INSERT INTO chatbot_temp.tFw(		
+		FW,
+		FCOMMENT,
+		FREGDATE
+		)VALUES(
+		#{Fw},
+		#{Fcomment},
+		NOW())
+	</insert>	
+	
+	 <insert id="insertFWFile" parameterType="hashMap">
+		INSERT INTO chatbot_temp.tFw_File(
+			fFILE_NO,
+			FNO,
+			fORG_FILE_NAME,
+			fSTORED_FILE_NAME,
+			fFILE_SIZE
+		)VALUES(
+			#{fFILE_NO},
+			#{FNO},
+			#{fORG_FILE_NAME},
+			#{fSTORED_FILE_NAME},
+			#{fFILE_SIZE}
+		)
+    </insert>    
+    
+	<select id="FWsellist" parameterType="int" resultType="hashMap">
+		SELECT fFILE_NO,
+			   fORG_FILE_NAME,
+			   ROUND(fFILE_SIZE/1024,1) AS fFILE_SIZE
+		  FROM chatbot_temp.tFw_File
+		 WHERE FNO = #{FNO}
+		   AND fDEL_GB = 'N'
+		 ORDER BY fFILE_NO ASC 
+	</select>
+	
+	<select id="FWselectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT 
+			fSTORED_FILE_NAME,
+			fORG_FILE_NAME
+		FROM chatbot_temp.tFw_File
+		WHERE fFILE_NO = #{fFILE_NO}
+	</select>	
+	
+	<update id="FWupdateFile" parameterType="hashMap">
+    	UPDATE chatbot_temp.tFw_File SET
+    	fDEL_GB = 'Y'
+    	WHERE fFILE_NO = #{fFILE_NO}
+    </update>    
+    
+    <select id="FWlistPage" resultType="com.example.demo.vo.FWVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT FNO
+		,FREGDATE
+		,FW
+		,FCOMMENT		 
+	 FROM 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.FNO 
+	,A.FREGDATE 
+	,A.FW
+	,A.FCOMMENT 	 
+	 FROM 
+	 chatbot_temp.tFw A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="search"></include>
+	<![CDATA[ORDER BY FREGDATE desc
+	 ) fwlist 
+	 WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
+	
+	<!-- F/W 리스트 페이지  -->
+	<select id="FWlistCount" resultType="int">
+
+		SELECT COUNT(FNO)
+		FROM chatbot_temp.tFw
+		WHERE 1=1
+		<include refid="search"></include>
+		and FNO > 0
+	</select>
+	
+	<select id="FWread" parameterType="int"
+		resultType="com.example.demo.vo.FWVO">
+		SELECT FNO,
+		FREGDATE,
+		FW,
+		FCOMMENT
+		FROM
+		chatbot_temp.tFw
+		WHERE FNO = #{fno}
+	</select>
+	
+	<!-- F/W 업데이트 -->
+	<update id="FWupdate" parameterType="com.example.demo.vo.FWVO">
+		UPDATE chatbot_temp.tFw
+		SET FREGDATE=NOW(), 
+		FW=#{Fw},
+		FCOMMENT=#{Fcomment}
+		WHERE FNO = #{fno}
+	</update>	
+
+	<!-- F/W 내역 삭제  -->
+	<delete id="FWdelete" parameterType="int">
+		DELETE
+		FROM
+		chatbot_temp.tFw
+		WHERE FNO = #{fno}
+	</delete>
+	
+	<!-- OCR 차량번호 검색 리스트 페이지  -->
+	<select id="OCR" resultType="hashMap">
+      <!--  SELECT DISTINCT CO_ID, CAR_NO from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1 -->
+      <!-- SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like '%' #{keyword} '%' limit 1-->
+      <!--  SELECT (SELECT DISTINCT B.CO_ID FROM tCo_Info B WHERE (SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like  '%' #{keyword} '%' limit 1)=B.CO_ID) CO_ID
+       ,(SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE (SELECT   DISTINCT CO_ID from chatbot_temp.tCsr_Bo2 where CAR_NO like  '%' #{keyword} '%')=B.CO_ID) CO_NM
+      ,(SELECT DISTINCT A.CAR_NO FROM chatbot_temp.tCsr_Bo2 A where CAR_NO like   '%' #{keyword} '%' limit 1)
+      CAR_NO
+      limit 1 --> 
+      SELECT DISTINCT  
+      CO_ID, 
+      CAR_NO, 
+      (SELECT DISTINCT B.CO_NM FROM tCo_Info B WHERE A.CO_ID=B.CO_ID) CO_NM
+      from chatbot_temp.tBus_Info A where CAR_NO like '%' #{keyword} '%' AND CHAR_LENGTH(CAR_NO) > 4; 
+    </select>
+	<insert id="insertCar" parameterType="com.example.demo.vo.BusVO" useGeneratedKeys="true" keyProperty="cno">
+		INSERT INTO chatbot_temp.tBus_Info(				
+		CO_ID,
+		CAR_NO
+		)VALUES (  		
+		#{Co_id},
+		#{Car_no}		
+		)		
+	</insert>
+	
+	 <select id="CarlistPage" resultType="com.example.demo.vo.BusVO"
+		parameterType="com.example.demo.vo.Criteria">
+	<![CDATA[
+	 SELECT CNO
+		,CO_ID
+		,CAR_NO				 
+	 FROM 	 
+	 ( 
+	 SELECT 
+	 @ROWNUM:=@ROWNUM+1 RNUM, 
+	 A.CNO 
+	,A.CO_ID
+	,A.CAR_NO	 	 
+	 FROM 
+	 chatbot_temp.tBus_Info A, 
+	 (SELECT @ROWNUM := 0) R 
+	 WHERE 
+	 1=1]]>
+		<include refid="searchcar"></include>
+	<![CDATA[ORDER BY CNO desc
+	 ) carlist	  
+	  WHERE RNUM >= #{rowStart} AND RNUM <= #{rowEnd} 
+	 ]]>
+	</select>
+	
+	<!-- 등록된 차량대수  -->
+	<select id="CarlistCount" resultType="int">
+
+		SELECT COUNT(CNO) AS NUM
+		FROM chatbot_temp.tBus_Info
+		WHERE 1=1
+		<include refid="searchcar"></include>
+		and CNO > 0
+	</select>
+	<select id="Carread" parameterType="int" resultType="com.example.demo.vo.BusVO">
+		SELECT CNO,
+		CO_ID,
+		CAR_NO		
+		FROM
+		chatbot_temp.tBus_Info
+		WHERE CNO = #{cno}
+	</select>
+	
+	<!-- 차량내역 업데이트 -->
+	<update id="Carupdate" parameterType="com.example.demo.vo.BusVO">
+		UPDATE chatbot_temp.tBus_Info
+		SET  
+		CO_ID=#{Co_id},
+		CAR_NO=#{Car_no}
+		WHERE CNO = #{cno}
+	</update>	
+
+	<!-- 차량 내역 삭제  -->
+	<delete id="Cardelete" parameterType="int">
+		DELETE
+		FROM
+		chatbot_temp.tBus_Info
+		WHERE CNO = #{cno}
+	</delete>
+	
+	<sql id="searchcar">
+		<if test="searchType != null">			
+			<if test="searchType == 'c'.toString()">AND CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%')</if>
+			<if test="searchType == 's'.toString()">AND CAR_NO LIKE '%' #{keyword} '%'</if>
+			
+			<if test="searchType == 'al'.toString()">AND (CO_ID IN (select CO_ID from chatbot_temp.tCo_Info where CO_NM like '%' #{keyword} '%'))or 
+				
+				(CAR_NO LIKE '%' #{keyword} '%')
+			</if>
+		</if>
+	</sql>
+	
+	<select id="cartot" resultType="hashMap"
+		parameterType="com.example.demo.vo.Criteria">
+		  SELECT COUNT(*) AS NUM FROM chatbot_temp.tBus_Info   
+	</select>
+	<!-- 엑셀 차량 내역 삭제  -->
+	<delete id="redelete" parameterType="com.example.demo.vo.BusVO">
+		DELETE FROM chatbot_temp.tBus_Info WHERE CO_ID LIKE '%' #{keyword} '%'		
+	</delete>
+	    	    
+</mapper>
+
+
+
+ 

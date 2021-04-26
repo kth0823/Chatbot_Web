@@ -85,7 +85,7 @@
 
 	<div id="root">
 		<header>
-			<h1>메뉴얼 등록 수정 화면</h1>
+			<h1>버스 등록 내역 수정 화면</h1>
 		</header>
 		<hr />
 
@@ -121,7 +121,7 @@
 				<div>
 					<button type="button" class="update_btn btn btn-warning">수정완료</button>
 					<button type="submit" class="cancel_btn btn btn-danger">취소</button>
-					<button type="button" class="fileAdd_btn btn btn-info">파일추가</button>					
+					<!--  <button type="button" class="fileAdd_btn btn btn-info">파일추가</button> -->					
 				</div>				
 			</form>
 		</section>

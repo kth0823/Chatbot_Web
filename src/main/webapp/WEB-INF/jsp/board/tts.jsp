@@ -8,8 +8,8 @@
     <script type="text/javascript" src="/resources/js/demo.js"  charset="utf-8"></script>
     <script type="text/javascript" src="/resources/js/recode.js"  charset="utf-8"></script>    
     <link rel="icon" href="http://www.atectn.com/wp-content/uploads/2019/04/favicon.ico" sizes="32x32">
-    <script type="text/javascript" src="/resources/js/synthesizePost.js?ver1.4"  charset="utf-8"></script>
-    <script type="text/javascript" src="/resources/js/synthesizeWorker.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/resources/js/synthesizePost.js?ver1.3"  charset="utf-8"></script>
+    <script type="text/javascript" src="/resources/js/synthesizeWorker.js?ver1.2" charset="utf-8"></script>
 </head>
 <body>
 <div id="kakaoWrap">
@@ -100,7 +100,8 @@
                 </div>
             </div>
         </div> -->
-        <div id="speechCompose" data-name="speechCompose" class="speech_comm speech_compose" data-wss="wss://speech-api.kakao.com:9443/tts" data-cachedate="2019122602">
+       <!--   <div id="speechCompose" data-name="speechCompose" class="speech_comm speech_compose" data-wss="wss://speech-api.kakao.com:9443/tts" data-cachedate="2019122602">-->
+       		<div id="speechCompose" data-name="speechCompose" class="speech_comm speech_compose" data-wss="" data-cachedate="">
             <div class="inner_speech">
              <!--   <h3 class="tit_subject">음성&nbsp;&nbsp;합성<span class="txt_sub"> : Text-To-Speech System</span>
                 </h3>
